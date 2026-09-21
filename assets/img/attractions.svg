@@ -1,22 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-label="ATTRACTIONS placeholder">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" preserveAspectRatio="xMidYMid slice" role="presentation">
 <defs>
 <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#F59C22" stop-opacity="0.30"/>
-<stop offset="100%" stop-color="#6B4108" stop-opacity="0.60"/>
+<stop offset="0%" stop-color="#F59C22" stop-opacity="0.34"/>
+<stop offset="100%" stop-color="#573306" stop-opacity="0.92"/>
 </linearGradient>
-<pattern id="s" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">
-<rect width="26" height="26" fill="none"/>
-<line x1="0" y1="0" x2="0" y2="26" stroke="rgba(255,255,255,.05)" stroke-width="7"/>
-</pattern>
+<radialGradient id="v" cx="50%" cy="50%" r="72%">
+<stop offset="55%" stop-color="#000" stop-opacity="0"/>
+<stop offset="100%" stop-color="#000" stop-opacity="0.45"/>
+</radialGradient>
 </defs>
-<rect width="1200" height="750" fill="#0A1113"/>
+<rect width="1200" height="750" fill="#08100F"/>
 <rect width="1200" height="750" fill="url(#g)"/>
-<rect width="1200" height="750" fill="url(#s)"/>
-<g opacity="0.5" transform="translate(600,375)">
-<rect x="-14" y="-14" width="28" height="28" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2"/>
-<line x1="-14" y1="-14" x2="14" y2="14" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
-<line x1="14" y1="-14" x2="-14" y2="14" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
-</g>
-<text x="600" y="430" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="15" fill="rgba(255,255,255,.34)" letter-spacing="5">ATTRACTIONS</text>
-<text x="600" y="455" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,.20)" letter-spacing="5">PLACEHOLDER</text>
+<g><rect x="-400" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="-250" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="-100" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="50" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="200" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="350" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="500" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="650" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="800" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="950" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="1100" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="1250" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="1400" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/><rect x="1550" y="-200" width="70" height="1200" fill="rgba(255,255,255,.05)" transform="rotate(22 600 375)"/></g>
+<rect width="1200" height="750" fill="url(#v)"/>
 </svg>
