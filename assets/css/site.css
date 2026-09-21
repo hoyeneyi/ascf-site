@@ -46,7 +46,10 @@ h1{font-size:clamp(34px,8.5vw,68px)}
 h2{font-size:clamp(28px,6vw,46px)}
 h3{font-size:clamp(18px,4vw,22px);letter-spacing:.04em}
 p{margin:0 0 18px}
-.gradient-text{background:var(--spectrum);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gradient-text{
+  display:inline-block;background:var(--spectrum);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
 .kicker{font-size:11px;letter-spacing:.28em;color:var(--mute);margin-bottom:12px}
 .lede{font-size:clamp(15px,3.6vw,18px);color:var(--soft);max-width:62ch}
 
@@ -128,18 +131,20 @@ p{margin:0 0 18px}
 
 /* ---------- hero carousel ---------- */
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
-.slides{position:relative;min-height:clamp(440px,78vh,660px)}
+.slides{position:relative;min-height:clamp(430px,62vh,560px)}
 .slide{
   position:absolute;inset:0;opacity:0;transition:opacity .9s ease;
-  display:flex;align-items:flex-end;pointer-events:none;
+  display:flex;align-items:center;pointer-events:none;
 }
 .slide.on{opacity:1;pointer-events:auto}
 .slide .bg{position:absolute;inset:0;background-size:cover;background-position:center}
 .slide .scrim{
   position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(7,12,13,.42) 0%,rgba(7,12,13,.72) 52%,rgba(7,12,13,.96) 100%);
+  background:linear-gradient(90deg,rgba(7,12,13,.93) 0%,rgba(7,12,13,.74) 46%,rgba(7,12,13,.45) 100%),
+             linear-gradient(180deg,rgba(7,12,13,.30) 0%,rgba(7,12,13,.30) 60%,rgba(7,12,13,.88) 100%);
 }
-.slide .inner{position:relative;width:100%;padding-bottom:64px;padding-top:80px}
+.slide .inner{position:relative;width:100%;padding:52px 20px}
+.slide .copy{max-width:620px}
 .slide .tag{
   display:inline-block;font-size:10.5px;letter-spacing:.24em;padding:6px 12px;
   border:1px solid var(--rule-2);margin-bottom:16px;color:#fff;background:rgba(0,0,0,.3);
@@ -160,14 +165,14 @@ p{margin:0 0 18px}
 .dots button.on{background:var(--yellow)}
 
 /* home identity block */
-.identity{text-align:center;padding:44px 0 36px;border-bottom:1px solid var(--rule);background:var(--ink)}
+.identity{text-align:center;padding:34px 0 26px;border-bottom:1px solid var(--rule);background:var(--ink)}
 .identity h1{font-size:clamp(30px,8vw,62px);line-height:.92}
 .identity .sub{
   display:block;font-family:var(--display);font-weight:600;
   font-size:clamp(13px,3.4vw,24px);letter-spacing:.15em;margin-top:8px;
 }
 .identity .where{
-  margin-top:18px;font-size:clamp(12.5px,3vw,15px);letter-spacing:.2em;color:var(--soft);
+  margin-top:14px;font-size:clamp(12.5px,3vw,15px);letter-spacing:.2em;color:var(--soft);
   font-weight:400;text-transform:uppercase;
 }
 .identity .where b{color:#fff;font-weight:600}
