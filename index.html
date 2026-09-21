@@ -4,203 +4,242 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="A conflict resolution festival in Pontiac, Michigan. Memorial Day Weekend 2028.">
-<title>Home &middot; America's Spring Canvas Festival</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
-<!-- Google Analytics 4 — replace G-XXXXXXXXXX with the real measurement ID at launch -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
+<title>America's Spring Canvas Festival — Pontiac, MI · May 26–29, 2028</title>
+<meta name="description" content="Four days of food, art and music in Pontiac, Michigan over Memorial Day weekend 2028.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/analytics.js"></script>
 </head>
-<body>
-<div class="gate" id="gate">
-  <div class="gate-in">
-    <hr class="spectrum-rule" style="margin-bottom:26px">
-    <h2>Preview build</h2>
-    <p>This site isn't public yet. Enter the access code to continue.</p>
-    <input id="code" type="password" placeholder="ACCESS CODE" aria-label="Access code" autocomplete="off">
-    <button class="btn btn-solid btn-block" id="enter" type="button">Enter</button>
-    <div class="err" id="gateErr"></div>
+<body data-page="home">
+
+<div class="topbar">
+  <div class="wrap">
+    <p data-edit="banner">Be first to know when the lineup drops</p>
+    <form data-signup="topbar">
+      <label class="sr" for="tb-home">Email address</label>
+      <input id="tb-home" type="email" placeholder="your@email.com" required>
+      <button type="submit" data-track="cta_click" data-label="topbar_signup">KEEP ME POSTED</button>
+    </form>
+    <span class="ok" style="display:none"></span>
   </div>
 </div>
-<div class="capture">
+
+<nav class="nav">
   <div class="wrap">
-    <p>Lineup drops, presale codes, and vendor deadlines &mdash; straight to your inbox.</p>
-    <form data-demo data-track-form="email_top" data-ok="You're on the list. Watch your inbox.">
-      <label for="e_top" class="sr-only" style="position:absolute;left:-9999px">Email address</label>
-      <input id="e_top" type="email" required placeholder="you@email.com" autocomplete="email">
-      <button type="submit" data-track="email_signup_top">Keep me posted</button>
-    </form>
-  </div>
-</div><nav class="nav">
-  <div class="wrap">
-    <a class="brand" href="index.html" data-track="nav_logo">
-      <span class="full">America&rsquo;s Spring Canvas Festival</span>
-      <span class="sub">Memorial Day Weekend 2028 &middot; Pontiac, Michigan</span>
+    <a class="brand" href="index.html" data-track="nav_click" data-label="home">
+      AMERICA'S SPRING CANVAS FESTIVAL
+      <span>PONTIAC, MICHIGAN · MAY 26–29, 2028</span>
     </a>
-    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html" aria-current="page" data-track="nav_index">Home</a></li><li><a href="about.html" data-track="nav_about">The Festival</a></li><li><a href="lineup.html" data-track="nav_lineup">Lineup</a></li><li><a href="rps.html" data-track="nav_rps">RPS Tournament</a></li><li><a href="vendors.html" data-track="nav_vendors">Vendors &amp; Artists</a></li><li><a href="sponsors.html" data-track="nav_sponsors">Sponsors</a></li><li><a href="tickets.html" data-track="nav_tickets">Tickets</a></li><li><a class="nav-cta" href="tickets.html" data-track="nav_cta_tickets">Get tickets</a></li>
-    </ul>
-  </div>
-</nav><section class="hero">
-  <div class="slides"><div class="slide on"><img src="assets/img/hero-1.svg" alt=""></div><div class="slide"><img src="assets/img/hero-2.svg" alt=""></div><div class="slide"><img src="assets/img/hero-3.svg" alt=""></div><div class="slide"><img src="assets/img/hero-4.svg" alt=""></div></div>
-  <div class="hero-inner">
-    <div class="wrap">
-      <span class="eyebrow">Memorial Day Weekend 2028</span>
-      <h1>America&rsquo;s Spring Canvas Festival</h1>
-      <div class="locale">
-        <span><i></i>Pontiac, Michigan</span>
-        <span><i></i>Memorial Day Weekend 2028</span>
-        <span><i></i>Three days</span>
-      </div>
-      <p class="tag">A conflict resolution festival disguised as the best weekend of your year.
-      Music, art, food, and a rock paper scissors world championship with real prize money.</p>
-      <div class="hero-actions">
-        <a class="btn btn-solid" href="tickets.html" data-track="hero_tickets">Get tickets</a>
-        <a class="btn btn-ghost" href="about.html" data-track="hero_learn">What is this?</a>
-      </div>
+    <div class="navlinks">
+        <a href="mission/" data-track="nav_click" data-label="Mission">Mission</a>
+        <a href="eateries/" data-track="nav_click" data-label="eATERIES">eATERIES</a>
+        <a href="exhibits/" data-track="nav_click" data-label="eXHIBITS">eXHIBITS</a>
+        <a href="entertainment/" data-track="nav_click" data-label="eNTERTAINMENT">eNTERTAINMENT</a>
+        <a href="tournament/" data-track="nav_click" data-label="Tournament">Tournament</a>
+        <a href="attractions/" data-track="nav_click" data-label="Attractions">Attractions</a>
+        <a href="involved/" data-track="nav_click" data-label="Get Involved">Get Involved</a>
     </div>
+    <button class="navtoggle" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
   </div>
-  <div class="dots" role="tablist" aria-label="Featured"><button role="tab" aria-selected="true" aria-label="Slide 1"></button><button role="tab" aria-selected="false" aria-label="Slide 2"></button><button role="tab" aria-selected="false" aria-label="Slide 3"></button><button role="tab" aria-selected="false" aria-label="Slide 4"></button></div>
-</section>
-<section class="sec">
+  <div class="mobilemenu">
+      <a href="mission/" data-track="nav_click_mobile" data-label="Mission">Mission</a>
+      <a href="eateries/" data-track="nav_click_mobile" data-label="eATERIES">eATERIES</a>
+      <a href="exhibits/" data-track="nav_click_mobile" data-label="eXHIBITS">eXHIBITS</a>
+      <a href="entertainment/" data-track="nav_click_mobile" data-label="eNTERTAINMENT">eNTERTAINMENT</a>
+      <a href="tournament/" data-track="nav_click_mobile" data-label="Tournament">Tournament</a>
+      <a href="attractions/" data-track="nav_click_mobile" data-label="Attractions">Attractions</a>
+      <a href="involved/" data-track="nav_click_mobile" data-label="Get Involved">Get Involved</a>
+  </div>
+</nav>
+
+
+<div class="identity">
   <div class="wrap">
-    <div class="sec-head">
-      <h2>Everything happening that weekend</h2>
-      <p class="lede">Seven stages of programming across three days, built so that a family,
-      a group of friends, and a serious music fan all get their money's worth from the same ticket.</p>
+    <h1 class="gradient-text">AMERICA'S<span class="sub">SPRING CANVAS FESTIVAL</span></h1>
+    <div class="where" data-edit="location"><b>PONTIAC, MICHIGAN</b> · MAY 26–29, 2028 · MEMORIAL DAY WEEKEND</div>
+    <div class="ribbon"></div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="slides">
+    <div class="slide on">
+      <div class="bg" style="background-image:url('assets/img/hero-crowd.svg')"></div>
+      <div class="scrim"></div>
+      <div class="inner wrap">
+        <span class="tag">FOUR DAYS · EIGHT STAGES</span>
+        <h2 class="gradient-text">Come for the<br>music.</h2>
+        <p>National headliners at night, local artists all afternoon, and eight stages running from noon until the fireworks.</p>
+        <div class="cta-row"><a class="btn btn-solid" href="entertainment/" data-track="cta_click" data-label="hero_lineup">See the lineup</a><a class="btn btn-ghost" href="involved/" data-track="cta_click" data-label="hero_sponsor">Become a sponsor</a></div>
+      </div>
     </div>
-    <div class="grid g3"><article class="card">
-  <img src="assets/img/tile-about.svg" alt="">
-  <div class="topbar"></div>
-  <div class="card-body">
-    <h3>The Festival</h3><p>Why a festival about conflict resolution, and what actually happens across the three days.</p>
-    <a class="btn btn-ghost" href="about.html" data-track="tile_about">More</a>
-  </div></article><article class="card">
-  <img src="assets/img/tile-music.svg" alt="">
-  <div class="topbar"></div>
-  <div class="card-body">
-    <h3>Lineup</h3><p>Stages, set times, and the artists we're bringing to Pontiac.</p>
-    <a class="btn btn-ghost" href="lineup.html" data-track="tile_lineup">More</a>
-  </div></article><article class="card">
-  <img src="assets/img/tile-rps.svg" alt="">
-  <div class="topbar"></div>
-  <div class="card-body">
-    <h3>RPS Tournament</h3><p>The rock paper scissors world championship. Open bracket, cash prizes.</p>
-    <a class="btn btn-ghost" href="rps.html" data-track="tile_rps">More</a>
-  </div></article><article class="card">
-  <img src="assets/img/tile-vendor.svg" alt="">
-  <div class="topbar"></div>
-  <div class="card-body">
-    <h3>Vendors &amp; Artists</h3><p>Booth space for makers, food, and retail. Applications open.</p>
-    <a class="btn btn-ghost" href="vendors.html" data-track="tile_vendors">More</a>
-  </div></article><article class="card">
-  <img src="assets/img/tile-sponsor.svg" alt="">
-  <div class="topbar"></div>
-  <div class="card-body">
-    <h3>Sponsors</h3><p>Packages, reach, and what your brand gets on the ground.</p>
-    <a class="btn btn-ghost" href="sponsors.html" data-track="tile_sponsors">More</a>
-  </div></article><article class="card">
-  <img src="assets/img/tile-tickets.svg" alt="">
-  <div class="topbar"></div>
-  <div class="card-body">
-    <h3>Tickets</h3><p>Passes, pricing tiers, and presale access.</p>
-    <a class="btn btn-ghost" href="tickets.html" data-track="tile_tickets">More</a>
-  </div></article></div>
-    <div class="stats">
-      <div><b>3</b><small>DAYS</small></div>
-      <div><b>30K</b><small>PROJECTED ATTENDANCE</small></div>
-      <div><b>$25K</b><small>RPS PRIZE POOL</small></div>
-      <div><b>100+</b><small>VENDOR BOOTHS</small></div>
+    <div class="slide">
+      <div class="bg" style="background-image:url('assets/img/hero-food.svg')"></div>
+      <div class="scrim"></div>
+      <div class="inner wrap">
+        <span class="tag">50 RESTAURANTS &amp; FOOD TRUCKS</span>
+        <h2 class="gradient-text">Stay for the<br>food.</h2>
+        <p>Fifty local kitchens serving the cooking of the communities that built this country — all of it in one place, for four days only.</p>
+        <div class="cta-row"><a class="btn btn-solid" href="eateries/" data-track="cta_click" data-label="hero_eateries">Explore eATERIES</a><a class="btn btn-ghost" href="involved/" data-track="cta_click" data-label="hero_vend">Apply to vend</a></div>
+      </div>
     </div>
-    <p class="muted" style="font-size:12.5px;margin-top:14px">Projected figures. <span class="tbd">TBD</span> pending final permits and venue confirmation.</p>
+    <div class="slide">
+      <div class="bg" style="background-image:url('assets/img/hero-rps.svg')"></div>
+      <div class="scrim"></div>
+      <div class="inner wrap">
+        <span class="tag">50,000 CONTESTANTS · 4 × $25,000</span>
+        <h2 class="gradient-text">Settle it the<br>old way.</h2>
+        <p>The largest Rock Paper Scissors tournament ever staged, with referees, announcers and four grand prizes of twenty-five thousand dollars.</p>
+        <div class="cta-row"><a class="btn btn-solid" href="tournament/" data-track="cta_click" data-label="hero_rps">Tournament details</a><a class="btn btn-ghost" href="index.html#notify" data-track="cta_click" data-label="hero_rps_alert">Get registration alerts</a></div>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="bg" style="background-image:url('assets/img/hero-art.svg')"></div>
+      <div class="scrim"></div>
+      <div class="inner wrap">
+        <span class="tag">150 ARTISTS</span>
+        <h2 class="gradient-text">Take a piece<br>of it home.</h2>
+        <p>Painting, glasswork, jewelry and print from a hundred and fifty makers, showing and selling across the whole weekend.</p>
+        <div class="cta-row"><a class="btn btn-solid" href="exhibits/" data-track="cta_click" data-label="hero_exhibits">Explore eXHIBITS</a><a class="btn btn-ghost" href="involved/" data-track="cta_click" data-label="hero_exhibit_apply">Apply to exhibit</a></div>
+      </div>
+    </div></div>
+  <div class="dots" aria-label="Choose slide"></div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="grid g4">
+      <div class="stat"><span>4</span><small>DAYS</small></div>
+      <div class="stat"><span>250K+</span><small>EXPECTED ATTENDANCE</small></div>
+      <div class="stat"><span>200</span><small>VENDORS &amp; ARTISTS</small></div>
+      <div class="stat"><span>8</span><small>STAGES</small></div>
+    </div>
   </div>
 </section>
 
-<section class="sec sec-alt">
+<section class="alt">
   <div class="wrap">
-    <div class="sec-head">
-      <h2>Why this festival exists</h2>
-      <p class="lede">Pontiac has been divided along lines nobody chose &mdash; block by block, school by school.
-      We think the fastest way past that isn't another panel discussion. It's giving people a reason
-      to stand next to each other for three days and enjoy the same thing.</p>
+    <div class="section-head">
+      <div class="kicker">Three ways in</div>
+      <h2>Everything on the grounds.</h2>
+      <p class="lede" style="margin-top:14px">Food, art and music from every culture that built this country — and one idea running through all of it.</p>
     </div>
-    <div class="grid g3">
-      <div><h3 style="margin-bottom:10px">Play beats debate</h3>
-        <p class="muted" style="font-size:14px">The RPS tournament puts strangers across from each other
-        in a game with no advantage, no history, and a handshake at the end.</p></div>
-      <div><h3 style="margin-bottom:10px">Money stays here</h3>
-        <p class="muted" style="font-size:14px">Vendor slots are reserved for local makers and food
-        businesses first, so the weekend leaves something behind.</p></div>
-      <div><h3 style="margin-bottom:10px">Everyone gets in</h3>
-        <p class="muted" style="font-size:14px">Tiered pricing and a free family block on Sunday
-        keep the gate from being the thing that divides people.</p></div>
+    <div class="cards c3">
+      <a class="card" href="eateries/" data-track="card_click" data-label="eateries">
+        <div class="bar"></div>
+        <div class="thumb" style="background-image:url('assets/img/eateries.svg')"></div>
+        <div class="body">
+          <h3>eATERIES</h3>
+          <p>Fifty local restaurants and food trucks, serving four days straight.</p>
+          <span class="more">EXPLORE →</span>
+        </div>
+      </a>
+      <a class="card" href="exhibits/" data-track="card_click" data-label="exhibits">
+        <div class="bar"></div>
+        <div class="thumb" style="background-image:url('assets/img/exhibits.svg')"></div>
+        <div class="body">
+          <h3>eXHIBITS</h3>
+          <p>A hundred and fifty artists showing and selling across every medium.</p>
+          <span class="more">EXPLORE →</span>
+        </div>
+      </a>
+      <a class="card" href="entertainment/" data-track="card_click" data-label="entertainment">
+        <div class="bar"></div>
+        <div class="thumb" style="background-image:url('assets/img/entertainment.svg')"></div>
+        <div class="body">
+          <h3>eNTERTAINMENT</h3>
+          <p>Eight stages, national headliners and everything in between.</p>
+          <span class="more">EXPLORE →</span>
+        </div>
+      </a>
     </div>
-    <div style="margin-top:30px"><a class="btn btn-solid" href="about.html" data-track="home_about_more">Read the full story</a></div>
   </div>
 </section>
-<section class="finale">
+
+<section>
   <div class="wrap">
-    <h2>Be first to know</h2>
-    <p>Presale codes, lineup announcements, and vendor deadlines go to the list before they go anywhere else.</p>
-    <a class="btn btn-solid" href="tickets.html" data-track="home_finale_tickets">Get tickets</a>
-  </div>
-</section><footer>
-  <div class="wrap">
-    <div class="fcols">
+    <div class="split">
       <div>
-        <h4>The festival</h4>
-        <p style="font-family:var(--display);font-size:19px;line-height:1.25;margin-bottom:10px">America&rsquo;s Spring Canvas Festival</p>
-        <p class="muted" style="font-size:13px">Memorial Day Weekend 2028<br>Pontiac, Michigan</p>
+        <div class="kicker">Why this festival exists</div>
+        <h2>A conflict resolution campaign you can dance at.</h2>
+        <div class="pledge" style="margin-top:22px">
+          <p>Spring Canvas carries one message: disagreements can end before they turn into violence. The festival takes that message to the people least likely to sit through a lecture about it.</p>
+          <p>The campaign runs all year — billboards, print, radio, and a banquet honoring students who resolved conflict peacefully.</p>
+        </div>
+        <a class="btn btn-ghost" href="mission/" data-track="cta_click" data-label="home_mission" style="margin-top:8px">Read the mission</a>
       </div>
-      <div>
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="about.html" data-track="foot_about">The Festival</a></li>
-          <li><a href="lineup.html" data-track="foot_lineup">Lineup</a></li>
-          <li><a href="rps.html" data-track="foot_rps">RPS Tournament</a></li>
-          <li><a href="tickets.html" data-track="foot_tickets">Tickets</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Get involved</h4>
-        <ul>
-          <li><a href="vendors.html" data-track="foot_vendors">Vendors &amp; Artists</a></li>
-          <li><a href="sponsors.html" data-track="foot_sponsors">Sponsors</a></li>
-          <li><a href="contact.html" data-track="foot_contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="fbot">
-      <span>&copy; 2026 America&rsquo;s Spring Canvas Festival</span>
-      <span>Preview build &mdash; content not final</span>
+      <div class="ph" style="background-image:url('assets/img/mission.svg')"></div>
     </div>
   </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="split">
+      <div class="ph" style="background-image:url('assets/img/tournament.svg')"></div>
+      <div>
+        <div class="kicker">The main attraction</div>
+        <h2>Rock. Paper.<br>Scissors.</h2>
+        <p class="lede" style="margin:18px 0 22px">Fifty thousand contestants. Four grand prizes of $25,000. Referees, announcers and a bracket big enough to set a world record.</p>
+        <a class="btn btn-solid" href="tournament/" data-track="cta_click" data-label="home_tournament">How it works</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="notify">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker">Stay in the loop</div>
+    <h2>Lineup. Tickets. Tournament.</h2>
+    <p class="lede" style="margin:14px auto 24px">One email when each announcement drops. Nothing else.</p>
+    <form class="signup" data-signup="home_footer">
+      <label class="sr" for="home-email">Email address</label>
+      <input id="home-email" type="email" placeholder="your@email.com" required>
+      <button class="btn btn-solid" type="submit" data-track="cta_click" data-label="home_signup">SIGN ME UP</button>
+    </form>
+    <div class="signup-note"></div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <h2>Put your brand on the canvas.</h2>
+    <p>Five partnership tiers reaching a projected quarter million people over four days.</p>
+    <a class="btn btn-solid" href="involved/" data-track="cta_click" data-label="home_band_sponsor">SPONSORSHIP OPPORTUNITIES</a>
+  </div>
+</div>
+
+
+<footer>
+  <div class="wrap">
+    <div class="footgrid">
+      <div>
+        <div class="fbrand gradient-text">AMERICA'S<br>SPRING CANVAS FESTIVAL</div>
+        <div class="meta">
+          Pontiac, Michigan 48341<br>
+          May 26–29, 2028 · Memorial Day Weekend<br>
+          <span class="tbd">CONTACT TBD</span>
+        </div>
+      </div>
+      <div>
+        <h4>THE FESTIVAL</h4>
+        <a href="mission/">Mission</a>
+        <a href="eateries/">eATERIES</a>
+        <a href="exhibits/">eXHIBITS</a>
+        <a href="entertainment/">eNTERTAINMENT</a>
+      </div>
+      <div>
+        <h4>TAKE PART</h4>
+        <a href="tournament/">RPS Tournament</a>
+        <a href="attractions/">Attractions</a>
+        <a href="involved/">Sponsor the festival</a>
+        <a href="involved/">Vendor &amp; artist applications</a>
+      </div>
+    </div>
+  </div>
+  <div class="footbar"></div>
 </footer>
 
-<div class="draft-flag">PREVIEW BUILD &mdash; placeholder content</div>
-<button class="fab" id="fab" data-track="open_analytics">Click data</button>
-
-<aside class="panel" id="panel" aria-label="Analytics preview">
-  <button class="close" id="panelClose" aria-label="Close">&times;</button>
-  <h3>What people click</h3>
-  <small>Every button and link on the site is tagged. Once Google Analytics is connected,
-  this data lands in your dashboard alongside traffic, devices, and where visitors came from.
-  The counts below are recorded locally in this browser so you can see the tracking work right now.</small>
-  <div class="clicks" id="clickList"></div>
-  <button class="btn btn-ghost" id="clearClicks" style="margin-top:18px;font-size:12px;padding:10px 16px">Reset counts</button>
-  <div class="panel-note">Separate pages mean Analytics also reports which pages hold attention
-  and where people drop off &mdash; not possible on a single-page site.</div>
-</aside>
-
-<script src="assets/site.js"></script>
+<script src="assets/js/site.js"></script>
 </body>
 </html>

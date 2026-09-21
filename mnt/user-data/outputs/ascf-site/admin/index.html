@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin Portal — America's Spring Canvas Festival</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<style>
+  body{background:#0B1213}
+  .shell{max-width:920px;margin:0 auto;padding:0 20px 70px}
+
+  .adminbar{border-bottom:1px solid var(--rule);background:#000;position:sticky;top:0;z-index:20}
+  .adminbar .in{max-width:920px;margin:0 auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .adminbar b{font-family:var(--display);letter-spacing:.09em;font-size:14px}
+  .adminbar span{color:var(--mute);font-size:11.5px;letter-spacing:.16em;display:block;font-family:var(--body);font-weight:400}
+  .adminbar .right{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .who{color:var(--mute);font-size:12.5px}
+
+  .login{max-width:380px;margin:12vh auto;text-align:center;padding:0 20px}
+  .login .ribbon{margin:20px auto 26px}
+  .login p{color:var(--mute);font-size:13.5px}
+  .login input{width:100%;background:#0A1112;border:1px solid var(--rule-2);color:#fff;padding:14px;margin-bottom:10px;font-family:var(--body);font-size:14px}
+  .err{color:var(--orange);font-size:13px;min-height:20px;margin-top:10px}
+
+  .panel{display:none}
+  .panel.on{display:block}
+
+  .tabs{display:flex;gap:4px;flex-wrap:wrap;margin:26px 0 22px;border-bottom:1px solid var(--rule)}
+  .tabs button{
+    background:none;border:none;border-bottom:2px solid transparent;color:var(--mute);cursor:pointer;
+    font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.11em;padding:12px 14px;
+  }
+  .tabs button.on{color:#fff;border-bottom-color:var(--yellow)}
+
+  .tabpane{display:none}
+  .tabpane.on{display:block}
+
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:10.5px;letter-spacing:.17em;color:var(--mute);margin-bottom:7px;font-weight:600}
+  .field input,.field select,.field textarea{
+    width:100%;background:#0A1112;border:1px solid var(--rule-2);color:#fff;
+    padding:12px 13px;font-family:var(--body);font-size:14px;line-height:1.6;
+  }
+  .field textarea{min-height:110px;resize:vertical}
+  .hint{color:var(--mute);font-size:12.5px;margin:-8px 0 18px}
+
+  .box{border:1px solid var(--rule);background:var(--ink-2);padding:24px 22px;margin-bottom:22px}
+  .box h3{margin-bottom:6px}
+  .box .sub{color:var(--mute);font-size:13px;margin-bottom:20px}
+
+  .itemrow{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    padding:13px 0;border-bottom:1px solid var(--rule);flex-wrap:wrap;
+  }
+  .itemrow b{font-family:var(--display);font-size:15.5px;letter-spacing:.05em}
+  .itemrow small{color:var(--mute);font-size:12px;letter-spacing:.09em;display:block}
+  .del{background:none;border:1px solid var(--rule-2);color:var(--mute);cursor:pointer;padding:6px 12px;font-size:11px;letter-spacing:.1em}
+  .del:hover{border-color:var(--orange);color:var(--orange)}
+
+  .saved{color:var(--lime);font-size:13px;margin-top:12px;display:none}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+
+  .notice{border-left:3px solid var(--yellow);background:rgba(253,209,10,.07);padding:16px 18px;color:var(--soft);font-size:13px;line-height:1.8;margin-bottom:26px}
+  .notice b{color:#fff}
+</style>
+</head>
+<body>
+
+<!-- ---------------- LOGIN ---------------- -->
+<div class="login" id="login">
+  <div style="font-size:10.5px;letter-spacing:.28em;color:var(--mute)">ADMIN PORTAL</div>
+  <h1 class="gradient-text" style="font-size:30px;margin-top:10px">AMERICA'S<br>SPRING CANVAS<br>FESTIVAL</h1>
+  <div class="ribbon" style="max-width:260px"></div>
+  <p style="margin-bottom:22px">Sign in to update the website.</p>
+  <input id="user" type="text" placeholder="Email" autocomplete="username">
+  <input id="pass" type="password" placeholder="Password" autocomplete="current-password">
+  <button class="btn btn-solid btn-block" id="signin" type="button">SIGN IN</button>
+  <div class="err" id="loginErr"></div>
+  <p style="margin-top:24px;font-size:12px">Demo login — <b style="color:var(--soft)">admin</b> / <b style="color:var(--soft)">canvas2028</b></p>
+</div>
+
+<!-- ---------------- PANEL ---------------- -->
+<div class="panel" id="panel">
+
+  <div class="adminbar">
+    <div class="in">
+      <div>
+        <b>ASCF ADMIN</b>
+        <span>CONTENT MANAGEMENT</span>
+      </div>
+      <div class="right">
+        <span class="who" id="who">Signed in</span>
+        <a class="btn btn-ghost" href="../index.html" style="padding:9px 16px;font-size:11.5px">VIEW SITE</a>
+        <button class="btn btn-ghost" id="signout" type="button" style="padding:9px 16px;font-size:11.5px">SIGN OUT</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell">
+
+    <div class="tabs">
+      <button class="on" data-tab="general">GENERAL</button>
+      <button data-tab="lineup">LINEUP</button>
+      <button data-tab="vendors">VENDORS &amp; ARTISTS</button>
+      <button data-tab="sponsors">SPONSORS</button>
+      <button data-tab="analytics">ANALYTICS</button>
+    </div>
+
+    <!-- GENERAL -->
+    <div class="tabpane on" id="tab-general">
+      <div class="notice">
+        <b>Demo mode.</b> Changes save to this browser only so you can see how the portal works.
+        The production build stores content in the database, so edits appear for every visitor on every device.
+      </div>
+
+      <div class="box">
+        <h3>Festival details</h3>
+        <div class="sub">Shown under the festival name on the homepage and in the site header.</div>
+        <div class="field">
+          <label>LOCATION &amp; DATE LINE</label>
+          <input id="f-location" type="text">
+        </div>
+        <div class="field">
+          <label>HOMEPAGE INTRO</label>
+          <textarea id="f-intro"></textarea>
+        </div>
+        <div class="actions"><button class="btn btn-solid" id="saveGeneral" type="button">SAVE CHANGES</button></div>
+        <div class="saved" id="savedGeneral">Saved. Reload the site to see it.</div>
+      </div>
+
+      <div class="box">
+        <h3>Announcement banner</h3>
+        <div class="sub">The message in the coloured bar at the top of every page.</div>
+        <div class="field">
+          <label>BANNER TEXT</label>
+          <input id="f-banner" type="text">
+        </div>
+        <div class="actions"><button class="btn btn-solid" id="saveBanner" type="button">SAVE CHANGES</button></div>
+        <div class="saved" id="savedBanner">Saved.</div>
+      </div>
+    </div>
+
+    <!-- LINEUP -->
+    <div class="tabpane" id="tab-lineup">
+      <div class="box">
+        <h3>Add an artist</h3>
+        <div class="sub">Published artists appear on the eNTERTAINMENT page and replace the "announced soon" message.</div>
+        <div class="field"><label>ARTIST NAME</label><input id="a-name" type="text" placeholder="e.g. The Roots"></div>
+        <div class="field"><label>STAGE</label>
+          <select id="a-stage">
+            <option>National Stage</option><option>Regional Stage</option><option>Local Stage</option>
+          </select>
+        </div>
+        <div class="field"><label>DAY &amp; SET TIME</label><input id="a-time" type="text" placeholder="Saturday · 9:00 PM"></div>
+        <div class="actions"><button class="btn btn-solid" id="addAct" type="button">PUBLISH TO SITE</button></div>
+        <div class="saved" id="savedAct">Published. It's live on the eNTERTAINMENT page.</div>
+      </div>
+
+      <div class="box">
+        <h3>Published lineup</h3>
+        <div class="sub" id="lineupCount">Nothing published yet.</div>
+        <div id="lineupList"></div>
+      </div>
+    </div>
+
+    <!-- VENDORS -->
+    <div class="tabpane" id="tab-vendors">
+      <div class="box">
+        <h3>Add a vendor or artist</h3>
+        <div class="sub">Populates the eATERIES and eXHIBITS directories as they're confirmed.</div>
+        <div class="field"><label>NAME</label><input id="v-name" type="text" placeholder="e.g. Buddy's Pizza"></div>
+        <div class="field"><label>CATEGORY</label>
+          <select id="v-cat"><option>eATERIES</option><option>eXHIBITS</option></select>
+        </div>
+        <div class="field"><label>SHORT DESCRIPTION</label><input id="v-desc" type="text" placeholder="Detroit-style square pizza since 1946"></div>
+        <div class="actions"><button class="btn btn-solid" id="addVendor" type="button">PUBLISH</button></div>
+        <div class="saved" id="savedVendor">Published.</div>
+      </div>
+
+      <div class="box">
+        <h3>Published directory</h3>
+        <div class="sub" id="vendorCount">Nothing published yet.</div>
+        <div id="vendorList"></div>
+      </div>
+    </div>
+
+    <!-- SPONSORS -->
+    <div class="tabpane" id="tab-sponsors">
+      <div class="box">
+        <h3>Add a confirmed sponsor</h3>
+        <div class="sub">Sponsor names appear on the Get Involved page once confirmed. Logo uploads come with the production build.</div>
+        <div class="field"><label>SPONSOR NAME</label><input id="s-name" type="text"></div>
+        <div class="field"><label>TIER</label>
+          <select id="s-tier">
+            <option>Diamond</option><option>Platinum</option><option>Gold</option><option>Silver</option><option>Bronze</option>
+          </select>
+        </div>
+        <div class="actions"><button class="btn btn-solid" id="addSponsor" type="button">PUBLISH</button></div>
+        <div class="saved" id="savedSponsor">Published.</div>
+      </div>
+
+      <div class="box">
+        <h3>Confirmed sponsors</h3>
+        <div class="sub" id="sponsorCount">Nothing published yet.</div>
+        <div id="sponsorList"></div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="tabpane" id="tab-analytics">
+      <div class="notice">
+        <b>Not connected yet.</b> Once the Google Analytics ID is added, this tab links straight to the live dashboard.
+      </div>
+      <div class="box">
+        <h3>What gets measured</h3>
+        <div class="sub">Every button and link on the site reports back, so you can see what people actually do.</div>
+        <div class="itemrow"><div><b>Email signups</b><small>WHICH PAGE AND WHICH FORM CONVERTED</small></div></div>
+        <div class="itemrow"><div><b>Sponsorship clicks</b><small>WHICH TIER PEOPLE OPEN MOST</small></div></div>
+        <div class="itemrow"><div><b>Apply buttons</b><small>VENDOR, ARTIST, PERFORMER, VOLUNTEER</small></div></div>
+        <div class="itemrow"><div><b>Homepage banner</b><small>WHICH ROTATING SLIDE DRIVES CLICKS</small></div></div>
+        <div class="itemrow"><div><b>Page traffic</b><small>VISITS, DEVICE, LOCATION, TIME ON PAGE</small></div></div>
+        <div class="itemrow"><div><b>Scroll depth</b><small>HOW FAR DOWN EACH PAGE PEOPLE GET</small></div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   Demo admin portal.
+   Storage is this browser only. Production swaps the three
+   functions below for Firebase Auth + Firestore.
+   ========================================================= */
+(function () {
+  'use strict';
+
+  var DEMO_USER = 'admin', DEMO_PASS = 'canvas2028';
+
+  var DEFAULTS = {
+    location: "PONTIAC, MICHIGAN · MAY 26–29, 2028 · MEMORIAL DAY WEEKEND",
+    intro: "Four days of food, art and music from every culture that built this country.",
+    banner: "Be first to know when the lineup drops"
+  };
+
+  function read(key, fallback) {
+    try { return JSON.parse(localStorage.getItem(key)) || fallback; }
+    catch (e) { return fallback; }
+  }
+  function write(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+    catch (e) { return false; }
+  }
+  function flash(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = 'block';
+    setTimeout(function () { el.style.display = 'none'; }, 2600);
+  }
+
+  /* ---------- auth ---------- */
+  var login = document.getElementById('login');
+  var panel = document.getElementById('panel');
+
+  function open() {
+    login.style.display = 'none';
+    panel.classList.add('on');
+    renderAll();
+  }
+  if (read('ascf_admin_session', false)) open();
+
+  document.getElementById('signin').onclick = function () {
+    var u = document.getElementById('user').value.trim().toLowerCase();
+    var p = document.getElementById('pass').value;
+    if (u === DEMO_USER && p === DEMO_PASS) {
+      write('ascf_admin_session', true);
+      document.getElementById('who').textContent = 'Signed in as ' + u;
+      open();
+    } else {
+      document.getElementById('loginErr').textContent = 'Incorrect email or password.';
+    }
+  };
+  document.getElementById('pass').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') document.getElementById('signin').click();
+  });
+  document.getElementById('signout').onclick = function () {
+    write('ascf_admin_session', false);
+    location.reload();
+  };
+
+  /* ---------- tabs ---------- */
+  document.querySelectorAll('.tabs button').forEach(function (b) {
+    b.onclick = function () {
+      document.querySelectorAll('.tabs button').forEach(function (x) { x.classList.remove('on'); });
+      document.querySelectorAll('.tabpane').forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      document.getElementById('tab-' + b.getAttribute('data-tab')).classList.add('on');
+    };
+  });
+
+  /* ---------- general ---------- */
+  function loadGeneral() {
+    var c = read('ascf_content', {});
+    document.getElementById('f-location').value = c.location || DEFAULTS.location;
+    document.getElementById('f-intro').value = c.intro || DEFAULTS.intro;
+    document.getElementById('f-banner').value = c.banner || DEFAULTS.banner;
+  }
+  document.getElementById('saveGeneral').onclick = function () {
+    var c = read('ascf_content', {});
+    c.location = document.getElementById('f-location').value;
+    c.intro = document.getElementById('f-intro').value;
+    write('ascf_content', c);
+    flash('savedGeneral');
+  };
+  document.getElementById('saveBanner').onclick = function () {
+    var c = read('ascf_content', {});
+    c.banner = document.getElementById('f-banner').value;
+    write('ascf_content', c);
+    flash('savedBanner');
+  };
+
+  /* ---------- generic list renderer ---------- */
+  function renderList(key, hostId, countId, label, fmt) {
+    var items = read(key, []);
+    var host = document.getElementById(hostId);
+    var count = document.getElementById(countId);
+    host.innerHTML = '';
+    if (!items.length) { count.textContent = 'Nothing published yet.'; return; }
+    count.textContent = items.length + ' ' + label + (items.length === 1 ? '' : 's') + ' live on the site.';
+    items.forEach(function (item, idx) {
+      var row = document.createElement('div');
+      row.className = 'itemrow';
+      var left = document.createElement('div');
+      var b = document.createElement('b'); b.textContent = item.name;
+      var s = document.createElement('small'); s.textContent = fmt(item);
+      left.appendChild(b); left.appendChild(s);
+      var del = document.createElement('button');
+      del.className = 'del'; del.textContent = 'REMOVE';
+      del.onclick = function () {
+        var cur = read(key, []); cur.splice(idx, 1); write(key, cur); renderAll();
+      };
+      row.appendChild(left); row.appendChild(del);
+      host.appendChild(row);
+    });
+  }
+
+  document.getElementById('addAct').onclick = function () {
+    var name = document.getElementById('a-name').value.trim();
+    if (!name) return;
+    var acts = read('ascf_lineup', []);
+    acts.push({ name: name, stage: document.getElementById('a-stage').value, time: document.getElementById('a-time').value.trim() });
+    write('ascf_lineup', acts);
+    document.getElementById('a-name').value = ''; document.getElementById('a-time').value = '';
+    flash('savedAct'); renderAll();
+  };
+
+  document.getElementById('addVendor').onclick = function () {
+    var name = document.getElementById('v-name').value.trim();
+    if (!name) return;
+    var v = read('ascf_vendors', []);
+    v.push({ name: name, cat: document.getElementById('v-cat').value, desc: document.getElementById('v-desc').value.trim() });
+    write('ascf_vendors', v);
+    document.getElementById('v-name').value = ''; document.getElementById('v-desc').value = '';
+    flash('savedVendor'); renderAll();
+  };
+
+  document.getElementById('addSponsor').onclick = function () {
+    var name = document.getElementById('s-name').value.trim();
+    if (!name) return;
+    var s = read('ascf_sponsors', []);
+    s.push({ name: name, tier: document.getElementById('s-tier').value });
+    write('ascf_sponsors', s);
+    document.getElementById('s-name').value = '';
+    flash('savedSponsor'); renderAll();
+  };
+
+  function renderAll() {
+    loadGeneral();
+    renderList('ascf_lineup', 'lineupList', 'lineupCount', 'artist',
+      function (i) { return (i.stage || '').toUpperCase() + (i.time ? ' · ' + i.time : ''); });
+    renderList('ascf_vendors', 'vendorList', 'vendorCount', 'listing',
+      function (i) { return (i.cat || '') + (i.desc ? ' · ' + i.desc : ''); });
+    renderList('ascf_sponsors', 'sponsorList', 'sponsorCount', 'sponsor',
+      function (i) { return (i.tier || '').toUpperCase(); });
+  }
+})();
+</script>
+</body>
+</html>
