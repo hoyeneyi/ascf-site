@@ -1,72 +1,60 @@
 # America's Spring Canvas Festival — Website
 
-Static multi-page site. No build step required to deploy — everything in this folder is ready to push.
-
-## Deploy to GitHub Pages
-
-```bash
-git init
-git add .
-git commit -m "ASCF site"
-git branch -M main
-git remote add origin https://github.com/<you>/ascf-site.git
-git push -u origin main
-```
-
-Settings → Pages → Deploy from a branch → `main` / root.
+Static, mobile-first, no build step needed to deploy. Push this folder as the repo root.
 
 ## Pages
 
 | URL | What's there |
 |---|---|
-| `/` | Rotating hero banner, stats, the three e's, mission, tournament, signup |
-| `/mission/` | The conflict resolution campaign, banquet, charity partners |
-| `/eateries/` | eATERIES — 50 restaurants and food trucks |
-| `/exhibits/` | eXHIBITS — 150 artists |
-| `/entertainment/` | eNTERTAINMENT — stages and lineup |
-| `/tournament/` | RPS tournament |
-| `/attractions/` | Rides, games, Kids Zone, fireworks |
-| `/involved/` | Sponsorship tiers, vendor/artist/volunteer/press |
-| `/admin/` | Admin portal (demo login: `admin` / `canvas2028`) |
+| `/` | Identity, 6-slide rotating banner, community mission box, experience cards, signup |
+| `/mission/` | The mission and the awards banquet |
+| `/campaign/` | Conflict Resolution Campaign — problem, change, meaning, plan |
+| `/eateries/` | Food |
+| `/exhibits/` | Arts & Culture |
+| `/entertainment/` | Entertainment — stages and lineup |
+| `/tournament/` | Competition — RPS tournament |
+| `/attractions/` | Attractions |
+| `/involved/` | Founding partner, why partner with us, start the conversation |
+| `/involved/sponsorship/` | Who attends, brand exposure, community impact, tier levels, request info |
+| `/involved/partners/` | Community partners (distinct from sponsors) |
+| `/news/` | News & updates |
+| `/contact/` | Eight categorized inquiry routes |
+| `/admin/` | Admin portal — demo login `admin` / `canvas2028` |
+
+## Still needed from the client
+
+- Domain (they asked about ascf.com — check availability and price first)
+- Logo — none exists yet; the site runs on type only, and the logo competition is a banner slide
+- Real photography — all images are generated placeholders
+- Email address to receive signups
+- Contact addresses for the eight inquiry categories
+- Social media handles for the footer links
 
 ## Analytics
 
-Open `assets/js/analytics.js` and replace `G-XXXXXXXXXX` with the Measurement ID from
-analytics.google.com. Nothing is sent until that's done.
-
-Click tracking is already wired. Every button and nav link carries a `data-track` attribute,
-so the reports show which CTAs get used, which hero slide converts, which sponsorship tier
-gets opened most, and how far down each page people scroll.
+Replace `G-XXXXXXXXXX` in `assets/js/analytics.js` with the GA4 Measurement ID.
+Tracking already covers: page views, email signups by location, sponsorship and partner
+clicks, which hero slide converts, vendor/exhibitor/volunteer clicks, nav use, social
+clicks, and scroll depth.
 
 ## Email capture
 
-Three places: the bar at the top of every page, the homepage signup section, and an
-inline form on each "announced soon" section.
-
-Set `FORM_ENDPOINT` near the top of `assets/js/site.js` to a Formspree endpoint to start
-collecting. Until then submissions confirm on screen but aren't stored.
+Set `FORM_ENDPOINT` in `assets/js/site.js`. Signup appears in the top bar of every page
+and as a full section on nine pages.
 
 ## Admin portal
 
-`/admin/` is a working demo — add lineup artists, vendors and sponsors, edit the homepage
-location line and the top banner. Published items appear on the live pages.
+Tabs: General, Lineup, News, Vendors & Artists, Sponsors, Analytics. Demo storage is the
+browser only. Production swaps `read()`/`write()` in `admin/index.html` and
+`loadContent()`/`loadLineup()` in `assets/js/site.js` for Firestore, plus Firebase Auth
+for login.
 
-**It stores to the browser only.** Production needs Firebase Auth for login and Firestore
-for content. The swap is contained: in `assets/js/site.js`, `loadContent()` and `loadLineup()`
-become Firestore reads; in `admin/index.html`, `read()` and `write()` become Firestore calls.
-Everything else stays.
+## Ownership
 
-## Images
-
-All images in `assets/img/` are generated SVG placeholders, clearly labelled. Drop in real
-photography with the same filenames and the site picks it up with no code changes.
-
-## Search engines
-
-`robots.txt` disallows everything and each page carries a `noindex` tag. Delete both when
-the site is ready to be public.
+Accounts should be created in the client's name — domain, hosting, analytics, forms,
+email list. They own the asset; we manage it.
 
 ## Rebuilding
 
-Pages are generated from `build.py` in the parent folder so the header, nav and footer stay
-in sync. Edit `build.py`, run `python3 build.py`, and the `site/` folder is rewritten.
+`python3 build.py` regenerates `site/` from the shared template.
+`python3 make_placeholders.py` regenerates the placeholder images.

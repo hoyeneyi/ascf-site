@@ -106,6 +106,7 @@
       <button class="on" data-tab="general">GENERAL</button>
       <button data-tab="lineup">LINEUP</button>
       <button data-tab="vendors">VENDORS &amp; ARTISTS</button>
+      <button data-tab="news">NEWS</button>
       <button data-tab="sponsors">SPONSORS</button>
       <button data-tab="analytics">ANALYTICS</button>
     </div>
@@ -185,6 +186,25 @@
         <h3>Published directory</h3>
         <div class="sub" id="vendorCount">Nothing published yet.</div>
         <div id="vendorList"></div>
+      </div>
+    </div>
+
+    <!-- NEWS -->
+    <div class="tabpane" id="tab-news">
+      <div class="box">
+        <h3>Post an update</h3>
+        <div class="sub">Posts appear on the News page. Use this for announcements, partner news and milestones.</div>
+        <div class="field"><label>HEADLINE</label><input id="n-title" type="text" placeholder="Logo competition opens"></div>
+        <div class="field"><label>DATE</label><input id="n-date" type="text" placeholder="March 2027"></div>
+        <div class="field"><label>POST</label><textarea id="n-body" placeholder="A few sentences..."></textarea></div>
+        <div class="actions"><button class="btn btn-solid" id="addPost" type="button">PUBLISH POST</button></div>
+        <div class="saved" id="savedPost">Published to the News page.</div>
+      </div>
+
+      <div class="box">
+        <h3>Published posts</h3>
+        <div class="sub" id="postCount">Nothing published yet.</div>
+        <div id="postList"></div>
       </div>
     </div>
 
@@ -368,6 +388,19 @@
     flash('savedVendor'); renderAll();
   };
 
+  document.getElementById('addPost').onclick = function () {
+    var title = document.getElementById('n-title').value.trim();
+    if (!title) return;
+    var posts = read('ascf_news', []);
+    posts.unshift({ name: title, date: document.getElementById('n-date').value.trim(),
+                    body: document.getElementById('n-body').value.trim() });
+    write('ascf_news', posts);
+    document.getElementById('n-title').value = '';
+    document.getElementById('n-date').value = '';
+    document.getElementById('n-body').value = '';
+    flash('savedPost'); renderAll();
+  };
+
   document.getElementById('addSponsor').onclick = function () {
     var name = document.getElementById('s-name').value.trim();
     if (!name) return;
@@ -384,6 +417,8 @@
       function (i) { return (i.stage || '').toUpperCase() + (i.time ? ' · ' + i.time : ''); });
     renderList('ascf_vendors', 'vendorList', 'vendorCount', 'listing',
       function (i) { return (i.cat || '') + (i.desc ? ' · ' + i.desc : ''); });
+    renderList('ascf_news', 'postList', 'postCount', 'post',
+      function (i) { return (i.date || '') + (i.body ? ' · ' + i.body.slice(0, 60) : ''); });
     renderList('ascf_sponsors', 'sponsorList', 'sponsorCount', 'sponsor',
       function (i) { return (i.tier || '').toUpperCase(); });
   }
