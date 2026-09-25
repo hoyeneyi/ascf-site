@@ -137,7 +137,7 @@ p{margin:0 0 18px}
   overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
   padding-bottom:40px;z-index:55;
 }
-body.menu-open{overflow:hidden}
+body.menu-open,html.menu-open{overflow:hidden}
 @media(min-width:900px){.mobilemenu{display:none!important}}
 .mobilemenu a{
   display:block;text-decoration:none;padding:12px var(--pad);border-bottom:1px solid var(--rule);

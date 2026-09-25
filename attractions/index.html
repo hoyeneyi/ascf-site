@@ -54,9 +54,12 @@
         <a href="../news/" data-track="nav_click" data-label="News">News</a>
         <a href="../contact/" data-track="nav_click" data-label="Contact">Contact</a>
     </div>
-    <button class="navtoggle" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+    <button class="navtoggle" aria-label="Menu" aria-expanded="false" aria-controls="mobilemenu"><i></i><i></i><i></i></button>
   </div>
-  <div class="mobilemenu">
+</nav>
+<!-- Lives outside <nav> on purpose: the header's backdrop-filter would otherwise
+     become the containing block for this fixed panel and collapse it. -->
+<div class="mobilemenu" id="mobilemenu">
       <a href="../index.html" data-track="nav_click_mobile" data-label="Home">Home</a>
       <span class="subhead">Mission</span>
       <a class="child" href="../mission/" data-track="nav_click_mobile" data-label="Mission overview">Mission overview</a>
@@ -73,8 +76,7 @@
       <a class="child" href="../involved/partners/" data-track="nav_click_mobile" data-label="Community Partners">Community Partners</a>
       <a href="../news/" data-track="nav_click_mobile" data-label="News">News</a>
       <a href="../contact/" data-track="nav_click_mobile" data-label="Contact">Contact</a>
-  </div>
-</nav>
+</div>
 
 
 <div class="pagehead">

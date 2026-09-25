@@ -50,6 +50,7 @@
     menu.classList.remove('open');
     menu.style.top = '';
     document.body.classList.remove('menu-open');
+    document.documentElement.classList.remove('menu-open');
     if (toggle) toggle.setAttribute('aria-expanded', 'false');
   }
 
@@ -61,6 +62,7 @@
     menu.style.top = Math.max(0, navEl.getBoundingClientRect().bottom) + 'px';
     menu.classList.add('open');
     document.body.classList.add('menu-open');
+    document.documentElement.classList.add('menu-open');
     if (toggle) toggle.setAttribute('aria-expanded', 'true');
   }
 
@@ -70,6 +72,17 @@
       if (isOpen) { closeMenu(); } else { openMenu(); }
       track('nav_toggle', { state: isOpen ? 'closed' : 'open' });
     });
+
+    /* Stop the page behind the menu from scrolling. overflow:hidden alone is
+       ignored by some iPhone Safari versions, so block the gestures directly,
+       everywhere except inside the menu itself. */
+    function blockBehind(e) {
+      if (!menu.classList.contains('open')) return;
+      if (e.target && e.target.closest && e.target.closest('.mobilemenu')) return;
+      if (e.cancelable) e.preventDefault();
+    }
+    document.addEventListener('touchmove', blockBehind, { passive: false });
+    document.addEventListener('wheel', blockBehind, { passive: false });
 
     /* tapping a link closes the panel so the next page isn't covered */
     menu.addEventListener('click', function (e) {
