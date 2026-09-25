@@ -1,0 +1,34 @@
+rules_version = '2';
+
+// Anyone can READ the published site content.
+// Only the email addresses listed below can WRITE it.
+//
+// Why an allowlist and not just "signed in": Firebase lets anyone create an
+// email/password account using the public config, so "signed in" alone
+// would let a stranger make an account and edit the site.
+//
+// To add or remove an editor: change this list, then publish the rules
+// (Firebase console -> Firestore -> Rules -> Publish), and add/remove the
+// person under Authentication -> Users.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isEditor() {
+      return request.auth != null
+        && request.auth.token.email in [
+          'owner@example.com',      // client — replace
+          'developer@example.com'   // you — replace
+        ];
+    }
+
+    match /site/content {
+      allow read: if true;
+      allow write: if isEditor();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

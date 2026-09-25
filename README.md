@@ -1,60 +1,97 @@
 # America's Spring Canvas Festival — Website
 
-Static, mobile-first, no build step needed to deploy. Push this folder as the repo root.
+Static site on GitHub Pages. Content is edited by the client through `/admin/`,
+stored in Firebase, and read by the public pages at load time. No rebuild or
+redeploy is needed for content changes.
 
-## Pages
+---
 
-| URL | What's there |
+## Go-live checklist (developer, one time, ~30 minutes)
+
+Do these in the **client's** Google account so they own the project. Add
+yourself as an Owner under Project settings → Users and permissions.
+
+### 1. Create the Firebase project
+1. console.firebase.google.com → **Add project** → name it (e.g. `ascf-website`). Analytics optional.
+2. **Upgrade to Blaze** (bottom-left plan badge). Required for image uploads — Firebase
+   no longer offers Storage on the free Spark plan. No-cost usage still applies; at this
+   site's scale the bill should be $0.
+3. In Google Cloud → Billing → **Budgets & alerts**, set a $5 monthly budget with email alerts
+   to the client and you. This is the guardrail against surprises.
+
+### 2. Turn on the three services
+- **Authentication** → Get started → **Email/Password** → Enable.
+  Then **Users** → Add user for each editor (client email + temporary password).
+- **Firestore Database** → Create database → Production mode → a US region.
+- **Storage** → Get started → Production mode → same region.
+
+### 3. Paste in the security rules
+- Open `firestore.rules` and `storage.rules` from this folder.
+- Replace the two placeholder emails in **both** files with the real editor emails.
+- Firestore → **Rules** tab → paste → Publish. Storage → **Rules** tab → paste → Publish.
+
+The allowlist matters: Firebase lets anyone create an account with the public
+config, so "signed in" alone is not enough. Only listed emails can write.
+
+### 4. Connect the site
+1. Project settings → **Your apps** → Web (`</>`) → register → copy the `firebaseConfig` object.
+2. Paste it into `assets/js/firebase-config.js`, replacing `null`.
+3. Commit and push. The yellow "Demo mode" banner disappears from `/admin/`.
+
+These config values are designed to be public. Security comes from the rules.
+
+### 5. Hand off
+- Send the client the `/admin/` link and their temporary password.
+- Have them sign in once and use **Forgot your password?** to set their own.
+- Send the Admin Guide.
+
+---
+
+## Also still to configure
+
+| What | Where |
 |---|---|
-| `/` | Identity, 6-slide rotating banner, community mission box, experience cards, signup |
-| `/mission/` | The mission and the awards banquet |
-| `/campaign/` | Conflict Resolution Campaign — problem, change, meaning, plan |
-| `/eateries/` | Food |
-| `/exhibits/` | Arts & Culture |
-| `/entertainment/` | Entertainment — stages and lineup |
-| `/tournament/` | Competition — RPS tournament |
-| `/attractions/` | Attractions |
-| `/involved/` | Founding partner, why partner with us, start the conversation |
-| `/involved/sponsorship/` | Who attends, brand exposure, community impact, tier levels, request info |
-| `/involved/partners/` | Community partners (distinct from sponsors) |
-| `/news/` | News & updates |
-| `/contact/` | Eight categorized inquiry routes |
-| `/admin/` | Admin portal — demo login `admin` / `canvas2028` |
+| Google Analytics | Replace `G-XXXXXXXXXX` in `assets/js/analytics.js` |
+| Email signups | Set `FORM_ENDPOINT` in `assets/js/site.js` (Formspree, or a Mailchimp/Brevo form URL) |
+| Custom domain | GitHub → Settings → Pages → Custom domain. Then set `SITE_URL` and `REPO_BASE = "/"` in `build.py`, rebuild, push |
+| Go public | Delete `robots.txt` and remove the `noindex` meta tag in `build.py`, rebuild, push |
 
-## Still needed from the client
+---
 
-- Domain (they asked about ascf.com — check availability and price first)
-- Logo — none exists yet; the site runs on type only, and the logo competition is a banner slide
-- Real photography — all images are generated placeholders
-- Email address to receive signups
-- Contact addresses for the eight inquiry categories
-- Social media handles for the footer links
+## How editing works
 
-## Analytics
+`build.py` generates every page, then `annotate.py` walks the output and tags
+every piece of client-facing text (`data-edit`), every image (`data-img`), and
+every email/social/document link (`data-link`). It writes
+`assets/js/schema.js`, which the admin uses to draw its forms — grouped by page
+and section, in page order. Currently **468 editable items across 14 groups**.
 
-Replace `G-XXXXXXXXXX` in `assets/js/analytics.js` with the GA4 Measurement ID.
-Tracking already covers: page views, email signups by location, sponsorship and partner
-clicks, which hero slide converts, vendor/exhibitor/volunteer clicks, nav use, social
-clicks, and scroll depth.
+Keys come from the original text, so they are stable across rebuilds. If you
+change default copy in `build.py`, any client override of that exact item is
+orphaned and the new default shows — expected behaviour.
 
-## Email capture
+`assets/js/content.js` fetches one Firestore document (`site/content`) over
+REST — no Firebase SDK on public pages — caches it for 60 seconds per tab, and
+applies text, images, links and the five lists (lineup, news, vendors,
+sponsors, partners).
 
-Set `FORM_ENDPOINT` in `assets/js/site.js`. Signup appears in the top bar of every page
-and as a full section on nine pages.
-
-## Admin portal
-
-Tabs: General, Lineup, News, Vendors & Artists, Sponsors, Analytics. Demo storage is the
-browser only. Production swaps `read()`/`write()` in `admin/index.html` and
-`loadContent()`/`loadLineup()` in `assets/js/site.js` for Firestore, plus Firebase Auth
-for login.
-
-## Ownership
-
-Accounts should be created in the client's name — domain, hosting, analytics, forms,
-email list. They own the asset; we manage it.
+Without a Firebase config everything runs in **demo mode**: admin login is
+`admin` / `canvas2028` and edits save to that one browser.
 
 ## Rebuilding
 
-`python3 build.py` regenerates `site/` from the shared template.
-`python3 make_placeholders.py` regenerates the placeholder images.
+    python3 build.py              # regenerate site/ and schema.js
+    python3 make_placeholders.py  # regenerate placeholder images
+    python3 make_brand_assets.py  # regenerate share image, favicon, touch icon
+
+## Files
+
+    index.html, */index.html   public pages
+    admin/index.html           editor portal
+    404.html                   branded not-found page
+    assets/css/site.css        all styling
+    assets/js/content.js       applies published content
+    assets/js/site.js          nav, carousel, analytics events, signup, motion
+    assets/js/schema.js        generated list of editable items
+    assets/js/firebase-config.js
+    firestore.rules, storage.rules

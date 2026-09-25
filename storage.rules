@@ -1,0 +1,30 @@
+rules_version = '2';
+
+// Uploaded images and documents are public to view.
+// Only listed editors can upload, capped at 25 MB per file.
+// Keep this list identical to the one in firestore.rules.
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isEditor() {
+      return request.auth != null
+        && request.auth.token.email in [
+          'owner@example.com',
+          'developer@example.com'
+        ];
+    }
+
+    match /uploads/{file=**} {
+      allow read: if true;
+      allow write: if isEditor()
+        && request.resource.size < 25 * 1024 * 1024
+        && (request.resource.contentType.matches('image/.*')
+            || request.resource.contentType == 'application/pdf');
+    }
+
+    match /{path=**} {
+      allow read, write: if false;
+    }
+  }
+}

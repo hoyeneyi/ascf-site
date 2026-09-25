@@ -4,424 +4,692 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Admin Portal — America's Spring Canvas Festival</title>
+<meta name="theme-color" content="#070C0D">
+<title>Admin — America's Spring Canvas Festival</title>
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
 <style>
-  body{background:#0B1213}
-  .shell{max-width:920px;margin:0 auto;padding:0 20px 70px}
+  body{background:#0A1112;padding-bottom:90px}
+  .hidden{display:none!important}
+  .mode{background:var(--yellow);color:#0A0A0A;text-align:center;font-size:12px;padding:8px 14px;font-weight:500;letter-spacing:.02em}
+  .mode b{font-weight:600}
 
-  .adminbar{border-bottom:1px solid var(--rule);background:#000;position:sticky;top:0;z-index:20}
-  .adminbar .in{max-width:920px;margin:0 auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-  .adminbar b{font-family:var(--display);letter-spacing:.09em;font-size:14px}
-  .adminbar span{color:var(--mute);font-size:11.5px;letter-spacing:.16em;display:block;font-family:var(--body);font-weight:400}
-  .adminbar .right{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-  .who{color:var(--mute);font-size:12.5px}
-
-  .login{max-width:380px;margin:12vh auto;text-align:center;padding:0 20px}
-  .login .ribbon{margin:20px auto 26px}
+  /* login */
+  .login{max-width:380px;margin:10vh auto;text-align:center;padding:0 20px}
+  .login .ribbon{margin:18px auto 24px;max-width:240px}
   .login p{color:var(--mute);font-size:13.5px}
-  .login input{width:100%;background:#0A1112;border:1px solid var(--rule-2);color:#fff;padding:14px;margin-bottom:10px;font-family:var(--body);font-size:14px}
-  .err{color:var(--orange);font-size:13px;min-height:20px;margin-top:10px}
+  .login input{width:100%;background:#0A1112;border:1px solid var(--rule-2);color:#fff;padding:14px;margin-bottom:10px;font-family:var(--body);font-size:15px}
+  .linkbtn{background:none;border:none;color:var(--soft);text-decoration:underline;cursor:pointer;font-family:var(--body);font-size:13px;margin-top:16px}
+  .msg{font-size:13px;min-height:20px;margin-top:12px}
+  .msg.err{color:var(--orange)} .msg.ok{color:var(--lime)}
 
-  .panel{display:none}
-  .panel.on{display:block}
+  /* shell */
+  .topnav{background:#000;border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:40}
+  .topnav .in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .topnav b{font-family:var(--display);letter-spacing:.08em;font-size:15px}
+  .topnav small{display:block;color:var(--mute);font-size:11px;letter-spacing:.1em}
+  .topnav .right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .sm{padding:9px 14px!important;font-size:11.5px!important}
+  .btn:disabled,.mini:disabled{opacity:.35;cursor:default;pointer-events:none}
 
-  .tabs{display:flex;gap:4px;flex-wrap:wrap;margin:26px 0 22px;border-bottom:1px solid var(--rule)}
-  .tabs button{
-    background:none;border:none;border-bottom:2px solid transparent;color:var(--mute);cursor:pointer;
-    font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.11em;padding:12px 14px;
+  .shell{max-width:1180px;margin:0 auto;padding:0 20px;display:grid;gap:26px;grid-template-columns:1fr}
+  @media(min-width:960px){.shell{grid-template-columns:230px 1fr}}
+  .side{padding-top:24px}
+  .side button{
+    display:block;width:100%;text-align:left;background:none;border:none;border-left:3px solid transparent;
+    color:var(--soft);cursor:pointer;font-family:var(--display);font-size:14px;letter-spacing:.08em;padding:11px 14px;
   }
-  .tabs button.on{color:#fff;border-bottom-color:var(--yellow)}
-
-  .tabpane{display:none}
-  .tabpane.on{display:block}
-
-  .field{margin-bottom:18px}
-  .field label{display:block;font-size:10.5px;letter-spacing:.17em;color:var(--mute);margin-bottom:7px;font-weight:600}
-  .field input,.field select,.field textarea{
-    width:100%;background:#0A1112;border:1px solid var(--rule-2);color:#fff;
-    padding:12px 13px;font-family:var(--body);font-size:14px;line-height:1.6;
+  .side button:hover{color:#fff;background:#0E1618}
+  .side button.on{color:#fff;border-left-color:var(--yellow);background:#0E1618}
+  .side .grp{font-size:10.5px;letter-spacing:.2em;color:var(--mute);padding:18px 14px 6px}
+  @media(max-width:959px){
+    .side{display:flex;gap:6px;overflow-x:auto;padding:14px 0 4px;-webkit-overflow-scrolling:touch}
+    .side .grp{display:none}
+    .side button{white-space:nowrap;width:auto;border-left:none;border-bottom:2px solid transparent;padding:10px 12px;font-size:12.5px}
+    .side button.on{border-bottom-color:var(--yellow)}
   }
-  .field textarea{min-height:110px;resize:vertical}
-  .hint{color:var(--mute);font-size:12.5px;margin:-8px 0 18px}
+  .main{padding:24px 0 40px;min-width:0}
+  .main h1{font-size:clamp(26px,5vw,36px);margin-bottom:6px}
+  .lead{color:var(--mute);font-size:14px;margin-bottom:22px;max-width:70ch}
 
-  .box{border:1px solid var(--rule);background:var(--ink-2);padding:24px 22px;margin-bottom:22px}
-  .box h3{margin-bottom:6px}
-  .box .sub{color:var(--mute);font-size:13px;margin-bottom:20px}
-
-  .itemrow{
-    display:flex;justify-content:space-between;align-items:center;gap:12px;
-    padding:13px 0;border-bottom:1px solid var(--rule);flex-wrap:wrap;
+  /* page editor */
+  .tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .tools select,.tools input{background:#0A1112;border:1px solid var(--rule-2);color:#fff;padding:12px;font-family:var(--body);font-size:14px}
+  .tools select{flex:1 1 260px}
+  .tools input{flex:2 1 260px}
+  .sec{border:1px solid var(--rule);background:var(--ink-2);margin-bottom:16px}
+  .sec > h3{font-size:15px;letter-spacing:.05em;padding:14px 18px;border-bottom:1px solid var(--rule);background:#0C1416;display:flex;justify-content:space-between;gap:10px}
+  .sec > h3 small{color:var(--mute);font-family:var(--body);font-size:11px;letter-spacing:.1em;font-weight:400}
+  .fld{padding:14px 18px;border-bottom:1px solid var(--rule)}
+  .fld:last-child{border-bottom:none}
+  .fld label{display:flex;justify-content:space-between;gap:10px;font-size:10.5px;letter-spacing:.16em;color:var(--mute);margin-bottom:7px;font-weight:600;text-transform:uppercase}
+  .fld label .chg{color:var(--yellow);letter-spacing:.1em}
+  .fld input[type=text],.fld textarea{
+    width:100%;background:#0A1112;border:1px solid var(--rule-2);color:#fff;padding:11px 12px;
+    font-family:var(--body);font-size:14.5px;line-height:1.6;
   }
-  .itemrow b{font-family:var(--display);font-size:15.5px;letter-spacing:.05em}
-  .itemrow small{color:var(--mute);font-size:12px;letter-spacing:.09em;display:block}
-  .del{background:none;border:1px solid var(--rule-2);color:var(--mute);cursor:pointer;padding:6px 12px;font-size:11px;letter-spacing:.1em}
-  .del:hover{border-color:var(--orange);color:var(--orange)}
+  .fld textarea{min-height:84px;resize:vertical}
+  .fld input:focus,.fld textarea:focus{border-color:var(--yellow);outline:none}
+  .fld.changed input,.fld.changed textarea{border-color:rgba(253,209,10,.55)}
+  .fhint{color:var(--mute);font-size:11.5px;margin-top:6px}
+  .fld label.mini,.listform label.mini{display:inline-block;margin:0;color:var(--soft);font-size:11px;
+    letter-spacing:.1em;font-weight:400;cursor:pointer;text-transform:none}
+  .frow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center}
+  .mini{background:none;border:1px solid var(--rule-2);color:var(--soft);cursor:pointer;padding:7px 12px;font-size:11px;letter-spacing:.1em;font-family:var(--body)}
+  .mini:hover{border-color:var(--yellow);color:var(--yellow)}
+  .mini.danger:hover{border-color:var(--orange);color:var(--orange)}
+  .imgprev{width:100%;max-width:340px;aspect-ratio:16/10;background:#0A1112 center/cover no-repeat;border:1px solid var(--rule-2)}
+  .busy{color:var(--yellow);font-size:12px}
+  .where{color:var(--mute);font-size:11px;letter-spacing:.06em;margin-top:4px}
 
-  .saved{color:var(--lime);font-size:13px;margin-top:12px;display:none}
-  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+  /* lists */
+  .listform{border:1px solid var(--rule);background:var(--ink-2);padding:20px;margin-bottom:18px}
+  .listform h3{margin-bottom:14px;font-size:17px}
+  .listform .f{margin-bottom:14px}
+  .listform label{display:block;font-size:10.5px;letter-spacing:.16em;color:var(--mute);margin-bottom:7px;font-weight:600;text-transform:uppercase}
+  .listform input[type=text],.listform textarea,.listform select{
+    width:100%;background:#0A1112;border:1px solid var(--rule-2);color:#fff;padding:11px 12px;font-family:var(--body);font-size:14.5px;
+  }
+  .listform textarea{min-height:90px}
+  .items{border:1px solid var(--rule);background:var(--ink-2)}
+  .item{display:flex;gap:14px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--rule)}
+  .item:last-child{border-bottom:none}
+  .item .th{width:54px;height:54px;flex:0 0 54px;background:#0A1112 center/cover no-repeat;border:1px solid var(--rule)}
+  .item .tx{flex:1;min-width:0}
+  .item .tx b{display:block;font-family:var(--display);font-size:16px;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .item .tx small{color:var(--mute);font-size:12px}
+  .item .act{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .none{padding:22px 16px;color:var(--mute);font-size:13.5px}
 
-  .notice{border-left:3px solid var(--yellow);background:rgba(253,209,10,.07);padding:16px 18px;color:var(--soft);font-size:13px;line-height:1.8;margin-bottom:26px}
-  .notice b{color:#fff}
+  /* help */
+  .help h2{font-size:22px;margin:26px 0 10px}
+  .help p,.help li{color:var(--soft);font-size:14.5px;max-width:72ch}
+  .help li{margin-bottom:8px}
+  .help code{background:#0A1112;border:1px solid var(--rule);padding:1px 6px;font-size:13px}
+
+  /* publish bar */
+  .pub{position:fixed;left:0;right:0;bottom:0;z-index:50;background:#000;border-top:1px solid var(--rule-2)}
+  .pub .in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .pub .state{font-size:13px;color:var(--mute)}
+  .pub .state.dirty{color:var(--yellow)}
+  .pub .btns{display:flex;gap:8px}
+  .toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:var(--lime);color:#0A0A0A;padding:10px 18px;font-size:13.5px;font-weight:500;z-index:60;display:none}
+  .toast.err{background:var(--orange);color:#fff}
 </style>
 </head>
 <body>
 
-<!-- ---------------- LOGIN ---------------- -->
-<div class="login" id="login">
+<div class="mode hidden" id="demoBanner"><b>Demo mode.</b> Changes save to this browser only. Connect Firebase to publish for everyone.</div>
+
+<!-- ============ LOGIN ============ -->
+<div class="login hidden" id="loginView">
   <div style="font-size:10.5px;letter-spacing:.28em;color:var(--mute)">ADMIN PORTAL</div>
-  <h1 class="gradient-text" style="font-size:30px;margin-top:10px">AMERICA'S<br>SPRING CANVAS<br>FESTIVAL</h1>
-  <div class="ribbon" style="max-width:260px"></div>
-  <p style="margin-bottom:22px">Sign in to update the website.</p>
-  <input id="user" type="text" placeholder="Email" autocomplete="username">
-  <input id="pass" type="password" placeholder="Password" autocomplete="current-password">
-  <button class="btn btn-solid btn-block" id="signin" type="button">SIGN IN</button>
-  <div class="err" id="loginErr"></div>
-  <p style="margin-top:24px;font-size:12px">Demo login — <b style="color:var(--soft)">admin</b> / <b style="color:var(--soft)">canvas2028</b></p>
+  <h1 class="gradient-text" style="font-size:30px;margin:10px auto 0">AMERICA'S<br>SPRING CANVAS<br>FESTIVAL</h1>
+  <div class="ribbon"></div>
+  <p style="margin-bottom:20px">Sign in to update the website.</p>
+  <input id="email" type="email" placeholder="Email" autocomplete="username">
+  <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+  <button class="btn btn-solid btn-block" id="signinBtn" type="button">SIGN IN</button>
+  <div class="msg" id="loginMsg"></div>
+  <button class="linkbtn hidden" id="forgotBtn" type="button">Forgot your password?</button>
+  <p class="hidden" id="demoCreds" style="margin-top:20px;font-size:12.5px">Demo login: <b style="color:var(--soft)">admin</b> / <b style="color:var(--soft)">canvas2028</b></p>
 </div>
 
-<!-- ---------------- PANEL ---------------- -->
-<div class="panel" id="panel">
-
-  <div class="adminbar">
-    <div class="in">
-      <div>
-        <b>ASCF ADMIN</b>
-        <span>CONTENT MANAGEMENT</span>
-      </div>
-      <div class="right">
-        <span class="who" id="who">Signed in</span>
-        <a class="btn btn-ghost" href="../index.html" style="padding:9px 16px;font-size:11.5px">VIEW SITE</a>
-        <button class="btn btn-ghost" id="signout" type="button" style="padding:9px 16px;font-size:11.5px">SIGN OUT</button>
-      </div>
+<!-- ============ APP ============ -->
+<div class="hidden" id="appView">
+  <div class="topnav"><div class="in">
+    <div><b>ASCF ADMIN</b><small id="whoami">Signed in</small></div>
+    <div class="right">
+      <a class="btn btn-ghost sm" href="../index.html" target="_blank" rel="noopener">VIEW SITE ↗</a>
+      <button class="btn btn-ghost sm" id="signoutBtn" type="button">SIGN OUT</button>
     </div>
-  </div>
+  </div></div>
 
   <div class="shell">
+    <aside class="side" id="side">
+      <div class="grp">CONTENT</div>
+      <button data-view="pages" class="on">Edit pages</button>
+      <div class="grp">LISTS</div>
+      <button data-view="list:lineup">Lineup</button>
+      <button data-view="list:news">News</button>
+      <button data-view="list:vendors">Vendors &amp; Artists</button>
+      <button data-view="list:sponsors">Sponsors</button>
+      <button data-view="list:partners">Community Partners</button>
+      <div class="grp">SUPPORT</div>
+      <button data-view="help">How to use this</button>
+    </aside>
 
-    <div class="tabs">
-      <button class="on" data-tab="general">GENERAL</button>
-      <button data-tab="lineup">LINEUP</button>
-      <button data-tab="vendors">VENDORS &amp; ARTISTS</button>
-      <button data-tab="news">NEWS</button>
-      <button data-tab="sponsors">SPONSORS</button>
-      <button data-tab="analytics">ANALYTICS</button>
-    </div>
-
-    <!-- GENERAL -->
-    <div class="tabpane on" id="tab-general">
-      <div class="notice">
-        <b>Demo mode.</b> Changes save to this browser only so you can see how the portal works.
-        The production build stores content in the database, so edits appear for every visitor on every device.
-      </div>
-
-      <div class="box">
-        <h3>Festival details</h3>
-        <div class="sub">Shown under the festival name on the homepage and in the site header.</div>
-        <div class="field">
-          <label>LOCATION &amp; DATE LINE</label>
-          <input id="f-location" type="text">
-        </div>
-        <div class="field">
-          <label>HOMEPAGE INTRO</label>
-          <textarea id="f-intro"></textarea>
-        </div>
-        <div class="actions"><button class="btn btn-solid" id="saveGeneral" type="button">SAVE CHANGES</button></div>
-        <div class="saved" id="savedGeneral">Saved. Reload the site to see it.</div>
-      </div>
-
-      <div class="box">
-        <h3>Announcement banner</h3>
-        <div class="sub">The message in the coloured bar at the top of every page.</div>
-        <div class="field">
-          <label>BANNER TEXT</label>
-          <input id="f-banner" type="text">
-        </div>
-        <div class="actions"><button class="btn btn-solid" id="saveBanner" type="button">SAVE CHANGES</button></div>
-        <div class="saved" id="savedBanner">Saved.</div>
-      </div>
-    </div>
-
-    <!-- LINEUP -->
-    <div class="tabpane" id="tab-lineup">
-      <div class="box">
-        <h3>Add an artist</h3>
-        <div class="sub">Published artists appear on the eNTERTAINMENT page and replace the "announced soon" message.</div>
-        <div class="field"><label>ARTIST NAME</label><input id="a-name" type="text" placeholder="e.g. The Roots"></div>
-        <div class="field"><label>STAGE</label>
-          <select id="a-stage">
-            <option>National Stage</option><option>Regional Stage</option><option>Local Stage</option>
-          </select>
-        </div>
-        <div class="field"><label>DAY &amp; SET TIME</label><input id="a-time" type="text" placeholder="Saturday · 9:00 PM"></div>
-        <div class="actions"><button class="btn btn-solid" id="addAct" type="button">PUBLISH TO SITE</button></div>
-        <div class="saved" id="savedAct">Published. It's live on the eNTERTAINMENT page.</div>
-      </div>
-
-      <div class="box">
-        <h3>Published lineup</h3>
-        <div class="sub" id="lineupCount">Nothing published yet.</div>
-        <div id="lineupList"></div>
-      </div>
-    </div>
-
-    <!-- VENDORS -->
-    <div class="tabpane" id="tab-vendors">
-      <div class="box">
-        <h3>Add a vendor or artist</h3>
-        <div class="sub">Populates the eATERIES and eXHIBITS directories as they're confirmed.</div>
-        <div class="field"><label>NAME</label><input id="v-name" type="text" placeholder="e.g. Buddy's Pizza"></div>
-        <div class="field"><label>CATEGORY</label>
-          <select id="v-cat"><option>eATERIES</option><option>eXHIBITS</option></select>
-        </div>
-        <div class="field"><label>SHORT DESCRIPTION</label><input id="v-desc" type="text" placeholder="Detroit-style square pizza since 1946"></div>
-        <div class="actions"><button class="btn btn-solid" id="addVendor" type="button">PUBLISH</button></div>
-        <div class="saved" id="savedVendor">Published.</div>
-      </div>
-
-      <div class="box">
-        <h3>Published directory</h3>
-        <div class="sub" id="vendorCount">Nothing published yet.</div>
-        <div id="vendorList"></div>
-      </div>
-    </div>
-
-    <!-- NEWS -->
-    <div class="tabpane" id="tab-news">
-      <div class="box">
-        <h3>Post an update</h3>
-        <div class="sub">Posts appear on the News page. Use this for announcements, partner news and milestones.</div>
-        <div class="field"><label>HEADLINE</label><input id="n-title" type="text" placeholder="Logo competition opens"></div>
-        <div class="field"><label>DATE</label><input id="n-date" type="text" placeholder="March 2027"></div>
-        <div class="field"><label>POST</label><textarea id="n-body" placeholder="A few sentences..."></textarea></div>
-        <div class="actions"><button class="btn btn-solid" id="addPost" type="button">PUBLISH POST</button></div>
-        <div class="saved" id="savedPost">Published to the News page.</div>
-      </div>
-
-      <div class="box">
-        <h3>Published posts</h3>
-        <div class="sub" id="postCount">Nothing published yet.</div>
-        <div id="postList"></div>
-      </div>
-    </div>
-
-    <!-- SPONSORS -->
-    <div class="tabpane" id="tab-sponsors">
-      <div class="box">
-        <h3>Add a confirmed sponsor</h3>
-        <div class="sub">Sponsor names appear on the Get Involved page once confirmed. Logo uploads come with the production build.</div>
-        <div class="field"><label>SPONSOR NAME</label><input id="s-name" type="text"></div>
-        <div class="field"><label>TIER</label>
-          <select id="s-tier">
-            <option>Diamond</option><option>Platinum</option><option>Gold</option><option>Silver</option><option>Bronze</option>
-          </select>
-        </div>
-        <div class="actions"><button class="btn btn-solid" id="addSponsor" type="button">PUBLISH</button></div>
-        <div class="saved" id="savedSponsor">Published.</div>
-      </div>
-
-      <div class="box">
-        <h3>Confirmed sponsors</h3>
-        <div class="sub" id="sponsorCount">Nothing published yet.</div>
-        <div id="sponsorList"></div>
-      </div>
-    </div>
-
-    <!-- ANALYTICS -->
-    <div class="tabpane" id="tab-analytics">
-      <div class="notice">
-        <b>Not connected yet.</b> Once the Google Analytics ID is added, this tab links straight to the live dashboard.
-      </div>
-      <div class="box">
-        <h3>What gets measured</h3>
-        <div class="sub">Every button and link on the site reports back, so you can see what people actually do.</div>
-        <div class="itemrow"><div><b>Email signups</b><small>WHICH PAGE AND WHICH FORM CONVERTED</small></div></div>
-        <div class="itemrow"><div><b>Sponsorship clicks</b><small>WHICH TIER PEOPLE OPEN MOST</small></div></div>
-        <div class="itemrow"><div><b>Apply buttons</b><small>VENDOR, ARTIST, PERFORMER, VOLUNTEER</small></div></div>
-        <div class="itemrow"><div><b>Homepage banner</b><small>WHICH ROTATING SLIDE DRIVES CLICKS</small></div></div>
-        <div class="itemrow"><div><b>Page traffic</b><small>VISITS, DEVICE, LOCATION, TIME ON PAGE</small></div></div>
-        <div class="itemrow"><div><b>Scroll depth</b><small>HOW FAR DOWN EACH PAGE PEOPLE GET</small></div></div>
-      </div>
-    </div>
-
+    <main class="main" id="main"></main>
   </div>
+
+  <div class="pub"><div class="in">
+    <div class="state" id="pubState">All changes are live.</div>
+    <div class="btns">
+      <button class="btn btn-ghost sm hidden" id="discardBtn" type="button">DISCARD</button>
+      <button class="btn btn-solid sm" id="publishBtn" type="button" disabled>PUBLISH CHANGES</button>
+    </div>
+  </div></div>
+  <div class="toast" id="toast"></div>
 </div>
 
+<script src="../assets/js/firebase-config.js"></script>
+<script src="../assets/js/schema.js"></script>
 <script>
-/* =========================================================
-   Demo admin portal.
-   Storage is this browser only. Production swaps the three
-   functions below for Firebase Auth + Firestore.
-   ========================================================= */
-(function () {
+(async function () {
   'use strict';
+  var CFG = window.ASCF_FIREBASE || null;
+  var SCHEMA = window.ASCF_SCHEMA || { pages: [] };
+  var $ = function (id) { return document.getElementById(id); };
 
-  var DEMO_USER = 'admin', DEMO_PASS = 'canvas2028';
+  /* =====================================================
+     Storage backends — same interface, demo or live
+     ===================================================== */
+  function blank() { return { text: {}, images: {}, links: {}, lists: {} }; }
 
-  var DEFAULTS = {
-    location: "PONTIAC, MICHIGAN · MAY 26–29, 2028 · MEMORIAL DAY WEEKEND",
-    intro: "Four days of food, art and music from every culture that built this country.",
-    banner: "Be first to know when the lineup drops"
-  };
-
-  function read(key, fallback) {
-    try { return JSON.parse(localStorage.getItem(key)) || fallback; }
-    catch (e) { return fallback; }
-  }
-  function write(key, value) {
-    try { localStorage.setItem(key, JSON.stringify(value)); return true; }
-    catch (e) { return false; }
-  }
-  function flash(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.style.display = 'block';
-    setTimeout(function () { el.style.display = 'none'; }, 2600);
-  }
-
-  /* ---------- auth ---------- */
-  var login = document.getElementById('login');
-  var panel = document.getElementById('panel');
-
-  function open() {
-    login.style.display = 'none';
-    panel.classList.add('on');
-    renderAll();
-  }
-  if (read('ascf_admin_session', false)) open();
-
-  document.getElementById('signin').onclick = function () {
-    var u = document.getElementById('user').value.trim().toLowerCase();
-    var p = document.getElementById('pass').value;
-    if (u === DEMO_USER && p === DEMO_PASS) {
-      write('ascf_admin_session', true);
-      document.getElementById('who').textContent = 'Signed in as ' + u;
-      open();
-    } else {
-      document.getElementById('loginErr').textContent = 'Incorrect email or password.';
+  var DemoBackend = {
+    live: false,
+    user: null,
+    init: async function () {
+      this.user = sessionStorage.getItem('ascf_demo_user');
+    },
+    signIn: async function (email, pw) {
+      if (email.trim().toLowerCase() === 'admin' && pw === 'canvas2028') {
+        sessionStorage.setItem('ascf_demo_user', 'admin');
+        this.user = 'admin';
+        return;
+      }
+      throw new Error('Incorrect email or password.');
+    },
+    signOut: async function () { sessionStorage.removeItem('ascf_demo_user'); this.user = null; },
+    reset: async function () { throw new Error('Password reset works once the site is connected to Firebase.'); },
+    load: async function () {
+      try { return JSON.parse(localStorage.getItem('ascf_demo_content') || 'null') || blank(); }
+      catch (e) { return blank(); }
+    },
+    save: async function (c) {
+      c.updatedAt = new Date().toISOString();
+      c.updatedBy = 'admin (demo)';
+      try { localStorage.setItem('ascf_demo_content', JSON.stringify(c)); }
+      catch (e) { throw new Error('Demo storage is full — images are large. Connect Firebase for real storage.'); }
+    },
+    upload: async function (file) {
+      var blob = await prepImage(file, 1400, 0.72);
+      return await new Promise(function (res, rej) {
+        var r = new FileReader();
+        r.onload = function () { res(r.result); };
+        r.onerror = function () { rej(new Error('Could not read the file.')); };
+        r.readAsDataURL(blob);
+      });
     }
   };
-  document.getElementById('pass').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') document.getElementById('signin').click();
-  });
-  document.getElementById('signout').onclick = function () {
-    write('ascf_admin_session', false);
-    location.reload();
+
+  var FirebaseBackend = {
+    live: true,
+    user: null,
+    init: async function () {
+      var V = '10.12.2', B = 'https://www.gstatic.com/firebasejs/' + V + '/';
+      var app = await import(B + 'firebase-app.js');
+      var auth = await import(B + 'firebase-auth.js');
+      var fs = await import(B + 'firebase-firestore.js');
+      var st = await import(B + 'firebase-storage.js');
+      this.m = { auth: auth, fs: fs, st: st };
+      this.app = app.initializeApp(CFG);
+      this.auth = auth.getAuth(this.app);
+      this.db = fs.getFirestore(this.app);
+      this.storage = st.getStorage(this.app);
+      var self = this;
+      await new Promise(function (res) {
+        auth.onAuthStateChanged(self.auth, function (u) { self.user = u ? u.email : null; res(); });
+      });
+    },
+    signIn: async function (email, pw) {
+      try { await this.m.auth.signInWithEmailAndPassword(this.auth, email.trim(), pw); }
+      catch (e) { throw new Error('Incorrect email or password.'); }
+      this.user = this.auth.currentUser && this.auth.currentUser.email;
+    },
+    signOut: async function () { await this.m.auth.signOut(this.auth); this.user = null; },
+    reset: async function (email) {
+      if (!email) throw new Error('Type your email address above first.');
+      await this.m.auth.sendPasswordResetEmail(this.auth, email.trim());
+    },
+    load: async function () {
+      var snap = await this.m.fs.getDoc(this.m.fs.doc(this.db, 'site', 'content'));
+      var d = snap.exists() ? snap.data() : blank();
+      if (d.updatedAt && d.updatedAt.toDate) d.updatedAt = d.updatedAt.toDate().toISOString();
+      return d;
+    },
+    save: async function (c) {
+      var copy = JSON.parse(JSON.stringify(c));
+      copy.updatedAt = this.m.fs.serverTimestamp();
+      copy.updatedBy = this.user;
+      try { await this.m.fs.setDoc(this.m.fs.doc(this.db, 'site', 'content'), copy); }
+      catch (e) { throw new Error('Could not publish. Your account may not have permission — contact your web developer.'); }
+      c.updatedAt = new Date().toISOString(); c.updatedBy = this.user;
+    },
+    upload: async function (file) {
+      var isDoc = !/^image\//.test(file.type);
+      var blob = isDoc ? file : await prepImage(file, 2000, 0.82);
+      var ext = isDoc ? (file.name.split('.').pop() || 'bin') : (blob.type === 'image/png' ? 'png' : blob.type === 'image/svg+xml' ? 'svg' : 'jpg');
+      var name = 'uploads/' + Date.now() + '-' + file.name.replace(/\.[^.]+$/, '').replace(/[^a-z0-9]+/gi, '-').slice(0, 40) + '.' + ext;
+      var r = this.m.st.ref(this.storage, name);
+      await this.m.st.uploadBytes(r, blob, { contentType: blob.type || file.type });
+      return await this.m.st.getDownloadURL(r);
+    }
   };
 
-  /* ---------- tabs ---------- */
-  document.querySelectorAll('.tabs button').forEach(function (b) {
-    b.onclick = function () {
-      document.querySelectorAll('.tabs button').forEach(function (x) { x.classList.remove('on'); });
-      document.querySelectorAll('.tabpane').forEach(function (x) { x.classList.remove('on'); });
-      b.classList.add('on');
-      document.getElementById('tab-' + b.getAttribute('data-tab')).classList.add('on');
-    };
-  });
-
-  /* ---------- general ---------- */
-  function loadGeneral() {
-    var c = read('ascf_content', {});
-    document.getElementById('f-location').value = c.location || DEFAULTS.location;
-    document.getElementById('f-intro').value = c.intro || DEFAULTS.intro;
-    document.getElementById('f-banner').value = c.banner || DEFAULTS.banner;
-  }
-  document.getElementById('saveGeneral').onclick = function () {
-    var c = read('ascf_content', {});
-    c.location = document.getElementById('f-location').value;
-    c.intro = document.getElementById('f-intro').value;
-    write('ascf_content', c);
-    flash('savedGeneral');
-  };
-  document.getElementById('saveBanner').onclick = function () {
-    var c = read('ascf_content', {});
-    c.banner = document.getElementById('f-banner').value;
-    write('ascf_content', c);
-    flash('savedBanner');
-  };
-
-  /* ---------- generic list renderer ---------- */
-  function renderList(key, hostId, countId, label, fmt) {
-    var items = read(key, []);
-    var host = document.getElementById(hostId);
-    var count = document.getElementById(countId);
-    host.innerHTML = '';
-    if (!items.length) { count.textContent = 'Nothing published yet.'; return; }
-    count.textContent = items.length + ' ' + label + (items.length === 1 ? '' : 's') + ' live on the site.';
-    items.forEach(function (item, idx) {
-      var row = document.createElement('div');
-      row.className = 'itemrow';
-      var left = document.createElement('div');
-      var b = document.createElement('b'); b.textContent = item.name;
-      var s = document.createElement('small'); s.textContent = fmt(item);
-      left.appendChild(b); left.appendChild(s);
-      var del = document.createElement('button');
-      del.className = 'del'; del.textContent = 'REMOVE';
-      del.onclick = function () {
-        var cur = read(key, []); cur.splice(idx, 1); write(key, cur); renderAll();
+  /* shrink big photos before upload so pages stay fast */
+  function prepImage(file, maxW, q) {
+    if (file.type === 'image/svg+xml' || file.type === 'image/gif') return Promise.resolve(file);
+    return new Promise(function (res, rej) {
+      var img = new Image(), url = URL.createObjectURL(file);
+      img.onload = function () {
+        var s = Math.min(1, maxW / img.naturalWidth);
+        var c = document.createElement('canvas');
+        c.width = Math.round(img.naturalWidth * s); c.height = Math.round(img.naturalHeight * s);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        var type = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+        c.toBlob(function (b) { b ? res(b) : rej(new Error('Could not process that image.')); }, type, q);
       };
-      row.appendChild(left); row.appendChild(del);
-      host.appendChild(row);
+      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error('That file isn\'t an image this browser can read. Try a JPG or PNG.')); };
+      img.src = url;
     });
   }
 
-  document.getElementById('addAct').onclick = function () {
-    var name = document.getElementById('a-name').value.trim();
-    if (!name) return;
-    var acts = read('ascf_lineup', []);
-    acts.push({ name: name, stage: document.getElementById('a-stage').value, time: document.getElementById('a-time').value.trim() });
-    write('ascf_lineup', acts);
-    document.getElementById('a-name').value = ''; document.getElementById('a-time').value = '';
-    flash('savedAct'); renderAll();
-  };
+  var BE = CFG ? FirebaseBackend : DemoBackend;
 
-  document.getElementById('addVendor').onclick = function () {
-    var name = document.getElementById('v-name').value.trim();
-    if (!name) return;
-    var v = read('ascf_vendors', []);
-    v.push({ name: name, cat: document.getElementById('v-cat').value, desc: document.getElementById('v-desc').value.trim() });
-    write('ascf_vendors', v);
-    document.getElementById('v-name').value = ''; document.getElementById('v-desc').value = '';
-    flash('savedVendor'); renderAll();
-  };
+  /* =====================================================
+     State
+     ===================================================== */
+  var content = blank(), saved = '{}';
+  var view = 'pages', pageId = (SCHEMA.pages[1] || SCHEMA.pages[0] || {}).id, query = '';
+  var editing = null;   // { list, index } while editing a list item
 
-  document.getElementById('addPost').onclick = function () {
-    var title = document.getElementById('n-title').value.trim();
-    if (!title) return;
-    var posts = read('ascf_news', []);
-    posts.unshift({ name: title, date: document.getElementById('n-date').value.trim(),
-                    body: document.getElementById('n-body').value.trim() });
-    write('ascf_news', posts);
-    document.getElementById('n-title').value = '';
-    document.getElementById('n-date').value = '';
-    document.getElementById('n-body').value = '';
-    flash('savedPost'); renderAll();
-  };
-
-  document.getElementById('addSponsor').onclick = function () {
-    var name = document.getElementById('s-name').value.trim();
-    if (!name) return;
-    var s = read('ascf_sponsors', []);
-    s.push({ name: name, tier: document.getElementById('s-tier').value });
-    write('ascf_sponsors', s);
-    document.getElementById('s-name').value = '';
-    flash('savedSponsor'); renderAll();
-  };
-
-  function renderAll() {
-    loadGeneral();
-    renderList('ascf_lineup', 'lineupList', 'lineupCount', 'artist',
-      function (i) { return (i.stage || '').toUpperCase() + (i.time ? ' · ' + i.time : ''); });
-    renderList('ascf_vendors', 'vendorList', 'vendorCount', 'listing',
-      function (i) { return (i.cat || '') + (i.desc ? ' · ' + i.desc : ''); });
-    renderList('ascf_news', 'postList', 'postCount', 'post',
-      function (i) { return (i.date || '') + (i.body ? ' · ' + i.body.slice(0, 60) : ''); });
-    renderList('ascf_sponsors', 'sponsorList', 'sponsorCount', 'sponsor',
-      function (i) { return (i.tier || '').toUpperCase(); });
+  function norm(c) {
+    c.text = c.text || {}; c.images = c.images || {}; c.links = c.links || {}; c.lists = c.lists || {};
+    return c;
   }
+  function snapshot() {
+    return JSON.stringify({ text: content.text, images: content.images, links: content.links, lists: content.lists });
+  }
+  function dirty() { return snapshot() !== saved; }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function toast(msg, err) {
+    var t = $('toast'); t.textContent = msg; t.className = 'toast' + (err ? ' err' : '');
+    t.style.display = 'block'; clearTimeout(toast._t);
+    toast._t = setTimeout(function () { t.style.display = 'none'; }, err ? 5200 : 2600);
+  }
+  function refreshBar() {
+    var d = dirty();
+    $('publishBtn').disabled = !d;
+    $('discardBtn').classList.toggle('hidden', !d);
+    var s = $('pubState');
+    if (d) { s.textContent = 'You have unpublished changes.'; s.className = 'state dirty'; }
+    else {
+      var when = content.updatedAt ? new Date(content.updatedAt).toLocaleString() : null;
+      s.textContent = when ? 'All changes are live · last published ' + when + (content.updatedBy ? ' by ' + content.updatedBy : '') : 'All changes are live.';
+      s.className = 'state';
+    }
+  }
+  function assetUrl(u) {  // schema defaults are relative to the site root
+    if (!u) return '';
+    return /^(https?:|data:|\/)/.test(u) ? u : '../' + u;
+  }
+
+  /* =====================================================
+     Views
+     ===================================================== */
+  function render() {
+    document.querySelectorAll('#side button').forEach(function (b) {
+      b.classList.toggle('on', b.getAttribute('data-view') === view);
+    });
+    if (view === 'pages') renderPages();
+    else if (view === 'help') renderHelp();
+    else renderList(view.split(':')[1]);
+    refreshBar();
+  }
+
+  /* ---------- page editor ---------- */
+  function renderPages() {
+    var m = $('main');
+    var opts = SCHEMA.pages.map(function (p) {
+      return '<option value="' + p.id + '"' + (p.id === pageId ? ' selected' : '') + '>' + esc(p.title) + '</option>';
+    }).join('');
+    m.innerHTML =
+      '<h1>Edit pages</h1>' +
+      '<p class="lead">Pick a page, change anything, then press <b>Publish changes</b> at the bottom. ' +
+      'Fields are in the same order they appear on the page. Search looks across the whole site.</p>' +
+      '<div class="tools"><select id="pagePick" aria-label="Page">' + opts + '</select>' +
+      '<input id="search" type="search" placeholder="Search all pages — e.g. Super Bowl" value="' + esc(query) + '"></div>' +
+      '<div id="fields"></div>';
+    $('pagePick').onchange = function () { pageId = this.value; query = ''; $('search').value = ''; drawFields(); };
+    $('search').oninput = function () { query = this.value; drawFields(); };
+    drawFields();
+  }
+
+  function fieldsToShow() {
+    var q = query.trim().toLowerCase();
+    if (!q) {
+      var p = SCHEMA.pages.filter(function (x) { return x.id === pageId; })[0];
+      return p ? p.fields.map(function (f) { return { f: f, page: p }; }) : [];
+    }
+    var out = [];
+    SCHEMA.pages.forEach(function (p) {
+      p.fields.forEach(function (f) {
+        var cur = currentValue(f);
+        if ((f.default + ' ' + cur + ' ' + f.label + ' ' + f.section).toLowerCase().indexOf(q) > -1) out.push({ f: f, page: p });
+      });
+    });
+    return out;
+  }
+
+  function currentValue(f) {
+    if (f.type === 'image') return content.images[f.key] || '';
+    if (f.type === 'link') return content.links[f.key] != null ? content.links[f.key] : f.default;
+    return content.text[f.key] != null ? content.text[f.key] : f.default;
+  }
+  function isChanged(f) {
+    if (f.type === 'image') return !!content.images[f.key];
+    if (f.type === 'link') return content.links[f.key] != null && content.links[f.key] !== f.default;
+    return content.text[f.key] != null && content.text[f.key] !== f.default;
+  }
+
+  function drawFields() {
+    var host = $('fields'), list = fieldsToShow(), searching = !!query.trim();
+    if (!list.length) { host.innerHTML = '<div class="sec"><div class="none">Nothing matches that search.</div></div>'; return; }
+    var groups = [], idx = {};
+    list.forEach(function (x) {
+      var g = (searching ? x.page.title + ' — ' : '') + x.f.section;
+      if (!(g in idx)) { idx[g] = groups.length; groups.push({ name: g, page: x.page, items: [] }); }
+      groups[idx[g]].items.push(x.f);
+    });
+    host.innerHTML = groups.map(function (g) {
+      var view = g.page.id === 'global' ? '' :
+        '<small><a href="../' + g.page.url + '" target="_blank" rel="noopener" style="color:var(--mute)">VIEW PAGE ↗</a></small>';
+      return '<div class="sec"><h3><span>' + esc(g.name) + '</span>' + view + '</h3>' +
+        g.items.map(fieldHtml).join('') + '</div>';
+    }).join('');
+    wireFields(host);
+  }
+
+  function fieldHtml(f) {
+    var ch = isChanged(f), v = currentValue(f);
+    var head = '<label for="f_' + f.key + '"><span>' + esc(f.label) + '</span>' +
+      (ch ? '<span class="chg">EDITED</span>' : '') + '</label>';
+    var body = '';
+    if (f.type === 'image') {
+      body = '<div class="imgprev" style="background-image:url(\'' + esc(assetUrl(v || f.default)) + '\')"></div>' +
+        '<div class="frow"><label class="mini" style="margin:0;display:inline-block">REPLACE IMAGE' +
+        '<input type="file" accept="image/*" data-up="' + f.key + '" hidden></label>' +
+        (ch ? '<button class="mini" data-reset="' + f.key + '" data-type="image">USE ORIGINAL</button>' : '') +
+        '<span class="busy hidden" id="busy_' + f.key + '">Uploading…</span></div>' +
+        '<div class="fhint">JPG or PNG. Large photos are resized automatically. Wide landscape images work best for banners.</div>';
+    } else if (f.type === 'link') {
+      body = '<input type="text" id="f_' + f.key + '" data-key="' + f.key + '" data-type="link" value="' + esc(v) +
+        '" placeholder="https://… or name@email.com">' +
+        '<div class="frow"><label class="mini" style="margin:0;display:inline-block">UPLOAD A FILE INSTEAD' +
+        '<input type="file" accept=".pdf,image/*" data-upfile="' + f.key + '" hidden></label>' +
+        (ch ? '<button class="mini" data-reset="' + f.key + '" data-type="link">RESET</button>' : '') +
+        '<span class="busy hidden" id="busy_' + f.key + '">Uploading…</span></div>' +
+        '<div class="fhint">Paste a web address or an email address. Upload a PDF here to link to it (e.g. a sponsorship deck).</div>';
+    } else {
+      var tag = f.type === 'long' ? 'textarea' : 'input';
+      body = (tag === 'textarea'
+        ? '<textarea id="f_' + f.key + '" data-key="' + f.key + '" data-type="text" rows="3">' + esc(v) + '</textarea>'
+        : '<input type="text" id="f_' + f.key + '" data-key="' + f.key + '" data-type="text" value="' + esc(v) + '">') +
+        '<div class="frow">' + (ch ? '<button class="mini" data-reset="' + f.key + '" data-type="text">RESET TO ORIGINAL</button>' : '') + '</div>' +
+        (tag === 'textarea' ? '<div class="fhint">**double asterisks** for bold · Enter for a new line · leave empty to hide</div>'
+                            : '<div class="fhint">Leave empty to hide this on the site.</div>');
+    }
+    return '<div class="fld' + (ch ? ' changed' : '') + '">' + head + body + '</div>';
+  }
+
+  function wireFields(host) {
+    host.querySelectorAll('[data-key]').forEach(function (el) {
+      el.addEventListener('input', function () {
+        var key = el.getAttribute('data-key'), type = el.getAttribute('data-type');
+        if (type === 'link') content.links[key] = el.value.trim();
+        else content.text[key] = el.value;
+        el.closest('.fld').classList.add('changed');
+        refreshBar();
+      });
+    });
+    host.querySelectorAll('[data-reset]').forEach(function (b) {
+      b.onclick = function () {
+        var key = b.getAttribute('data-reset'), type = b.getAttribute('data-type');
+        if (type === 'image') delete content.images[key];
+        else if (type === 'link') delete content.links[key];
+        else delete content.text[key];
+        drawFields(); refreshBar();
+      };
+    });
+    host.querySelectorAll('input[data-up]').forEach(function (inp) {
+      inp.onchange = function () { doUpload(inp, 'image'); };
+    });
+    host.querySelectorAll('input[data-upfile]').forEach(function (inp) {
+      inp.onchange = function () { doUpload(inp, 'file'); };
+    });
+  }
+
+  async function doUpload(inp, kind) {
+    var file = inp.files && inp.files[0];
+    if (!file) return;
+    if (file.size > 25 * 1024 * 1024) { toast('That file is over 25 MB. Please use a smaller one.', true); return; }
+    var key = inp.getAttribute(kind === 'image' ? 'data-up' : 'data-upfile');
+    var busy = $('busy_' + key); if (busy) busy.classList.remove('hidden');
+    try {
+      var url = await BE.upload(file);
+      if (kind === 'image') content.images[key] = url; else content.links[key] = url;
+      toast('Uploaded. Press Publish changes to make it live.');
+      drawFields(); refreshBar();
+    } catch (e) {
+      toast(e.message || 'Upload failed.', true);
+      if (busy) busy.classList.add('hidden');
+    }
+  }
+
+  /* ---------- lists ---------- */
+  var LISTS = {
+    lineup: { title: 'Lineup', page: 'entertainment/', add: 'end',
+      blurb: 'Performers show on the Entertainment page in this order. Once one is added, the "announced soon" message disappears.',
+      fields: [{ k: 'name', label: 'Artist or act', req: 1 },
+               { k: 'detail', label: 'Stage · day · time', ph: 'National Stage · Saturday · 9:00 PM' }] },
+    news: { title: 'News', page: 'news/', add: 'start',
+      blurb: 'Posts show on the News page, newest at the top.',
+      fields: [{ k: 'name', label: 'Headline', req: 1 }, { k: 'detail', label: 'Date', ph: 'March 2027' },
+               { k: 'body', label: 'Post', type: 'long' }, { k: 'image', label: 'Photo (optional)', type: 'image' },
+               { k: 'link', label: 'Link (optional)', ph: 'https://…' }] },
+    vendors: { title: 'Vendors & Artists', page: 'eateries/', add: 'end',
+      blurb: 'Restaurants show on the Food page; artists and exhibitors on the Arts & Culture page.',
+      fields: [{ k: 'name', label: 'Name', req: 1 },
+               { k: 'category', label: 'Show on', type: 'select', opts: [['eATERIES', 'Food page'], ['eXHIBITS', 'Arts & Culture page']] },
+               { k: 'body', label: 'Short description', type: 'long' }, { k: 'image', label: 'Photo (optional)', type: 'image' },
+               { k: 'link', label: 'Website (optional)', ph: 'https://…' }] },
+    sponsors: { title: 'Sponsors', page: 'involved/sponsorship/', add: 'end',
+      blurb: 'Confirmed sponsors show on the Sponsorship page. The section stays hidden until the first one is added.',
+      fields: [{ k: 'name', label: 'Sponsor name', req: 1 },
+               { k: 'detail', label: 'Tier (optional)', type: 'select', opts: [['', '—'], ['Diamond', 'Diamond'], ['Platinum', 'Platinum'], ['Gold', 'Gold'], ['Silver', 'Silver'], ['Bronze', 'Bronze'], ['Founding Partner', 'Founding Partner']] },
+               { k: 'image', label: 'Logo (PNG with transparent background is best)', type: 'image' },
+               { k: 'link', label: 'Website (optional)', ph: 'https://…' }] },
+    partners: { title: 'Community Partners', page: 'involved/partners/', add: 'end',
+      blurb: 'Partners show on the Community Partners page and the Campaign page.',
+      fields: [{ k: 'name', label: 'Organization', req: 1 }, { k: 'body', label: 'What they do (optional)', type: 'long' },
+               { k: 'image', label: 'Logo (optional)', type: 'image' }, { k: 'link', label: 'Website (optional)', ph: 'https://…' }] }
+  };
+
+  function renderList(name) {
+    var def = LISTS[name], items = content.lists[name] || [];
+    var cur = editing && editing.list === name ? items[editing.index] : null;
+    var m = $('main');
+    var form = def.fields.map(function (f) {
+      var v = cur ? (cur[f.k] || '') : (f.type === 'select' && f.opts ? f.opts[0][0] : '');
+      var id = 'l_' + f.k;
+      if (f.type === 'long') return '<div class="f"><label for="' + id + '">' + esc(f.label) + '</label><textarea id="' + id + '">' + esc(v) + '</textarea></div>';
+      if (f.type === 'select') return '<div class="f"><label for="' + id + '">' + esc(f.label) + '</label><select id="' + id + '">' +
+        f.opts.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === v ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('') + '</select></div>';
+      if (f.type === 'image') return '<div class="f"><label>' + esc(f.label) + '</label>' +
+        '<div class="imgprev" id="l_prev" style="max-width:220px;background-image:url(\'' + esc(v) + '\')"></div>' +
+        '<input type="hidden" id="' + id + '" value="' + esc(v) + '">' +
+        '<div class="frow"><label class="mini" style="margin:0;display:inline-block">' + (v ? 'REPLACE' : 'ADD') + ' IMAGE' +
+        '<input type="file" accept="image/*" id="l_file" hidden></label>' +
+        (v ? '<button class="mini" id="l_clear" type="button">REMOVE IMAGE</button>' : '') +
+        '<span class="busy hidden" id="l_busy">Uploading…</span></div></div>';
+      return '<div class="f"><label for="' + id + '">' + esc(f.label) + (f.req ? ' *' : '') + '</label>' +
+        '<input type="text" id="' + id + '" value="' + esc(v) + '" placeholder="' + esc(f.ph || '') + '"></div>';
+    }).join('');
+
+    var rows = items.length ? items.map(function (it, i) {
+      var th = it.image ? '<div class="th" style="background-image:url(\'' + esc(it.image) + '\')"></div>' : '<div class="th"></div>';
+      var sub = [it.detail, it.category === 'eATERIES' ? 'Food page' : it.category === 'eXHIBITS' ? 'Arts & Culture page' : ''].filter(Boolean).join(' · ');
+      return '<div class="item">' + th + '<div class="tx"><b>' + esc(it.name) + '</b><small>' + esc(sub) + '</small></div>' +
+        '<div class="act"><button class="mini" data-mv="' + i + '" data-d="-1"' + (i === 0 ? ' disabled' : '') + '>↑</button>' +
+        '<button class="mini" data-mv="' + i + '" data-d="1"' + (i === items.length - 1 ? ' disabled' : '') + '>↓</button>' +
+        '<button class="mini" data-ed="' + i + '">EDIT</button>' +
+        '<button class="mini danger" data-del="' + i + '">REMOVE</button></div></div>';
+    }).join('') : '<div class="none">Nothing here yet. Add the first one above.</div>';
+
+    m.innerHTML = '<h1>' + esc(def.title) + '</h1><p class="lead">' + esc(def.blurb) +
+      ' <a href="../' + def.page + '" target="_blank" rel="noopener" style="color:var(--soft)">View page ↗</a></p>' +
+      '<div class="listform"><h3>' + (cur ? 'Edit “' + esc(cur.name) + '”' : 'Add new') + '</h3>' + form +
+      '<div class="frow"><button class="btn btn-solid sm" id="l_save" type="button">' + (cur ? 'SAVE ITEM' : 'ADD TO LIST') + '</button>' +
+      (cur ? '<button class="btn btn-ghost sm" id="l_cancel" type="button">CANCEL</button>' : '') + '</div></div>' +
+      '<div class="items">' + rows + '</div>';
+
+    var file = $('l_file');
+    if (file) file.onchange = async function () {
+      var f = file.files && file.files[0]; if (!f) return;
+      $('l_busy').classList.remove('hidden');
+      try {
+        var url = await BE.upload(f);
+        $('l_image').value = url; $('l_prev').style.backgroundImage = "url('" + url.replace(/'/g, '%27') + "')";
+        toast('Image ready. Save the item, then Publish changes.');
+      } catch (e) { toast(e.message || 'Upload failed.', true); }
+      $('l_busy').classList.add('hidden');
+    };
+    var clr = $('l_clear');
+    if (clr) clr.onclick = function () { $('l_image').value = ''; $('l_prev').style.backgroundImage = 'none'; };
+
+    $('l_save').onclick = function () {
+      var it = {};
+      def.fields.forEach(function (f) { var el = $('l_' + f.k); it[f.k] = el ? el.value.trim() : ''; });
+      if (!it.name) { toast('Add a name first.', true); return; }
+      var arr = (content.lists[name] = content.lists[name] || []);
+      if (cur) arr[editing.index] = it;
+      else if (def.add === 'start') arr.unshift(it); else arr.push(it);
+      editing = null; render();
+      toast(cur ? 'Saved. Press Publish changes to make it live.' : 'Added. Press Publish changes to make it live.');
+    };
+    var cancel = $('l_cancel'); if (cancel) cancel.onclick = function () { editing = null; render(); };
+
+    m.querySelectorAll('[data-mv]').forEach(function (b) {
+      b.onclick = function () {
+        var i = +b.getAttribute('data-mv'), d = +b.getAttribute('data-d'), arr = content.lists[name];
+        var j = i + d; if (j < 0 || j >= arr.length) return;
+        var t = arr[i]; arr[i] = arr[j]; arr[j] = t; editing = null; render();
+      };
+    });
+    m.querySelectorAll('[data-ed]').forEach(function (b) {
+      b.onclick = function () { editing = { list: name, index: +b.getAttribute('data-ed') }; render(); window.scrollTo(0, 0); };
+    });
+    m.querySelectorAll('[data-del]').forEach(function (b) {
+      b.onclick = function () {
+        var i = +b.getAttribute('data-del');
+        if (!confirm('Remove “' + content.lists[name][i].name + '”? You can still Discard before publishing.')) return;
+        content.lists[name].splice(i, 1); editing = null; render();
+      };
+    });
+  }
+
+  /* ---------- help ---------- */
+  function renderHelp() {
+    $('main').innerHTML = '<div class="help"><h1>How to use this</h1>' +
+      '<p class="lead">Everything on the website can be changed from here. Nothing goes live until you press <b>Publish changes</b>.</p>' +
+      '<h2>Changing words</h2><ol>' +
+      '<li>Go to <b>Edit pages</b> and pick the page from the dropdown, or type a few words into the search box to find them anywhere on the site.</li>' +
+      '<li>Change the text in the box. Edited boxes get a yellow outline.</li>' +
+      '<li>Press <b>Publish changes</b> at the bottom of the screen.</li></ol>' +
+      '<p>Put <code>**two asterisks**</code> around words to make them bold. Leave a box empty to hide that line. <b>Reset to original</b> puts the first version back.</p>' +
+      '<h2>Changing photos</h2><ol><li>Find the image in <b>Edit pages</b> (images show as a preview box).</li>' +
+      '<li>Press <b>Replace image</b> and choose a photo. Big photos are shrunk automatically.</li><li>Press <b>Publish changes</b>.</li></ol>' +
+      '<p>Wide, landscape photos work best, especially for the rotating homepage banner. Only use photos you own or have permission to use.</p>' +
+      '<h2>Lineup, news, vendors, sponsors and partners</h2>' +
+      '<p>Use the matching tab on the left. Fill in the form, press <b>Add to list</b>, then <b>Publish changes</b>. Use the arrows to reorder. The "announced soon" messages on the site disappear by themselves once something is added.</p>' +
+      '<h2>Emails, social links and documents</h2>' +
+      '<p>Social media links are under <b>Site-wide (top banner &amp; footer)</b>. The contact emails are on the <b>Contact</b> page. You can type a plain email address, like <code>info@yourdomain.com</code>, and it will open the visitor\'s email app. To link a PDF, such as the sponsorship deck, use <b>Upload a file instead</b>.</p>' +
+      '<h2>If something goes wrong</h2><ul>' +
+      '<li><b>Made a mistake before publishing?</b> Press <b>Discard</b>.</li>' +
+      '<li><b>Already published?</b> Use <b>Reset to original</b> on that box, then publish again.</li>' +
+      '<li><b>Don\'t see your change?</b> The site can take up to a minute to update. Refresh the page.</li>' +
+      '<li><b>Forgot your password?</b> Use <b>Forgot your password?</b> on the sign-in screen.</li></ul></div>';
+  }
+
+  /* =====================================================
+     Wiring
+     ===================================================== */
+  $('side').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-view]'); if (!b) return;
+    view = b.getAttribute('data-view'); editing = null; render(); window.scrollTo(0, 0);
+  });
+
+  $('publishBtn').onclick = async function () {
+    var btn = this; btn.disabled = true; btn.textContent = 'PUBLISHING…';
+    try {
+      await BE.save(content);
+      saved = snapshot();
+      try { sessionStorage.removeItem('ascf_content_cache_v1'); } catch (e) {}
+      toast('Published. Your changes are live.');
+    } catch (e) { toast(e.message || 'Could not publish.', true); }
+    btn.textContent = 'PUBLISH CHANGES'; refreshBar();
+  };
+  $('discardBtn').onclick = function () {
+    if (!confirm('Throw away everything you changed since the last publish?')) return;
+    var s = JSON.parse(saved); content.text = s.text; content.images = s.images; content.links = s.links; content.lists = s.lists;
+    editing = null; render(); toast('Changes discarded.');
+  };
+  window.addEventListener('beforeunload', function (e) { if (dirty()) { e.preventDefault(); e.returnValue = ''; } });
+
+  async function enterApp() {
+    $('loginView').classList.add('hidden');
+    $('appView').classList.remove('hidden');
+    $('whoami').textContent = 'Signed in as ' + BE.user;
+    try { content = norm(await BE.load()); }
+    catch (e) { content = blank(); toast('Could not load the current content. Check your connection.', true); }
+    saved = snapshot();
+    render();
+  }
+  function showLogin() {
+    $('appView').classList.add('hidden');
+    $('loginView').classList.remove('hidden');
+  }
+
+  $('signinBtn').onclick = async function () {
+    var msg = $('loginMsg'); msg.className = 'msg'; msg.textContent = '';
+    try { await BE.signIn($('email').value, $('password').value); await enterApp(); }
+    catch (e) { msg.className = 'msg err'; msg.textContent = e.message; }
+  };
+  $('password').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('signinBtn').click(); });
+  $('forgotBtn').onclick = async function () {
+    var msg = $('loginMsg');
+    try { await BE.reset($('email').value); msg.className = 'msg ok'; msg.textContent = 'Check your email for a reset link.'; }
+    catch (e) { msg.className = 'msg err'; msg.textContent = e.message; }
+  };
+  $('signoutBtn').onclick = async function () {
+    if (dirty() && !confirm('You have unpublished changes. Sign out anyway?')) return;
+    await BE.signOut(); location.reload();
+  };
+
+  /* boot */
+  if (!BE.live) { $('demoBanner').classList.remove('hidden'); $('demoCreds').classList.remove('hidden'); $('email').type = 'text'; $('email').placeholder = 'Email (demo: admin)'; }
+  else { $('forgotBtn').classList.remove('hidden'); }
+  try { await BE.init(); }
+  catch (e) { showLogin(); $('loginMsg').className = 'msg err'; $('loginMsg').textContent = 'Could not reach the login service. Check your connection and refresh.'; return; }
+  if (BE.user) enterApp(); else showLogin();
 })();
 </script>
 </body>
