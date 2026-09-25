@@ -675,3 +675,56 @@ a.logo-tile:hover{border-color:var(--rule-2);transform:translateY(-2px)}
 .logo-tile .logo-name{font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:.05em}
 .logo-tile small{font-size:10px;letter-spacing:.2em;color:var(--mute);text-transform:uppercase}
 .logo-tile p{font-size:13px;color:var(--soft);margin:0}
+
+/* ===========================================================
+   RENDER-REVIEW FIXES
+   Desktop + 390px pass. Each rule replaces an earlier one, so
+   this block stays last in the file.
+   =========================================================== */
+
+/* The footbase wraps at narrow widths once the copyright line fills
+   its row. space-between then leaves BACK TO TOP stranded on the
+   left, so pin it to the right edge on whatever row it lands on. */
+.totop{margin-left:auto}
+
+/* Contact cards sit in a stretched grid row, but each CTA floated up
+   under its own paragraph, so the links in a row sat 5-6px apart.
+   Push every CTA to the bottom of its card instead. */
+.contact-card{display:flex;flex-direction:column}
+.contact-card p{min-height:0;margin-bottom:18px}
+.contact-card a{margin-top:auto;align-self:flex-start}
+
+/* Slides share one grid cell, so a 0.9s symmetric crossfade showed
+   both headlines stacked for most of the transition. Drop the old
+   slide fast and bring the new one in just behind it. */
+.slide{transition:opacity .35s ease}
+.slide.on{transition:opacity .8s ease .15s}
+
+/* Hero dots were a 30x4px hit area. Keep the 4px bar, give the
+   button a 28px target around it. */
+.dots button{
+  width:30px;height:32px;padding:0;border:none;background:none;
+  position:relative;overflow:visible;
+}
+.dots button::before{
+  content:"";position:absolute;left:0;right:0;top:50%;margin-top:-2px;height:4px;
+  background:rgba(255,255,255,.3);
+}
+.dots button.on{background:none}
+.dots button.on::after{
+  content:"";position:absolute;left:0;right:0;top:50%;margin-top:-2px;height:4px;
+  background:var(--yellow);transform-origin:left center;
+  animation:fill 6.5s linear forwards;
+}
+@media(prefers-reduced-motion:reduce){
+  .dots button.on::after{animation:none!important;transform:scaleX(1)}
+}
+
+/* Trailing paragraph margin made the empty-state box bottom-heavy. */
+.empty p:last-child{margin-bottom:0}
+
+/* Remaining touch targets under ~30px on a phone: the contact CTAs and
+   the mission accordion toggle. Pad them vertically only, so the
+   underline keeps its 3px gap and nothing reflows horizontally. */
+.contact-card a{padding-top:10px}
+details.more summary{padding:6px 0}
