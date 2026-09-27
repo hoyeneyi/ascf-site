@@ -135,6 +135,12 @@
   .toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:var(--lime);color:#0A0A0A;padding:10px 18px;font-size:13.5px;font-weight:500;z-index:60;display:none}
   .toast.err{background:var(--orange);color:#fff}
 
+  /* site status */
+  .status{padding:16px 18px;border-radius:var(--r-md);margin-bottom:18px;font-size:14.5px;border:1px solid var(--rule-2)}
+  .status b{font-family:var(--display);font-weight:600;letter-spacing:.03em}
+  .status.live{background:rgba(178,206,59,.10);border-color:rgba(178,206,59,.45);color:var(--lime)}
+  .status.closed{background:rgba(253,209,10,.10);border-color:rgba(253,209,10,.45);color:var(--yellow)}
+
   /* analytics report */
   .gds{
     border:1px solid var(--rule);background:var(--ink-2);
@@ -225,6 +231,7 @@
   <div class="shell">
     <aside class="side" id="side">
       <div class="grp">CONTENT</div>
+      <button data-view="status">Site status</button>
       <button data-view="pages" class="on">Edit pages</button>
       <div class="grp">LISTS</div>
       <button data-view="list:lineup">Lineup</button>
@@ -263,7 +270,7 @@
   /* =====================================================
      Storage backends — same interface, demo or live
      ===================================================== */
-  function blank() { return { text: {}, images: {}, links: {}, lists: {} }; }
+  function blank() { return { text: {}, images: {}, links: {}, lists: {}, settings: {} }; }
 
   var DemoBackend = {
     live: false,
@@ -423,10 +430,12 @@
 
   function norm(c) {
     c.text = c.text || {}; c.images = c.images || {}; c.links = c.links || {}; c.lists = c.lists || {};
+    c.settings = c.settings || {};
     return c;
   }
   function snapshot() {
-    return JSON.stringify({ text: content.text, images: content.images, links: content.links, lists: content.lists });
+    return JSON.stringify({ text: content.text, images: content.images, links: content.links,
+                            lists: content.lists, settings: content.settings });
   }
   function dirty() { return snapshot() !== saved; }
 
@@ -462,7 +471,8 @@
     document.querySelectorAll('#side button').forEach(function (b) {
       b.classList.toggle('on', b.getAttribute('data-view') === view);
     });
-    if (view === 'pages') renderPages();
+    if (view === 'status') renderStatus();
+    else if (view === 'pages') renderPages();
     else if (view === 'help') renderHelp();
     else if (view === 'signups') renderSignups();
     else if (view === 'analytics') renderAnalytics();
@@ -838,6 +848,109 @@
     });
   }
 
+  /* ---------- site status ---------- */
+  var CS_DEFAULTS = {
+    comingSoonHeadline: 'Something big is coming to Pontiac.',
+    comingSoonMessage: "America's Spring Canvas Festival launches soon. Join the list and be the first to know."
+  };
+
+  function sha256Hex(text) {
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+        return ('0' + b.toString(16)).slice(-2);
+      }).join('');
+    });
+  }
+
+  function renderStatus() {
+    var st = content.settings = content.settings || {};
+    var on = !!st.comingSoon;
+    var hasCode = !!st.previewCodeHash;
+    var m = $('main');
+
+    m.innerHTML = '<h1>Site status</h1>' +
+      '<p class="lead">Controls whether the public sees the full website or a Coming Soon page. ' +
+      'Changes take effect when you press Publish changes.</p>' +
+
+      '<div class="status ' + (on ? 'closed' : 'live') + '">' +
+        '<b>' + (on
+          ? 'Coming Soon mode is ON: the public sees the Coming Soon page'
+          : 'Your site is LIVE: everyone sees the full site') + '</b>' +
+      '</div>' +
+
+      '<div class="listform">' +
+        '<h3>Coming Soon mode</h3>' +
+        '<div class="frow" style="margin-bottom:6px">' +
+          '<button class="btn ' + (on ? 'btn-ghost' : 'btn-solid') + ' sm" id="csOff" type="button">SITE IS LIVE</button>' +
+          '<button class="btn ' + (on ? 'btn-solid' : 'btn-ghost') + ' sm" id="csOn" type="button">COMING SOON</button>' +
+        '</div>' +
+        '<p class="fhint">This hides the site from casual visitors. It isn’t a security lock.</p>' +
+
+        '<div class="f" style="margin-top:18px">' +
+          '<label for="csCode">Preview code</label>' +
+          '<p class="fhint" style="margin:0 0 8px">' +
+            (hasCode ? 'A preview code is set.' : 'No preview code is set yet.') +
+            ' The code itself is never stored, only a one-way hash, because the settings are publicly readable.</p>' +
+          '<input type="text" id="csCode" autocomplete="off" placeholder="' +
+            (hasCode ? 'Type a new code to change it' : 'Choose a preview code') + '">' +
+          '<div class="frow">' +
+            '<button class="btn btn-ghost sm" id="csCodeSet" type="button">' +
+              (hasCode ? 'CHANGE CODE' : 'SET CODE') + '</button>' +
+            (hasCode ? '<button class="mini danger" id="csCodeClear" type="button">REMOVE CODE</button>' : '') +
+            '<span class="busy hidden" id="csCodeBusy">Saving…</span>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="f">' +
+          '<label for="csHeadline">Headline</label>' +
+          '<input type="text" id="csHeadline" value="' +
+            esc(st.comingSoonHeadline || CS_DEFAULTS.comingSoonHeadline) + '">' +
+        '</div>' +
+        '<div class="f">' +
+          '<label for="csMessage">Message</label>' +
+          '<textarea id="csMessage">' +
+            esc(st.comingSoonMessage || CS_DEFAULTS.comingSoonMessage) + '</textarea>' +
+        '</div>' +
+
+        '<div class="frow" style="margin-top:14px">' +
+          '<a class="btn btn-ghost sm" href="../?preview=comingsoon" target="_blank" rel="noopener">PREVIEW THE COMING SOON PAGE &#8599;</a>' +
+        '</div>' +
+      '</div>';
+
+    function setMode(v) {
+      content.settings.comingSoon = v;
+      render();
+      toast(v ? 'Coming Soon mode staged. Press Publish changes to close the site.'
+              : 'Staged going live. Press Publish changes to open the site.');
+    }
+    $('csOn').onclick = function () { setMode(true); };
+    $('csOff').onclick = function () { setMode(false); };
+
+    $('csCodeSet').onclick = function () {
+      var v = $('csCode').value.trim();
+      if (v.length < 4) { toast('Use at least 4 characters.', true); return; }
+      $('csCodeBusy').classList.remove('hidden');
+      sha256Hex(v).then(function (hex) {
+        content.settings.previewCodeHash = hex;
+        render();
+        toast('Preview code staged. Press Publish changes to apply it.');
+      }).catch(function () {
+        $('csCodeBusy').classList.add('hidden');
+        toast('This browser could not hash the code. Use HTTPS or localhost.', true);
+      });
+    };
+    var clr = $('csCodeClear');
+    if (clr) clr.onclick = function () {
+      if (!confirm('Remove the preview code? Nobody will be able to unlock the site.')) return;
+      content.settings.previewCodeHash = '';
+      render();
+      toast('Preview code removed. Press Publish changes to apply it.');
+    };
+
+    $('csHeadline').oninput = function () { content.settings.comingSoonHeadline = this.value; refreshBar(); };
+    $('csMessage').oninput = function () { content.settings.comingSoonMessage = this.value; refreshBar(); };
+  }
+
   /* ---------- analytics ---------- */
   var GDS_ID = '562949dd-8df6-4f2a-87c9-6d6391875c44';
   var GDS_EMBED = 'https://datastudio.google.com/embed/reporting/' + GDS_ID + '/page/u3u9F';
@@ -908,7 +1021,8 @@
   };
   $('discardBtn').onclick = function () {
     if (!confirm('Throw away everything you changed since the last publish?')) return;
-    var s = JSON.parse(saved); content.text = s.text; content.images = s.images; content.links = s.links; content.lists = s.lists;
+    var s = JSON.parse(saved); content.text = s.text; content.images = s.images; content.links = s.links;
+    content.lists = s.lists; content.settings = s.settings || {};
     editing = null; render(); toast('Changes discarded.');
   };
   window.addEventListener('beforeunload', function (e) { if (dirty()) { e.preventDefault(); e.returnValue = ''; } });

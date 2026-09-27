@@ -37,6 +37,55 @@ SIGNUP_BTN = "JOIN THE CANVAS COMMUNITY"
 SITE_URL = "https://ascfestival.com/"
 REPO_BASE = "/"                    # used only by the 404 page
 
+# Fall-back when the Coming Soon setting cannot be read in time.
+# True until launch, so nothing leaks if Firestore is slow or down.
+COMING_SOON_DEFAULT = True
+
+GATE_HEAD = """<script>
+(function(){
+  var d=document.documentElement;
+  d.classList.add('js','ascf-gate-wait');
+  window.ASCF_COMING_SOON_DEFAULT=__CS_DEFAULT__;
+  /* If the settings read stalls or fails, fall back to the build-time
+     default rather than leaving the page blank or leaking the site. */
+  window.__ascfGateTimer=setTimeout(function(){
+    if(!d.classList.contains('ascf-gate-wait'))return;
+    d.classList.remove('ascf-gate-wait');
+    if(window.ASCF_COMING_SOON_DEFAULT)d.classList.add('ascf-cs');
+  },2000);
+})();
+</script>"""
+
+COMING_SOON_HTML = """
+<div id="comingsoon" class="cs-root">
+  <div class="cs-glow"></div>
+  <div class="cs-in">
+    <div class="cs-name">AMERICA'S<br>SPRING CANVAS FESTIVAL</div>
+    <div class="cs-where"><b>PONTIAC, MICHIGAN</b> &middot; MEMORIAL DAY WEEKEND 2028</div>
+    <div class="ribbon"></div>
+    <h1 id="cs-headline">Something big is coming to Pontiac.</h1>
+    <p class="cs-msg" id="cs-message">America's Spring Canvas Festival launches soon. Join the list and be the first to know.</p>
+    <form class="signup" id="cs-signup">
+      <label class="sr" for="cs-email">Email address</label>
+      <input id="cs-email" type="email" placeholder="your@email.com" required>
+      <button class="btn btn-solid" type="submit">JOIN THE LIST</button>
+    </form>
+    <div class="signup-note" id="cs-signupnote"></div>
+    <button type="button" class="cs-codelink" id="cs-codetoggle" aria-expanded="false" aria-controls="cs-codewrap">Have a preview code?</button>
+    <div class="cs-codewrap" id="cs-codewrap">
+      <div class="cs-coderow">
+        <label class="sr" for="cs-code">Preview code</label>
+        <input id="cs-code" type="text" autocomplete="off" placeholder="Preview code">
+        <button class="btn btn-ghost" type="button" id="cs-codego">UNLOCK</button>
+      </div>
+      <div class="cs-codemsg" id="cs-codemsg"></div>
+    </div>
+    <div class="cs-foot">&copy; America's Spring Canvas Festival &middot; Pontiac, Michigan</div>
+  </div>
+</div>
+"""
+
+
 
 def link(base, href):
     # The homepage is linked as a folder ("./", "../"), never as index.html.
@@ -88,7 +137,7 @@ def page(slug, title, description, body, base, current="", path=None):
 <title>{title}</title>
 <meta name="description" content="{description}">
 <meta name="theme-color" content="#070C0D">
-<script>document.documentElement.classList.add('js')</script>
+{GATE_HEAD.replace('__CS_DEFAULT__', 'true' if COMING_SOON_DEFAULT else 'false')}
 <link rel="icon" type="image/svg+xml" href="{base}assets/img/favicon.svg">
 <link rel="apple-touch-icon" href="{base}assets/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
@@ -106,8 +155,11 @@ def page(slug, title, description, body, base, current="", path=None):
 {FONTS}
 <link rel="stylesheet" href="{base}assets/css/site.css">
 <script src="{base}assets/js/analytics.js"></script>
+<script src="{base}assets/js/firebase-config.js"></script>
+<script src="{base}assets/js/gate.js"></script>
 </head>
 <body data-page="{slug}">
+{COMING_SOON_HTML}
 
 <div class="topbar">
   <div class="wrap">
@@ -185,7 +237,6 @@ def page(slug, title, description, body, base, current="", path=None):
   <div class="footbar"></div>
 </footer>
 
-<script src="{base}assets/js/firebase-config.js"></script>
 <script src="{base}assets/js/content.js"></script>
 <script src="{base}assets/js/site.js"></script>
 </body>

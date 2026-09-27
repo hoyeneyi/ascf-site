@@ -23,7 +23,10 @@ INLINE_OK = {"b", "br"}                      # plus span.tbd, handled below
 CONTAINERS = {"section", "footer"}
 CONTAINER_CLASSES = {"slide", "pagehead", "band", "identity", "ticker", "countdown", "topbar"}
 GLOBAL_CLASSES = {"topbar"}                   # plus <footer>
-SKIP_CLASSES = {"navlinks", "mobilemenu", "cd", "dots", "sr", "credit", "totop", "wm", "bar", "glow", "scrim"}
+SKIP_CLASSES = {"navlinks", "mobilemenu", "cd", "dots", "sr", "credit", "totop", "wm", "bar", "glow", "scrim",
+                # The Coming Soon page is driven by Site status settings,
+                # not by the page editor, so it must not become fields.
+                "cs-root"}
 SKIP_TAGS = {"nav", "head", "script", "style"}
 # Labels that count as "a heading" when naming a nearby image.
 HEADING_LABELS = {"Page title", "Heading", "Subheading", "Banner headline",

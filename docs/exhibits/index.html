@@ -7,7 +7,20 @@
 <title>Arts &amp; Culture &mdash; America's Spring Canvas Festival</title>
 <meta name="description" content="A hundred and fifty artists across visual arts, crafts and cultural exhibits.">
 <meta name="theme-color" content="#070C0D">
-<script>document.documentElement.classList.add('js')</script>
+<script>
+(function(){
+  var d=document.documentElement;
+  d.classList.add('js','ascf-gate-wait');
+  window.ASCF_COMING_SOON_DEFAULT=true;
+  /* If the settings read stalls or fails, fall back to the build-time
+     default rather than leaving the page blank or leaking the site. */
+  window.__ascfGateTimer=setTimeout(function(){
+    if(!d.classList.contains('ascf-gate-wait'))return;
+    d.classList.remove('ascf-gate-wait');
+    if(window.ASCF_COMING_SOON_DEFAULT)d.classList.add('ascf-cs');
+  },2000);
+})();
+</script>
 <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
 <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
@@ -25,8 +38,38 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
 <script src="../assets/js/analytics.js"></script>
+<script src="../assets/js/firebase-config.js"></script>
+<script src="../assets/js/gate.js"></script>
 </head>
 <body data-page="exhibits">
+
+<div id="comingsoon" class="cs-root">
+  <div class="cs-glow"></div>
+  <div class="cs-in">
+    <div class="cs-name">AMERICA'S<br>SPRING CANVAS FESTIVAL</div>
+    <div class="cs-where"><b>PONTIAC, MICHIGAN</b> &middot; MEMORIAL DAY WEEKEND 2028</div>
+    <div class="ribbon"></div>
+    <h1 id="cs-headline">Something big is coming to Pontiac.</h1>
+    <p class="cs-msg" id="cs-message">America's Spring Canvas Festival launches soon. Join the list and be the first to know.</p>
+    <form class="signup" id="cs-signup">
+      <label class="sr" for="cs-email">Email address</label>
+      <input id="cs-email" type="email" placeholder="your@email.com" required>
+      <button class="btn btn-solid" type="submit">JOIN THE LIST</button>
+    </form>
+    <div class="signup-note" id="cs-signupnote"></div>
+    <button type="button" class="cs-codelink" id="cs-codetoggle" aria-expanded="false" aria-controls="cs-codewrap">Have a preview code?</button>
+    <div class="cs-codewrap" id="cs-codewrap">
+      <div class="cs-coderow">
+        <label class="sr" for="cs-code">Preview code</label>
+        <input id="cs-code" type="text" autocomplete="off" placeholder="Preview code">
+        <button class="btn btn-ghost" type="button" id="cs-codego">UNLOCK</button>
+      </div>
+      <div class="cs-codemsg" id="cs-codemsg"></div>
+    </div>
+    <div class="cs-foot">&copy; America's Spring Canvas Festival &middot; Pontiac, Michigan</div>
+  </div>
+</div>
+
 
 <div class="topbar">
   <div class="wrap">
@@ -188,7 +231,6 @@
   <div class="footbar"></div>
 </footer>
 
-<script src="../assets/js/firebase-config.js"></script>
 <script src="../assets/js/content.js"></script>
 <script src="../assets/js/site.js"></script>
 </body>
