@@ -16,4 +16,12 @@
    These values are safe to publish; access is controlled by the
    security rules in firestore.rules and storage.rules.
    =========================================================== */
-window.ASCF_FIREBASE = null;
+window.ASCF_FIREBASE = {
+  apiKey: "AIzaSyBeD0-D2b8raTgX0nkKmdSIUYmHlDMHHXI",
+  authDomain: "ascf-website-a03ab.firebaseapp.com",
+  projectId: "ascf-website-a03ab",
+  storageBucket: "ascf-website-a03ab.firebasestorage.app",
+  messagingSenderId: "472653529663",
+  appId: "1:472653529663:web:d0417160b0da40d9942e8a",
+  measurementId: "G-0VS660XQQS"
+};

@@ -728,3 +728,8 @@ a.logo-tile:hover{border-color:var(--rule-2);transform:translateY(-2px)}
    underline keeps its 3px gap and nothing reflows horizontally. */
 .contact-card a{padding-top:10px}
 details.more summary{padding:6px 0}
+
+/* Signup failures reuse the confirmation slot, so they need to read as
+   an error rather than a success. */
+.signup-note.signup-err{color:var(--orange)}
+.topbar .ok.signup-err{color:#6E1800}

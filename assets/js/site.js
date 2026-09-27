@@ -146,32 +146,115 @@
   }
 
   /* ---------- 4. Email capture -------------------------------------
-     Swap the Formspree endpoint below for the client's real form ID.
-     Until then submissions are logged, not sent.
+     Signups go straight to Firestore over REST, so public pages never
+     have to load the Firebase SDK. The rules allow create-only on
+     /signups and validate every field, so a stranger can add their own
+     address but cannot read, edit or delete the list.
+
+     With no Firebase config the site is in demo mode and signups are
+     kept in localStorage, which is what the admin reads there too.
+
+     FORM_ENDPOINT is an optional extra (e.g. Formspree). When set it
+     receives a copy, but it never decides what the visitor is told.
   ------------------------------------------------------------------ */
   var FORM_ENDPOINT = ''; /* e.g. 'https://formspree.io/f/xxxxxxxx' */
+  var SIGNUP_STORE = 'ascf_signups';   /* demo-mode key, shared with the admin */
+
+  function signupsUrl() {
+    var cfg = window.ASCF_FIREBASE;
+    if (!cfg || !cfg.projectId) return '';
+    return 'https://firestore.googleapis.com/v1/projects/' +
+           encodeURIComponent(cfg.projectId) +
+           '/databases/(default)/documents/signups';
+  }
+
+  function saveLocally(rec) {
+    try {
+      var all = JSON.parse(localStorage.getItem(SIGNUP_STORE) || '[]');
+      all.push(rec);
+      localStorage.setItem(SIGNUP_STORE, JSON.stringify(all));
+      return true;
+    } catch (e) { return false; }
+  }
 
   document.querySelectorAll('form[data-signup]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var input = form.querySelector('input[type=email]');
       if (!input || !input.value.trim()) return;
-      var where = form.getAttribute('data-signup');
 
-      track('email_signup', { location: where });
+      var where = form.getAttribute('data-signup') || '';
+      var email = input.value.trim().toLowerCase();
+      var btn = form.querySelector('button[type=submit]') || form.querySelector('button');
+      if (email.length > 254 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { fail(); return; }
 
-      function done() {
-        var note = form.parentNode.querySelector('.signup-note, .ok');
-        if (note) { note.style.display = 'block'; note.textContent = "You're on the list."; }
+      var rec = {
+        email: email,
+        source: where.slice(0, 60),
+        page: location.pathname.slice(0, 200),
+        createdAt: new Date().toISOString()
+      };
+
+      function note(msg, ok) {
+        var n = form.parentNode.querySelector('.signup-note, .ok');
+        if (!n) return;
+        n.style.display = 'block';
+        n.textContent = msg;
+        if (ok) { n.classList.remove('signup-err'); } else { n.classList.add('signup-err'); }
+      }
+      function busy(on) {
+        if (!btn) return;
+        btn.disabled = on;
+        btn.style.opacity = on ? '.6' : '';
+      }
+      function succeed() {
+        track('email_signup', { location: where });
+        note("You're on the list.", true);
         form.reset();
+        busy(false);
+      }
+      function fail() {
+        note('Something went wrong, please try again.', false);
+        busy(false);
       }
 
-      if (!FORM_ENDPOINT) { done(); return; }
-      fetch(FORM_ENDPOINT, {
+      /* the optional extra never gates the confirmation */
+      function copyToEndpoint() {
+        if (!FORM_ENDPOINT) return;
+        try {
+          fetch(FORM_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: rec.email, source: rec.source, page: rec.page })
+          }).catch(function () {});
+        } catch (err) {}
+      }
+
+      busy(true);
+      var url = signupsUrl();
+
+      if (!url) {                      /* demo mode */
+        copyToEndpoint();
+        if (saveLocally(rec)) { succeed(); } else { fail(); }
+        return;
+      }
+
+      fetch(url, {
         method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: input.value.trim(), source: where })
-      }).then(done).catch(done);
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fields: {
+            email:     { stringValue: rec.email },
+            source:    { stringValue: rec.source },
+            page:      { stringValue: rec.page },
+            createdAt: { timestampValue: rec.createdAt }
+          }
+        })
+      }).then(function (res) {
+        if (!res.ok) { fail(); return; }
+        copyToEndpoint();
+        succeed();
+      }).catch(fail);
     });
   });
 

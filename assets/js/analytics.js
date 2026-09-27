@@ -4,7 +4,7 @@
    works normally.
 ------------------------------------------------------------------ */
 (function () {
-  var GA_ID = 'G-XXXXXXXXXX';
+  var GA_ID = 'G-0VS660XQQS';
   if (GA_ID.indexOf('XXXX') > -1) { return; }
   var s = document.createElement('script');
   s.async = true;
