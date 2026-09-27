@@ -26,9 +26,14 @@ yourself as an Owner under Project settings → Users and permissions.
 - **Storage** → Get started → Production mode → same region.
 
 ### 3. Paste in the security rules
-- Open `firestore.rules` and `storage.rules` from this folder.
-- Replace the two placeholder emails in **both** files with the real editor emails.
-- Firestore → **Rules** tab → paste → Publish. Storage → **Rules** tab → paste → Publish.
+- The rules live **outside this repo**, in `C:\Users\hafee\dev\ascf-private\`
+  (`firestore.rules` and `storage.rules`). They are kept there because they list
+  the real editor email addresses and this repo is public.
+- Keep the editor allowlist **identical** in both files.
+- Publishing is manual: open each file, copy it, paste it into the console.
+  Firestore → **Rules** tab → paste → Publish. Storage → **Rules** tab → paste → Publish.
+- Nothing in the build reads or copies these files, so editing them has no
+  effect until you paste them into the console.
 
 The allowlist matters: Firebase lets anyone create an account with the public
 config, so "signed in" alone is not enough. Only listed emails can write.
@@ -94,4 +99,7 @@ Without a Firebase config everything runs in **demo mode**: admin login is
     assets/js/site.js          nav, carousel, analytics events, signup, motion
     assets/js/schema.js        generated list of editable items
     assets/js/firebase-config.js
-    firestore.rules, storage.rules
+
+Security rules are **not** in this repo. They live in
+`C:\Users\hafee\dev\ascf-private\` (`firestore.rules`, `storage.rules`) and are
+published by pasting them into the Firebase console.

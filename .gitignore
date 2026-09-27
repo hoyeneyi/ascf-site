@@ -1,4 +1,3 @@
-# Security rules contain real editor email addresses.
-# Kept locally, published by hand in the Firebase console.
-firestore.rules
-storage.rules
+*.rules
+__pycache__/
+.DS_Store
