@@ -134,6 +134,52 @@
   .pub .btns{display:flex;gap:8px}
   .toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:var(--lime);color:#0A0A0A;padding:10px 18px;font-size:13.5px;font-weight:500;z-index:60;display:none}
   .toast.err{background:var(--orange);color:#fff}
+
+  /* ===========================================================
+     ROUNDING PASS — same treatment as the public site.
+     Last in the block so each rule wins.
+     =========================================================== */
+
+  /* .sm sets padding with !important, so the letter-space compensation
+     has to match it or the text drifts left again. */
+  .sm{padding:9px 14px!important;padding-left:calc(14px + .13em)!important}
+
+  .mini{
+    display:inline-flex;align-items:center;justify-content:center;line-height:1.2;
+    border-radius:var(--r-pill);padding:7px 12px;padding-left:calc(12px + .1em);
+    transition:border-color .18s,color .18s,transform .18s,box-shadow .18s;
+  }
+  .mini:hover{transform:translateY(-1px);box-shadow:var(--shadow-btn)}
+  .mini:active{transform:none;box-shadow:none}
+  .linkbtn{border-radius:var(--r-sm)}
+
+  /* panels */
+  .sec{border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-card)}
+  .listform{border-radius:var(--r-md);box-shadow:var(--shadow-card)}
+  .items{border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-card)}
+  .tbl{border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-card)}
+  .warn{border-radius:var(--r-md)}
+  .mode{border-radius:0}
+
+  /* fields */
+  .login input,
+  .tools select,.tools input,
+  .fld input[type=text],.fld textarea,
+  .listform input[type=text],.listform textarea,.listform select,
+  .sutop input{border-radius:var(--r-md)}
+
+  /* previews and thumbnails */
+  .imgprev{border-radius:var(--r-md)}
+  .item .th{border-radius:var(--r-sm)}
+
+  /* sidebar tabs read better as soft chips */
+  .side button{border-radius:0 var(--r-pill) var(--r-pill) 0}
+  @media(min-width:900px){.side button{border-radius:0 var(--r-pill) var(--r-pill) 0}}
+  @media(max-width:899px){.side button{border-radius:var(--r-pill)}}
+
+  @media(prefers-reduced-motion:reduce){
+    .mini:hover{transform:none}
+  }
 </style>
 </head>
 <body>

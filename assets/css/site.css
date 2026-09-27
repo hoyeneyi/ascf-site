@@ -18,8 +18,19 @@
 
   --spectrum:linear-gradient(90deg,#0F9BA4 0%,#2FA79C 18%,#F26A3C 40%,#F59C22 58%,#B2CE3B 78%,#FDD10A 100%);
   --spectrum-v:linear-gradient(180deg,#0F9BA4,#F26A3C,#B2CE3B,#FDD10A);
-  --rule:rgba(255,255,255,.10);
-  --rule-2:rgba(255,255,255,.18);
+  /* Softened one notch in the rounding pass: the borders were doing more
+     work than they needed to once surfaces had radius and shadow. */
+  --rule:rgba(255,255,255,.075);
+  --rule-2:rgba(255,255,255,.14);
+
+  --r-sm:8px;
+  --r-md:14px;
+  --r-lg:22px;
+  --r-pill:999px;
+
+  /* Restrained, not glowy. This is a dark site. */
+  --shadow-card:0 8px 30px rgba(0,0,0,.25);
+  --shadow-btn:0 6px 16px rgba(0,0,0,.30);
 
   --display:'Oswald',Impact,'Arial Narrow',sans-serif;
   --body:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -733,3 +744,92 @@ details.more summary{padding:6px 0}
    an error rather than a success. */
 .signup-note.signup-err{color:var(--orange)}
 .topbar .ok.signup-err{color:#6E1800}
+
+/* ===========================================================
+   ROUNDING PASS
+   Softer, rounder, less boxy. Full-bleed elements (top bar, nav,
+   hero, ticker, bands, footer, ribbon) stay square on purpose —
+   rounding them would just leave slivers of page background.
+   This block is last in the file so each rule wins outright.
+   =========================================================== */
+
+/* ---- buttons ----
+   Letter-spacing is added after the final letter too, so centred text
+   sits half a space left of true centre. padding-left carries one full
+   letter-space to cancel it. inline-flex handles vertical centring, and
+   the line-height leaves room for buttons that wrap to two lines on a
+   phone. */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  line-height:1.2;border-radius:var(--r-pill);
+  padding:14px 26px;padding-left:calc(26px + .13em);
+  transition:background .18s,color .18s,border-color .18s,
+             transform .18s cubic-bezier(.2,.7,.2,1),box-shadow .18s;
+}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-btn)}
+.btn:active{transform:none;box-shadow:none}
+.btn-block{display:flex;width:100%}
+
+.topbar button{
+  display:inline-flex;align-items:center;justify-content:center;line-height:1.2;
+  border-radius:var(--r-pill);padding-left:calc(16px + .12em);
+  transition:background .18s,transform .18s,box-shadow .18s;
+}
+.topbar button:hover{transform:translateY(-1px);box-shadow:var(--shadow-btn)}
+.topbar button:active{transform:none;box-shadow:none}
+.topbar input{border-radius:var(--r-md)}
+@media(max-width:760px){
+  .topbar button{padding-left:calc(11px + .06em)}
+}
+
+.totop{
+  display:inline-flex;align-items:center;justify-content:center;line-height:1.2;
+  border-radius:var(--r-pill);padding:8px 14px;padding-left:calc(14px + .14em);
+  transition:border-color .18s,color .18s,transform .18s,box-shadow .18s;
+}
+.totop:hover{transform:translateY(-1px);box-shadow:var(--shadow-btn)}
+.totop:active{transform:none;box-shadow:none}
+
+/* ---- raised surfaces ---- */
+.card{border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-card)}
+.card:hover{box-shadow:0 12px 34px rgba(0,0,0,.32)}
+.card .thumb{border-radius:0}
+.ph{border-radius:var(--r-md);overflow:hidden}
+.mission-box{border-radius:var(--r-lg)}
+.empty{border-radius:var(--r-md)}
+.contact-card{border-radius:var(--r-md);box-shadow:var(--shadow-card)}
+.logo-tile{border-radius:var(--r-md);box-shadow:var(--shadow-card)}
+a.logo-tile:hover{box-shadow:0 12px 34px rgba(0,0,0,.32)}
+.post .post-img{border-radius:var(--r-md)}
+
+/* Tile grids: round the outer frame and clip the inner cells, so the
+   1px gaps that draw the grid lines stop short of the corner. */
+.grid{border-radius:var(--r-md);overflow:hidden}
+.execute .items{border-radius:var(--r-md);overflow:hidden}
+.rows{border-radius:var(--r-md);overflow:hidden}
+
+/* ---- form fields ---- */
+.signup input{border-radius:var(--r-md)}
+
+/* ---- pills ----
+   These carry letter-spacing too, so they get the same padding-left
+   compensation as the buttons. */
+.slide .tag{
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:var(--r-pill);padding:6px 12px;padding-left:calc(12px + .24em);
+}
+@media(max-width:600px){
+  .slide .tag{padding:5px 10px;padding-left:calc(10px + .24em)}
+}
+.tbd{border-radius:var(--r-pill);padding:3px 7px;padding-left:calc(7px + .16em)}
+.social a{
+  border-radius:var(--r-pill);padding:8px 14px;padding-left:calc(14px + .12em);
+  transition:border-color .18s,color .18s,transform .18s,box-shadow .18s;
+}
+.social a:hover{transform:translateY(-1px);box-shadow:var(--shadow-btn)}
+/* the dot is drawn by the pseudo-elements, so the radius goes there */
+.dots button::before,.dots button.on::after{border-radius:var(--r-pill)}
+
+@media(prefers-reduced-motion:reduce){
+  .btn:hover,.topbar button:hover,.totop:hover,.social a:hover{transform:none}
+}
