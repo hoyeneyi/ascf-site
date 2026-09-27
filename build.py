@@ -39,7 +39,9 @@ REPO_BASE = "/"                    # used only by the 404 page
 
 
 def link(base, href):
-    return f"{base}index.html" if href == "" else f"{base}{href}"
+    # The homepage is linked as a folder ("./", "../"), never as index.html.
+    # Analytics counts "/" and "/index.html" as two different pages otherwise.
+    return (base or "./") if href == "" else f"{base}{href}"
 
 
 def nav_html(base, current):
@@ -76,6 +78,7 @@ def nav_html(base, current):
 def page(slug, title, description, body, base, current="", path=None):
     desk, mob = nav_html(base, current)
     url = SITE_URL + (path if path is not None else current)
+    home_href = base or "./"
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,7 +123,7 @@ def page(slug, title, description, body, base, current="", path=None):
 
 <nav class="nav">
   <div class="wrap">
-    <a class="brand" href="{base}index.html" data-track="nav_click" data-label="brand_home">
+    <a class="brand" href="{home_href}" data-track="nav_click" data-label="brand_home">
       AMERICA'S SPRING CANVAS FESTIVAL
       <span>PONTIAC, MICHIGAN · MEMORIAL DAY WEEKEND 2028</span>
     </a>
@@ -253,7 +256,7 @@ SLIDES = [
      "Come for the<br>music.",
      "National headliners at night, local artists all afternoon, and eight stages running from noon until the fireworks.",
      [("entertainment/", "See the lineup", "btn-solid", "hero_lineup"),
-      ("index.html#notify", "Get festival updates", "btn-ghost", "hero_updates")]),
+      ("./#notify", "Get festival updates", "btn-ghost", "hero_updates")]),
     ("hero-food", "50 RESTAURANTS &amp; FOOD TRUCKS",
      "Stay for the<br>food.",
      "Fifty local kitchens serving the cooking of the communities that built this country &mdash; all in one place, for four days only.",
@@ -268,12 +271,12 @@ SLIDES = [
      "Settle it the<br>old way.",
      "The largest Rock Paper Scissors tournament ever staged, with referees, announcers and four grand prizes of twenty-five thousand dollars.",
      [("tournament/", "Tournament details", "btn-solid", "hero_rps"),
-      ("index.html#notify", "Get registration alerts", "btn-ghost", "hero_rps_alert")]),
+      ("./#notify", "Get registration alerts", "btn-ghost", "hero_rps_alert")]),
     ("hero-art", "OPEN CALL",
      "Don't notice<br>a logo? Exactly.",
      "We haven't designed one yet, because we'd rather the community did. The Spring Canvas logo "
      "competition opens soon, and the winning mark becomes the face of the festival.",
-     [("index.html#notify", "Get competition details", "btn-solid", "hero_logo_comp"),
+     [("./#notify", "Get competition details", "btn-solid", "hero_logo_comp"),
       ("campaign/", "Why we're doing this", "btn-ghost", "hero_logo_why")]),
 ]
 
@@ -1063,7 +1066,7 @@ def not_found():
     <h2 style="margin-top:18px">This part of the canvas is still blank.</h2>
     <p class="lede" style="margin:14px auto 26px">The page you were looking for doesn't exist, or it moved while we were building.</p>
     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-      <a class="btn btn-solid" href="{b}index.html" data-track="cta_click" data-label="404_home">BACK TO HOME</a>
+      <a class="btn btn-solid" href="{b}" data-track="cta_click" data-label="404_home">BACK TO HOME</a>
       <a class="btn btn-ghost" href="{b}contact/" data-track="cta_click" data-label="404_contact">CONTACT US</a>
     </div>
   </div>

@@ -6,6 +6,11 @@
 (function () {
   var GA_ID = 'G-0VS660XQQS';
   if (GA_ID.indexOf('XXXX') > -1) { return; }
+
+  /* Local testing must not show up in the client's visitor numbers. */
+  var host = location.hostname;
+  var LOCAL = { 'localhost': 1, '127.0.0.1': 1, '[::1]': 1, '::1': 1 };
+  if (LOCAL[host] || location.protocol === 'file:') { return; }
   var s = document.createElement('script');
   s.async = true;
   s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
