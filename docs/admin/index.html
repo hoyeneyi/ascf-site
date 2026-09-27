@@ -104,6 +104,22 @@
   .item .act{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
   .none{padding:22px 16px;color:var(--mute);font-size:13.5px}
 
+  /* signups */
+  .sutop{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .sutop .count{font-family:var(--display);font-size:26px;letter-spacing:.03em}
+  .sutop .count small{display:block;font-family:var(--body);font-size:10.5px;letter-spacing:.16em;color:var(--mute);text-transform:uppercase;margin-top:2px}
+  .sutop .grow{flex:1}
+  .sutop input{background:#0A1112;border:1px solid var(--rule-2);color:#fff;padding:10px 12px;font-family:var(--body);font-size:14px;min-width:200px}
+  .tbl{border:1px solid var(--rule);background:var(--ink-2);overflow-x:auto}
+  .tbl table{border-collapse:collapse;width:100%;min-width:560px}
+  .tbl th{text-align:left;font-size:10px;letter-spacing:.16em;color:var(--mute);text-transform:uppercase;font-weight:600;padding:11px 14px;border-bottom:1px solid var(--rule-2)}
+  .tbl td{padding:11px 14px;border-bottom:1px solid var(--rule);font-size:13.5px;color:var(--soft);vertical-align:middle}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl td.em{color:#fff;word-break:break-all}
+  .tbl td.when{white-space:nowrap;color:var(--mute);font-size:12.5px}
+  .tbl td.act{text-align:right;white-space:nowrap}
+  .warn{border:1px solid var(--orange);background:rgba(242,106,60,.09);padding:18px 16px;color:var(--soft);font-size:14px}
+
   /* help */
   .help h2{font-size:22px;margin:26px 0 10px}
   .help p,.help li{color:var(--soft);font-size:14.5px;max-width:72ch}
@@ -158,6 +174,7 @@
       <button data-view="list:vendors">Vendors &amp; Artists</button>
       <button data-view="list:sponsors">Sponsors</button>
       <button data-view="list:partners">Community Partners</button>
+      <button data-view="signups">Signups</button>
       <div class="grp">SUPPORT</div>
       <button data-view="help">How to use this</button>
     </aside>
@@ -215,6 +232,22 @@
       try { localStorage.setItem('ascf_demo_content', JSON.stringify(c)); }
       catch (e) { throw new Error('Demo storage is full — images are large. Connect Firebase for real storage.'); }
     },
+    signups: async function () {
+      var raw = [];
+      try { raw = JSON.parse(localStorage.getItem('ascf_signups') || '[]') || []; }
+      catch (e) { raw = []; }
+      return raw.map(function (r, i) {
+        return { id: 'demo:' + i, email: r.email || '', source: r.source || '', page: r.page || '', createdAt: r.createdAt || '' };
+      }).sort(function (a, b) { return String(b.createdAt).localeCompare(String(a.createdAt)); });
+    },
+    removeSignup: async function (id) {
+      var raw = [];
+      try { raw = JSON.parse(localStorage.getItem('ascf_signups') || '[]') || []; }
+      catch (e) { raw = []; }
+      var i = parseInt(String(id).split(':')[1], 10);
+      if (!isNaN(i) && i >= 0 && i < raw.length) raw.splice(i, 1);
+      localStorage.setItem('ascf_signups', JSON.stringify(raw));
+    },
     upload: async function (file) {
       var blob = await prepImage(file, 1400, 0.72);
       return await new Promise(function (res, rej) {
@@ -268,6 +301,27 @@
       try { await this.m.fs.setDoc(this.m.fs.doc(this.db, 'site', 'content'), copy); }
       catch (e) { throw new Error('Could not publish. Your account may not have permission — contact your web developer.'); }
       c.updatedAt = new Date().toISOString(); c.updatedBy = this.user;
+    },
+    signups: async function () {
+      var f = this.m.fs, snap;
+      try {
+        snap = await f.getDocs(f.query(f.collection(this.db, 'signups'), f.orderBy('createdAt', 'desc')));
+      } catch (e) {
+        var code = (e && (e.code || e.message)) || '';
+        if (/permission|insufficient|denied/i.test(String(code))) { var pe = new Error('denied'); pe.denied = true; throw pe; }
+        throw new Error('Could not load signups. Check your connection.');
+      }
+      var out = [];
+      snap.forEach(function (d) {
+        var v = d.data() || {};
+        var when = v.createdAt && v.createdAt.toDate ? v.createdAt.toDate().toISOString() : (v.createdAt || '');
+        out.push({ id: d.id, email: v.email || '', source: v.source || '', page: v.page || '', createdAt: when });
+      });
+      return out;
+    },
+    removeSignup: async function (id) {
+      try { await this.m.fs.deleteDoc(this.m.fs.doc(this.db, 'signups', id)); }
+      catch (e) { throw new Error('Could not remove that signup. Your account may not have permission.'); }
     },
     upload: async function (file) {
       var isDoc = !/^image\//.test(file.type);
@@ -351,6 +405,7 @@
     });
     if (view === 'pages') renderPages();
     else if (view === 'help') renderHelp();
+    else if (view === 'signups') renderSignups();
     else renderList(view.split(':')[1]);
     refreshBar();
   }
@@ -602,6 +657,123 @@
         var i = +b.getAttribute('data-del');
         if (!confirm('Remove “' + content.lists[name][i].name + '”? You can still Discard before publishing.')) return;
         content.lists[name].splice(i, 1); editing = null; render();
+      };
+    });
+  }
+
+  /* ---------- signups ---------- */
+  var suRows = null, suErr = null, suQuery = '';
+
+  function renderSignups() {
+    var m = $('main');
+    m.innerHTML = '<h1>Signups</h1>' +
+      '<p class="lead">Everyone who joined the mailing list from the website. ' +
+      'This list is read straight from the live site, so it is not part of Publish changes.</p>' +
+      '<div class="none" id="suBody">Loading…</div>';
+    suErr = null;
+    BE.signups().then(function (rows) {
+      if (view !== 'signups') return;
+      suRows = rows; suErr = null; paintSignups();
+    }).catch(function (e) {
+      if (view !== 'signups') return;
+      suRows = null; suErr = e; paintSignups();
+    });
+  }
+
+  function suFiltered() {
+    if (!suRows) return [];
+    var q = suQuery.trim().toLowerCase();
+    if (!q) return suRows;
+    return suRows.filter(function (r) { return r.email.toLowerCase().indexOf(q) > -1; });
+  }
+
+  function suWhen(iso) {
+    if (!iso) return '—';
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return '—';
+    return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) +
+      ' ' + d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+  }
+
+  /* one row per email, keeping the earliest date */
+  function suUnique() {
+    var by = {};
+    (suRows || []).forEach(function (r) {
+      var k = r.email.toLowerCase();
+      if (!by[k] || String(r.createdAt) < String(by[k].createdAt)) by[k] = r;
+    });
+    return Object.keys(by).sort().map(function (k) { return by[k]; });
+  }
+
+  function suCsv() {
+    function cell(v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; }
+    var lines = [['email', 'first_signed_up', 'form'].map(cell).join(',')];
+    suUnique().forEach(function (r) {
+      lines.push([cell(r.email), cell(r.createdAt || ''), cell(r.source || '')].join(','));
+    });
+    return lines.join('\r\n') + '\r\n';
+  }
+
+  function paintSignups() {
+    var host = $('suBody');
+    if (!host) return;
+
+    if (suErr) {
+      host.className = '';
+      host.innerHTML = suErr.denied
+        ? '<div class="warn">Your account doesn’t have access to signups — contact your web developer</div>'
+        : '<div class="warn">' + esc(suErr.message || 'Could not load signups.') + '</div>';
+      return;
+    }
+
+    var rows = suFiltered(), total = (suRows || []).length, uniq = suUnique().length;
+    host.className = '';
+    host.innerHTML =
+      '<div class="sutop">' +
+        '<div class="count">' + total + '<small>' + (total === 1 ? 'signup' : 'signups') +
+          (uniq !== total ? ' · ' + uniq + ' unique' : '') + '</small></div>' +
+        '<div class="grow"><input type="search" id="suSearch" placeholder="Search by email" value="' + esc(suQuery) + '"></div>' +
+        '<button class="btn btn-ghost sm" id="suCsv" type="button"' + (total ? '' : ' disabled') + '>EXPORT CSV</button>' +
+      '</div>' +
+      (total === 0
+        ? '<div class="items"><div class="none">No signups yet. They appear here as soon as someone joins from the website.</div></div>'
+        : rows.length === 0
+          ? '<div class="items"><div class="none">No email matches that search.</div></div>'
+          : '<div class="tbl"><table><thead><tr><th>Date</th><th>Email</th><th>Form</th><th></th></tr></thead><tbody>' +
+            rows.map(function (r) {
+              return '<tr><td class="when">' + esc(suWhen(r.createdAt)) + '</td>' +
+                '<td class="em">' + esc(r.email) + '</td>' +
+                '<td>' + esc(r.source || '—') + '</td>' +
+                '<td class="act"><button class="mini danger" data-su="' + esc(r.id) + '">REMOVE</button></td></tr>';
+            }).join('') +
+            '</tbody></table></div>');
+
+    var s = $('suSearch');
+    if (s) {
+      s.oninput = function () { suQuery = s.value; paintSignups(); var n = $('suSearch'); if (n) { n.focus(); n.setSelectionRange(n.value.length, n.value.length); } };
+    }
+    var csv = $('suCsv');
+    if (csv) csv.onclick = function () {
+      var blob = new Blob([suCsv()], { type: 'text/csv;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'ascf-signups-' + new Date().toISOString().slice(0, 10) + '.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+      toast('Exported ' + suUnique().length + ' ' + (suUnique().length === 1 ? 'address' : 'addresses') + '.');
+    };
+    host.querySelectorAll('[data-su]').forEach(function (b) {
+      b.onclick = async function () {
+        var id = b.getAttribute('data-su');
+        var row = (suRows || []).filter(function (r) { return r.id === id; })[0];
+        if (!confirm('Remove ' + (row ? row.email : 'this signup') + ' from the list? This cannot be undone.')) return;
+        b.disabled = true;
+        try {
+          await BE.removeSignup(id);
+          suRows = (suRows || []).filter(function (r) { return r.id !== id; });
+          paintSignups();
+          toast('Removed.');
+        } catch (e) { b.disabled = false; toast(e.message || 'Could not remove that signup.', true); }
       };
     });
   }
