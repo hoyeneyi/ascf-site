@@ -23,21 +23,21 @@ window.ASCF_SCHEMA = {
     {
      "key": "global__div__1a02378f",
      "type": "long",
-     "label": "Label",
+     "label": "Footer text",
      "section": "Footer",
      "default": "AMERICA'S\nSPRING CANVAS FESTIVAL"
     },
     {
      "key": "global__div__bfc11905",
      "type": "long",
-     "label": "Label",
+     "label": "Footer text",
      "section": "Footer",
      "default": "Pontiac, Michigan 48341\nMay 26–29, 2028 · Memorial Day Weekend"
     },
     {
      "key": "global__a__c99a6d04",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Footer text",
      "section": "Footer",
      "default": "INSTAGRAM"
     },
@@ -51,7 +51,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "global__a__6669dcbf",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Footer text",
      "section": "Footer",
      "default": "FACEBOOK"
     },
@@ -65,7 +65,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "global__a__e0534aaa",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Footer text",
      "section": "Footer",
      "default": "TIKTOK"
     },
@@ -79,7 +79,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "global__a__4d11beed",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Footer text",
      "section": "Footer",
      "default": "YOUTUBE"
     },
@@ -93,7 +93,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "global__a__986703f9",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Footer text",
      "section": "Footer",
      "default": "LINKEDIN"
     },
@@ -107,7 +107,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "global__span__cd0ddd45",
      "type": "text",
-     "label": "Label",
+     "label": "Footer text",
      "section": "Footer",
      "default": "© America's Spring Canvas Festival · Pontiac, Michigan"
     }
@@ -149,7 +149,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h2__7c416f26",
      "type": "long",
-     "label": "Heading",
+     "label": "Banner headline",
      "section": "The world has come to Pontiac before.",
      "default": "The world has come\nto Pontiac before."
     },
@@ -163,7 +163,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__span__36b2a6ca",
      "type": "text",
-     "label": "Label",
+     "label": "Event name",
      "section": "The world has come to Pontiac before.",
      "default": "Super Bowl XVI"
     },
@@ -177,14 +177,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__span__225e57f2",
      "type": "text",
-     "label": "Label",
+     "label": "Event name",
      "section": "The world has come to Pontiac before.",
      "default": "WrestleMania III"
     },
     {
      "key": "home__span__ffa32dff",
      "type": "text",
-     "label": "Label",
+     "label": "Event name",
      "section": "The world has come to Pontiac before.",
      "default": "Papal Mass"
     },
@@ -198,7 +198,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__span__5f6ee87c",
      "type": "text",
-     "label": "Label",
+     "label": "Event name",
      "section": "The world has come to Pontiac before.",
      "default": "FIFA World Cup"
     },
@@ -212,21 +212,21 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__span__e156a046",
      "type": "text",
-     "label": "Label",
+     "label": "Event name",
      "section": "The world has come to Pontiac before.",
      "default": "America's Spring Canvas Festival"
     },
     {
      "key": "home__a__d1f97be6",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Banner button",
      "section": "The world has come to Pontiac before.",
      "default": "Join the movement"
     },
     {
      "key": "home__a__8bb7dd5b",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Banner button",
      "section": "The world has come to Pontiac before.",
      "default": "Become a sponsor"
     },
@@ -247,28 +247,28 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h2__89ef6ee7",
      "type": "long",
-     "label": "Heading",
+     "label": "Banner headline",
      "section": "Come for the music.",
      "default": "Come for the\nmusic."
     },
     {
      "key": "home__p__6d42b69f",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Banner text",
      "section": "Come for the music.",
      "default": "National headliners at night, local artists all afternoon, and eight stages running from noon until the fireworks."
     },
     {
      "key": "home__a__4e0240a3",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Banner button",
      "section": "Come for the music.",
      "default": "See the lineup"
     },
     {
      "key": "home__a__a971f315",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Banner button",
      "section": "Come for the music.",
      "default": "Get festival updates"
     },
@@ -289,28 +289,28 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h2__169af60b",
      "type": "long",
-     "label": "Heading",
+     "label": "Banner headline",
      "section": "Stay for the food.",
      "default": "Stay for the\nfood."
     },
     {
      "key": "home__p__0a2d8b79",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Banner text",
      "section": "Stay for the food.",
      "default": "Fifty local kitchens serving the cooking of the communities that built this country — all in one place, for four days only."
     },
     {
      "key": "home__a__b7b86de7",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Banner button",
      "section": "Stay for the food.",
      "default": "Explore the food"
     },
     {
      "key": "home__a__84564c1f",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Banner button",
      "section": "Stay for the food.",
      "default": "Vendor interest form"
     },
@@ -331,28 +331,28 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h2__ab96baf0",
      "type": "long",
-     "label": "Heading",
+     "label": "Banner headline",
      "section": "Take a piece of it home.",
      "default": "Take a piece\nof it home."
     },
     {
      "key": "home__p__2ba363d3",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Banner text",
      "section": "Take a piece of it home.",
      "default": "Painting, glasswork, jewelry and print from a hundred and fifty makers, showing and selling across the whole weekend."
     },
     {
      "key": "home__a__59025a72",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Banner button",
      "section": "Take a piece of it home.",
      "default": "Explore arts & culture"
     },
     {
      "key": "home__a__7c9fd148",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Banner button",
      "section": "Take a piece of it home.",
      "default": "Exhibitor application"
     },
@@ -373,28 +373,28 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h2__b952b492",
      "type": "long",
-     "label": "Heading",
+     "label": "Banner headline",
      "section": "Settle it the old way.",
      "default": "Settle it the\nold way."
     },
     {
      "key": "home__p__b94456f3",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Banner text",
      "section": "Settle it the old way.",
      "default": "The largest Rock Paper Scissors tournament ever staged, with referees, announcers and four grand prizes of twenty-five thousand dollars."
     },
     {
      "key": "home__a__22a06f4d",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Banner button",
      "section": "Settle it the old way.",
      "default": "Tournament details"
     },
     {
      "key": "home__a__fd56f140",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Banner button",
      "section": "Settle it the old way.",
      "default": "Get registration alerts"
     },
@@ -415,28 +415,28 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h2__2f210025",
      "type": "long",
-     "label": "Heading",
+     "label": "Banner headline",
      "section": "Don't notice a logo? Exactly.",
      "default": "Don't notice\na logo? Exactly."
     },
     {
      "key": "home__p__564116fb",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Banner text",
      "section": "Don't notice a logo? Exactly.",
      "default": "We haven't designed one yet, because we'd rather the community did. The Spring Canvas logo competition opens soon, and the winning mark becomes the face of the festival."
     },
     {
      "key": "home__a__afe04aa7",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Banner button",
      "section": "Don't notice a logo? Exactly.",
      "default": "Get competition details"
     },
     {
      "key": "home__a__805aa4cb",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Banner button",
      "section": "Don't notice a logo? Exactly.",
      "default": "Why we're doing this"
     },
@@ -548,56 +548,56 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__span__1b645389",
      "type": "text",
-     "label": "Label",
+     "label": "Stat number",
      "section": "Why America's Spring Canvas Festival?",
      "default": "4"
     },
     {
      "key": "home__small__55284f78",
      "type": "text",
-     "label": "Small text",
+     "label": "Stat label",
      "section": "Why America's Spring Canvas Festival?",
      "default": "DAYS"
     },
     {
      "key": "home__span__fe5dbbce",
      "type": "text",
-     "label": "Label",
+     "label": "Stat number",
      "section": "Why America's Spring Canvas Festival?",
      "default": "8"
     },
     {
      "key": "home__small__7d7606a1",
      "type": "text",
-     "label": "Small text",
+     "label": "Stat label",
      "section": "Why America's Spring Canvas Festival?",
      "default": "STAGES"
     },
     {
      "key": "home__span__24a42d54",
      "type": "text",
-     "label": "Label",
+     "label": "Stat number",
      "section": "Why America's Spring Canvas Festival?",
      "default": "150+"
     },
     {
      "key": "home__small__0708775d",
      "type": "text",
-     "label": "Small text",
+     "label": "Stat label",
      "section": "Why America's Spring Canvas Festival?",
      "default": "ARTISTS & EXHIBITORS"
     },
     {
      "key": "home__span__a53653ec",
      "type": "text",
-     "label": "Label",
+     "label": "Stat number",
      "section": "Why America's Spring Canvas Festival?",
      "default": "50+"
     },
     {
      "key": "home__small__41733255",
      "type": "text",
-     "label": "Small text",
+     "label": "Stat label",
      "section": "Why America's Spring Canvas Festival?",
      "default": "FOOD EXPERIENCES"
     },
@@ -625,7 +625,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h2__9d2cdb38",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "What's on the grounds.",
      "default": "What's on the grounds."
     },
@@ -639,21 +639,21 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h3__8c520bb4",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "What's on the grounds.",
      "default": "Entertainment"
     },
     {
      "key": "home__p__74dbb823",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "What's on the grounds.",
      "default": "National, regional and local stages running every day of the festival."
     },
     {
      "key": "home__span__03b58fb2",
      "type": "text",
-     "label": "Label",
+     "label": "Card link text",
      "section": "What's on the grounds.",
      "default": "EXPLORE →"
     },
@@ -667,14 +667,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h3__9aa7c566",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "What's on the grounds.",
      "default": "Arts & Culture"
     },
     {
      "key": "home__p__54ddf637",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "What's on the grounds.",
      "default": "Visual arts, crafts and cultural exhibits from a hundred and fifty makers."
     },
@@ -688,14 +688,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h3__35b25929",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "What's on the grounds.",
      "default": "Food"
     },
     {
      "key": "home__p__a9f4b011",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "What's on the grounds.",
      "default": "Local restaurants, food trucks and cuisines from across the country."
     },
@@ -709,14 +709,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h3__1917f4f0",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "What's on the grounds.",
      "default": "Competition"
     },
     {
      "key": "home__p__5b93c489",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "What's on the grounds.",
      "default": "The Rock/Paper/Scissors Tournament — fifty thousand contestants, four grand prizes."
     },
@@ -730,14 +730,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h3__676afc5a",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "What's on the grounds.",
      "default": "Attractions"
     },
     {
      "key": "home__p__b9165948",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "What's on the grounds.",
      "default": "Go-karts, ninja warrior, zip line, rock climbing, Kids Zone, helicopter rides and fireworks."
     },
@@ -751,14 +751,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__h3__18f5e901",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "What's on the grounds.",
      "default": "Conflict Resolution"
     },
     {
      "key": "home__p__37bf0b91",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "What's on the grounds.",
      "default": "The year-round campaign behind the four days."
     },
@@ -779,7 +779,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "home__p__690e0b59",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Join the Canvas community.",
      "default": "Be the first to receive festival announcements, partnership opportunities, community initiatives and event updates."
     },
@@ -835,7 +835,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "mission__p__32e89083",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Page header",
      "default": "A four-day festival celebrating culture, community, entertainment and conflict resolution."
     },
@@ -905,7 +905,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "mission__p__47999246",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Honoring the peacemakers.",
      "default": "The banquet recognizes students who resolved disagreements peacefully, with a motivational keynote on how young people can address conflict before violence occurs."
     },
@@ -961,7 +961,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "campaign__p__6c5c1e98",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Page header",
      "default": "Conflict doesn't have to end in violence. This is the year-round work behind the four days."
     },
@@ -982,7 +982,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "campaign__p__a8f89a2e",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Most violence starts as a disagreement.",
      "default": "Arguments between people who know each other — neighbors, classmates, family, people who shared a street corner — escalate because nobody in the moment knows how to stop them. The people involved rarely wanted it to go that far."
     },
@@ -1003,14 +1003,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "campaign__h2__417f94dc",
      "type": "long",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Give conflict resolution a place in the conversation.",
      "default": "Give conflict resolution a\nplace in the conversation."
     },
     {
      "key": "campaign__p__639d0900",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Give conflict resolution a place in the conversation.",
      "default": "Not as a lecture, a program or a pamphlet nobody reads, but as something woven into an experience people actually want to attend."
     },
@@ -1024,7 +1024,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "campaign__h2__f273dfb6",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Ending it before it starts.",
      "default": "Ending it before it starts."
     },
@@ -1080,7 +1080,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "campaign__h2__10d9a3b2",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "The plan.",
      "default": "The plan."
     },
@@ -1192,7 +1192,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "campaign__h2__f0bbedf8",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Community partners & programming.",
      "default": "Community partners & programming."
     },
@@ -1262,7 +1262,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "eateries__p__94f014f2",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Page header",
      "default": "Local restaurants, food trucks and cuisines from the many communities that make up America."
     },
@@ -1283,14 +1283,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "eateries__p__8a24bada",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Fifty kitchens. Four days.",
      "default": "Every eATERY is a local business. No national chains, no concession-stand food — the same kitchens that feed this region year-round, gathered in one place for a weekend."
     },
     {
      "key": "eateries__p__7f2f1f33",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Fifty kitchens. Four days.",
      "default": "Expect the full range: soul food, tacos, jerk, injera, banh mi, pierogi, barbecue, and whatever else shows up when you invite an entire region to cook."
     },
@@ -1304,7 +1304,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "eateries__h2__2b744c5b",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Who's cooking.",
      "default": "Who's cooking."
     },
@@ -1346,7 +1346,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "eateries__p__690e0b59",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Know when the vendors drop.",
      "default": "Be the first to receive festival announcements, partnership opportunities, community initiatives and event updates."
     },
@@ -1381,7 +1381,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "exhibits__p__a2eef1b4",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Page header",
      "default": "Visual arts, crafts and cultural exhibits from a hundred and fifty artists."
     },
@@ -1395,14 +1395,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "exhibits__p__801f83bf",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "A market, a gallery and a studio.",
      "default": "eXHIBITS is where the festival earns its name. Painting, glasswork, jewelry, printmaking, sculpture and textiles — shown, demonstrated and sold across all four days."
     },
     {
      "key": "exhibits__p__97bffbe3",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "A market, a gallery and a studio.",
      "default": "Many artists work live on the grounds, so you can watch a piece come together and take it home the same afternoon."
     },
@@ -1416,7 +1416,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "exhibits__h2__6f1f238b",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "What you'll find.",
      "default": "What you'll find."
     },
@@ -1486,7 +1486,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "exhibits__h2__71e439b6",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Who's showing.",
      "default": "Who's showing."
     },
@@ -1528,7 +1528,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "exhibits__p__690e0b59",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Know when the roster drops.",
      "default": "Be the first to receive festival announcements, partnership opportunities, community initiatives and event updates."
     },
@@ -1563,7 +1563,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "entertainment__p__98369dfe",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Page header",
      "default": "Eight stages running every day, from local talent at noon to national headliners at night."
     },
@@ -1584,14 +1584,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "entertainment__p__5aca7e51",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Eight stages. Four days.",
      "default": "Acts span a wide range of musical genres, plus magic, comedy and performance throughout the grounds."
     },
     {
      "key": "entertainment__h2__2aba8f84",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "The stages.",
      "default": "The stages."
     },
@@ -1661,7 +1661,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "entertainment__h2__ffd0f7aa",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Who's playing.",
      "default": "Who's playing."
     },
@@ -1703,7 +1703,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "entertainment__p__690e0b59",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Know when the lineup drops.",
      "default": "Be the first to receive festival announcements, partnership opportunities, community initiatives and event updates."
     },
@@ -1738,7 +1738,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "tournament__p__34f3e771",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Page header",
      "default": "Fifty thousand contestants. Four grand prizes of $25,000. The oldest way to settle a disagreement, played at record scale."
     },
@@ -1752,14 +1752,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "tournament__p__72e3e88f",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Referees. Announcers. A world record.",
      "default": "Rock Paper Scissors is how people have settled disputes without a fight for as long as anyone can remember. We are staging it as a real sport — officiated matches, called play, and a bracket that runs the full four days."
     },
     {
      "key": "tournament__p__ad9a013e",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Referees. Announcers. A world record.",
      "default": "A field this size could set the world record for participants in an event of its kind."
     },
@@ -1773,56 +1773,56 @@ window.ASCF_SCHEMA = {
     {
      "key": "tournament__span__4655758e",
      "type": "text",
-     "label": "Label",
+     "label": "Stat number",
      "section": "Section",
      "default": "50,000"
     },
     {
      "key": "tournament__small__c7ce1b41",
      "type": "text",
-     "label": "Small text",
+     "label": "Stat label",
      "section": "Section",
      "default": "PROJECTED CONTESTANTS"
     },
     {
      "key": "tournament__span__a2f176db",
      "type": "text",
-     "label": "Label",
+     "label": "Stat number",
      "section": "Section",
      "default": "$25,000"
     },
     {
      "key": "tournament__small__0818366e",
      "type": "text",
-     "label": "Small text",
+     "label": "Stat label",
      "section": "Section",
      "default": "PER GRAND PRIZE"
     },
     {
      "key": "tournament__span__1b645389",
      "type": "text",
-     "label": "Label",
+     "label": "Stat number",
      "section": "Section",
      "default": "4"
     },
     {
      "key": "tournament__small__de879f7e",
      "type": "text",
-     "label": "Small text",
+     "label": "Stat label",
      "section": "Section",
      "default": "GRAND PRIZES"
     },
     {
      "key": "tournament__small__5b317405",
      "type": "text",
-     "label": "Small text",
+     "label": "Stat label",
      "section": "Section",
      "default": "DAYS OF BRACKET PLAY"
     },
     {
      "key": "tournament__h2__c9d99335",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Registration.",
      "default": "Registration."
     },
@@ -1899,7 +1899,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "tournament__p__690e0b59",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Be first in the bracket.",
      "default": "Be the first to receive festival announcements, partnership opportunities, community initiatives and event updates."
     },
@@ -1934,7 +1934,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "attractions__p__00ce85f1",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Page header",
      "default": "The young and the young at heart get a full weekend of it."
     },
@@ -1948,14 +1948,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "attractions__h3__9fba91a0",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Section",
      "default": "Ninja Warrior Course"
     },
     {
      "key": "attractions__p__1b06163e",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Section",
      "default": "A custom-built obstacle course designed to test every kind of fitness."
     },
@@ -1969,14 +1969,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "attractions__h3__bb7ca127",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Section",
      "default": "3-Point Shot Contest"
     },
     {
      "key": "attractions__p__c58b5810",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Section",
      "default": "Make every shot from the NBA line against a 60-second clock and drive home a new car."
     },
@@ -1990,14 +1990,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "attractions__h3__39e6f7c2",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Section",
      "default": "Helicopter Rides"
     },
     {
      "key": "attractions__p__6c048268",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Section",
      "default": "A once-in-a-lifetime bird's eye view of the City of Pontiac."
     },
@@ -2011,14 +2011,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "attractions__h3__aa60d0ce",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Section",
      "default": "Go Karts"
     },
     {
      "key": "attractions__p__daa94e0e",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Section",
      "default": "A full racecourse of twists and turns for the young and the young at heart."
     },
@@ -2032,14 +2032,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "attractions__h3__adc4fb8f",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Section",
      "default": "Kids Zone"
     },
     {
      "key": "attractions__p__599a36b9",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Section",
      "default": "Giant coloring, slime games, puzzles and everything in between."
     },
@@ -2053,14 +2053,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "attractions__h3__23689ef1",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Section",
      "default": "Zip Line"
     },
     {
      "key": "attractions__p__22786aca",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Section",
      "default": "Height and nerve, in that order."
     },
@@ -2074,14 +2074,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "attractions__h3__cabaebf2",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Section",
      "default": "Rock Climbing"
     },
     {
      "key": "attractions__p__4e30e938",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Section",
      "default": "A climbing wall for every level, from first-timers up."
     },
@@ -2095,14 +2095,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "attractions__h3__37b0ae54",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Section",
      "default": "Fireworks Show"
     },
     {
      "key": "attractions__p__e270b4eb",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Section",
      "default": "A full sensory production lighting up the night sky."
     },
@@ -2158,7 +2158,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "involved__p__2663246e",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Page header",
      "default": "Four days at this scale, and a campaign that runs all year, takes a lot of hands."
     },
@@ -2207,7 +2207,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "involved__h2__88392749",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Six reasons.",
      "default": "Six reasons."
     },
@@ -2305,168 +2305,168 @@ window.ASCF_SCHEMA = {
     {
      "key": "involved__h2__739a892c",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Start the conversation.",
      "default": "Start the conversation."
     },
     {
      "key": "involved__h3__d9d60c21",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Start the conversation.",
      "default": "Sponsorship"
     },
     {
      "key": "involved__p__d585a727",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Start the conversation.",
      "default": "Help bring the vision to life."
     },
     {
      "key": "involved__h3__bc49fd4f",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Start the conversation.",
      "default": "Community Partners"
     },
     {
      "key": "involved__p__03d056d5",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Start the conversation.",
      "default": "Help us build the mission."
     },
     {
      "key": "involved__a__66d8bf17",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Card link text",
      "section": "Start the conversation.",
      "default": "PARTNER WITH US"
     },
     {
      "key": "involved__h3__634d8941",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Start the conversation.",
      "default": "Vendors"
     },
     {
      "key": "involved__p__c88e6755",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Start the conversation.",
      "default": "Bring your food or business to Pontiac."
     },
     {
      "key": "involved__a__47629d6d",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Card link text",
      "section": "Start the conversation.",
      "default": "VENDOR INTEREST FORM"
     },
     {
      "key": "involved__h3__24029bd0",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Start the conversation.",
      "default": "Exhibitors"
     },
     {
      "key": "involved__p__a4c41917",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Start the conversation.",
      "default": "Showcase your art, organization or cultural experience."
     },
     {
      "key": "involved__a__9d89f092",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Card link text",
      "section": "Start the conversation.",
      "default": "EXHIBITOR APPLICATION"
     },
     {
      "key": "involved__h3__e8e5ae7e",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Start the conversation.",
      "default": "Volunteers"
     },
     {
      "key": "involved__p__68250e9c",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Start the conversation.",
      "default": "Help make the experience possible."
     },
     {
      "key": "involved__a__0c132c11",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Card link text",
      "section": "Start the conversation.",
      "default": "VOLUNTEER"
     },
     {
      "key": "involved__h3__8c520bb4",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Start the conversation.",
      "default": "Entertainment"
     },
     {
      "key": "involved__p__0f0174a0",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Start the conversation.",
      "default": "Perform at ASCF."
     },
     {
      "key": "involved__a__f5758913",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Card link text",
      "section": "Start the conversation.",
      "default": "SUBMIT AN ACT"
     },
     {
      "key": "involved__h3__0c77aeec",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Start the conversation.",
      "default": "Media"
     },
     {
      "key": "involved__p__4d656603",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Start the conversation.",
      "default": "Help tell the story."
     },
     {
      "key": "involved__a__1bbeab3b",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Card link text",
      "section": "Start the conversation.",
      "default": "MEDIA INQUIRIES"
     },
     {
      "key": "involved__h3__95345e27",
      "type": "text",
-     "label": "Subheading",
+     "label": "Card title",
      "section": "Start the conversation.",
      "default": "Donate"
     },
     {
      "key": "involved__p__e882d117",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Card text",
      "section": "Start the conversation.",
      "default": "Support the conflict resolution campaign."
     },
     {
      "key": "involved__a__e52d0de9",
      "type": "text",
-     "label": "Button / link text",
+     "label": "Card link text",
      "section": "Start the conversation.",
      "default": "DONATE"
     },
@@ -2487,7 +2487,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "involved__p__690e0b59",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Stay close to the build.",
      "default": "Be the first to receive festival announcements, partnership opportunities, community initiatives and event updates."
     },
@@ -2522,7 +2522,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "sponsorship__p__4535cb13",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Page header",
      "default": "Organizations providing financial and in-kind support for the festival and the campaign."
     },
@@ -2536,63 +2536,63 @@ window.ASCF_SCHEMA = {
     {
      "key": "sponsorship__h2__ac14971e",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "The audience.",
      "default": "The audience."
     },
     {
      "key": "sponsorship__span__11cac8cd",
      "type": "text",
-     "label": "Label",
+     "label": "Stat number",
      "section": "The audience.",
      "default": "250K+"
     },
     {
      "key": "sponsorship__small__e4ec9682",
      "type": "text",
-     "label": "Small text",
+     "label": "Stat label",
      "section": "The audience.",
      "default": "PROJECTED OVER FOUR DAYS"
     },
     {
      "key": "sponsorship__span__4655758e",
      "type": "text",
-     "label": "Label",
+     "label": "Stat number",
      "section": "The audience.",
      "default": "50,000"
     },
     {
      "key": "sponsorship__small__53cd5110",
      "type": "text",
-     "label": "Small text",
+     "label": "Stat label",
      "section": "The audience.",
      "default": "TOURNAMENT CONTESTANTS"
     },
     {
      "key": "sponsorship__span__4efb6cb7",
      "type": "text",
-     "label": "Label",
+     "label": "Stat number",
      "section": "The audience.",
      "default": "Family"
     },
     {
      "key": "sponsorship__small__90eadc8e",
      "type": "text",
-     "label": "Small text",
+     "label": "Stat label",
      "section": "The audience.",
      "default": "MULTI-GENERATIONAL, LOCAL AND REGIONAL"
     },
     {
      "key": "sponsorship__span__710c85ef",
      "type": "text",
-     "label": "Label",
+     "label": "Stat number",
      "section": "The audience.",
      "default": "National"
     },
     {
      "key": "sponsorship__small__cf99ac34",
      "type": "text",
-     "label": "Small text",
+     "label": "Stat label",
      "section": "The audience.",
      "default": "MEDIA ATTENTION AROUND THE WORLD-RECORD ATTEMPT"
     },
@@ -2606,7 +2606,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "sponsorship__h2__b67631a4",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Where your name shows up.",
      "default": "Where your name shows up."
     },
@@ -2676,7 +2676,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "sponsorship__h2__eae6fca3",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "What your support funds.",
      "default": "What your support funds."
     },
@@ -2732,140 +2732,140 @@ window.ASCF_SCHEMA = {
     {
      "key": "sponsorship__h2__b8ba1bb3",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Levels of support.",
      "default": "Levels of support."
     },
     {
      "key": "sponsorship__p__6d618af1",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Levels of support.",
      "default": "Every level can be tailored. If none of these fit what you have in mind, tell us what you're thinking."
     },
     {
      "key": "sponsorship__h3__50e122e5",
      "type": "text",
-     "label": "Subheading",
+     "label": "Tier name",
      "section": "Levels of support.",
      "default": "DIAMOND"
     },
     {
      "key": "sponsorship__div__6fad2f3f",
      "type": "text",
-     "label": "Label",
+     "label": "Tier price",
      "section": "Levels of support.",
      "default": "$250K"
     },
     {
      "key": "sponsorship__li__d6b92749",
      "type": "text",
-     "label": "List item",
+     "label": "Tier benefit",
      "section": "Levels of support.",
      "default": "Logo placement on event website"
     },
     {
      "key": "sponsorship__li__e56ceb9c",
      "type": "text",
-     "label": "List item",
+     "label": "Tier benefit",
      "section": "Levels of support.",
      "default": "Media & press opportunities"
     },
     {
      "key": "sponsorship__li__d5176e44",
      "type": "text",
-     "label": "List item",
+     "label": "Tier benefit",
      "section": "Levels of support.",
      "default": "Logo on event marketing material"
     },
     {
      "key": "sponsorship__li__2f4ceaba",
      "type": "text",
-     "label": "List item",
+     "label": "Tier benefit",
      "section": "Levels of support.",
      "default": "Recognition in all news releases"
     },
     {
      "key": "sponsorship__li__2fafbbc3",
      "type": "text",
-     "label": "List item",
+     "label": "Tier benefit",
      "section": "Levels of support.",
      "default": "Logo on co-branded event items"
     },
     {
      "key": "sponsorship__li__a54abbc1",
      "type": "text",
-     "label": "List item",
+     "label": "Tier benefit",
      "section": "Levels of support.",
      "default": "Company giveaways allowed"
     },
     {
      "key": "sponsorship__li__98358b65",
      "type": "text",
-     "label": "List item",
+     "label": "Tier benefit",
      "section": "Levels of support.",
      "default": "Full page digital souvenir booklet ad"
     },
     {
      "key": "sponsorship__h3__0308adec",
      "type": "text",
-     "label": "Subheading",
+     "label": "Tier name",
      "section": "Levels of support.",
      "default": "PLATINUM"
     },
     {
      "key": "sponsorship__div__51f68454",
      "type": "text",
-     "label": "Label",
+     "label": "Tier price",
      "section": "Levels of support.",
      "default": "$100K"
     },
     {
      "key": "sponsorship__h3__81ff70ac",
      "type": "text",
-     "label": "Subheading",
+     "label": "Tier name",
      "section": "Levels of support.",
      "default": "GOLD"
     },
     {
      "key": "sponsorship__div__fb2dbad2",
      "type": "text",
-     "label": "Label",
+     "label": "Tier price",
      "section": "Levels of support.",
      "default": "$75K"
     },
     {
      "key": "sponsorship__li__099b91d3",
      "type": "text",
-     "label": "List item",
+     "label": "Tier benefit",
      "section": "Levels of support.",
      "default": "Digital souvenir booklet ad"
     },
     {
      "key": "sponsorship__h3__462e8399",
      "type": "text",
-     "label": "Subheading",
+     "label": "Tier name",
      "section": "Levels of support.",
      "default": "SILVER"
     },
     {
      "key": "sponsorship__div__80944b10",
      "type": "text",
-     "label": "Label",
+     "label": "Tier price",
      "section": "Levels of support.",
      "default": "$50K"
     },
     {
      "key": "sponsorship__h3__264d71b4",
      "type": "text",
-     "label": "Subheading",
+     "label": "Tier name",
      "section": "Levels of support.",
      "default": "BRONZE"
     },
     {
      "key": "sponsorship__div__c45649b1",
      "type": "text",
-     "label": "Label",
+     "label": "Tier price",
      "section": "Levels of support.",
      "default": "$25K"
     },
@@ -2879,7 +2879,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "sponsorship__h2__ee4f5485",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Thank you to our partners.",
      "default": "Thank you to our partners."
     },
@@ -2893,7 +2893,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "sponsorship__p__edf9f43a",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Request sponsorship information.",
      "default": "We'll send the full deck and set up a conversation."
     },
@@ -2949,7 +2949,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "partners__p__10e86dbb",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Page header",
      "default": "Organizations helping us execute the mission — not funders, but collaborators."
     },
@@ -2963,14 +2963,14 @@ window.ASCF_SCHEMA = {
     {
      "key": "partners__p__e66c8263",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Sponsors fund it. Partners build it.",
      "default": "A community partner brings expertise, reach or programming to the conflict resolution campaign. Mediation organizations, schools, nonprofits, faith communities, government and community groups."
     },
     {
      "key": "partners__p__6f30acff",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Sponsors fund it. Partners build it.",
      "default": "If your work already touches conflict, youth or community safety in this region, there's a place for it here."
     },
@@ -2984,7 +2984,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "partners__h2__129de2ac",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "What partnership looks like.",
      "default": "What partnership looks like."
     },
@@ -3040,7 +3040,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "partners__h2__949a878f",
      "type": "text",
-     "label": "Heading",
+     "label": "Section heading",
      "section": "Who we're working with.",
      "default": "Who we're working with."
     },
@@ -3089,7 +3089,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "news__p__b294b85e",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Page header",
      "default": "Two years is a long build. This is where the progress gets posted."
     },
@@ -3124,7 +3124,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "news__p__690e0b59",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Get it in your inbox instead.",
      "default": "Be the first to receive festival announcements, partnership opportunities, community initiatives and event updates."
     },
@@ -3159,7 +3159,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "contact__p__b8466d44",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Page header",
      "default": "Pick the category that fits and it reaches the right person directly."
     },
@@ -3362,7 +3362,7 @@ window.ASCF_SCHEMA = {
     {
      "key": "contact__p__690e0b59",
      "type": "long",
-     "label": "Paragraph",
+     "label": "Section intro",
      "section": "Join the Canvas community.",
      "default": "Be the first to receive festival announcements, partnership opportunities, community initiatives and event updates."
     },

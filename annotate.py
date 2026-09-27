@@ -25,6 +25,9 @@ CONTAINER_CLASSES = {"slide", "pagehead", "band", "identity", "ticker", "countdo
 GLOBAL_CLASSES = {"topbar"}                   # plus <footer>
 SKIP_CLASSES = {"navlinks", "mobilemenu", "cd", "dots", "sr", "credit", "totop", "wm", "bar", "glow", "scrim"}
 SKIP_TAGS = {"nav", "head", "script", "style"}
+# Labels that count as "a heading" when naming a nearby image.
+HEADING_LABELS = {"Page title", "Heading", "Subheading", "Banner headline",
+                  "Section heading", "Card title", "Tier name"}
 KIND_LABEL = {
     "h1": "Page title", "h2": "Heading", "h3": "Subheading", "p": "Paragraph",
     "small": "Small text", "b": "Bold text", "li": "List item", "summary": "Expandable title",
@@ -61,6 +64,7 @@ class _Walker(HTMLParser):
         self.link_cands = []
         self.containers = {}
         self._cid = 0
+        self._card = 0
 
     def _abs(self):
         ln, col = self.getpos()
@@ -109,10 +113,19 @@ class _Walker(HTMLParser):
         if tag == "h4" and glob_here:
             skip_here = True
 
+        anc = set()
+        for e in self.stack:
+            anc |= e["classes"]
+        card = next((e["card"] for e in reversed(self.stack) if e["card"]), None)
+        if "card" in classes:
+            self._card += 1
+            card = self._card
+
         self.stack.append({
             "tag": tag, "classes": classes, "attrs": a, "start": start, "tag_end": tag_end,
             "skip": skip_here, "global": glob_here, "cid": cid,
             "cont": cid or parent_cont, "bad_child": False,
+            "anc": anc, "card": card,
         })
         if len(self.stack) > 1:
             parent = self.stack[-2]
@@ -161,7 +174,80 @@ class _Walker(HTMLParser):
         if el["tag"] in TEXT_TAGS and not el["bad_child"] and text and re.search(r"[A-Za-z0-9]", text):
             self.text_cands.append({"start": el["start"], "end": end, "pos": el["tag_end"],
                                     "tag": el["tag"], "classes": el["classes"], "text": text,
-                                    "global": el["global"], "cont": el["cont"]})
+                                    "global": el["global"], "cont": el["cont"],
+                                    "anc": el["anc"], "card": el["card"]})
+
+
+def _label_for(c, cont_kind, section, is_tier):
+    """Name a field by where it sits, not just by its tag.
+
+    Falls through to KIND_LABEL when nothing more specific applies, so a
+    layout this doesn't know about still gets a usable label.
+    """
+    tag, cls, anc, text = c["tag"], c["classes"], c["anc"], c["text"]
+
+    # explicit class hints win outright
+    if "kicker" in cls:
+        return "Small caps label"
+    if "tag" in cls:
+        return "Banner tag"
+
+    # homepage banner slides
+    if cont_kind == "slide":
+        if tag in ("h1", "h2"):
+            return "Banner headline"
+        if tag == "p":
+            return "Banner text"
+        if tag in ("a", "button"):
+            return "Banner button"
+
+    # the Pontiac roll call
+    if "history" in anc:
+        if tag == "b":
+            return "Year"
+        if tag == "span":
+            return "Event name"
+    if tag == "b" and re.fullmatch(r"\d{4}", text):
+        return "Year"
+
+    # sponsorship tiers are cards carrying a price
+    if is_tier:
+        if tag == "h3":
+            return "Tier name"
+        if tag == "li":
+            return "Tier benefit"
+        if tag == "div" and text.lstrip().startswith("$"):
+            return "Tier price"
+
+    # feature cards
+    if "card" in anc:
+        if tag == "h3":
+            return "Card title"
+        if tag == "p":
+            return "Card text"
+        if "more" in cls or tag in ("a", "button"):
+            return "Card link text"
+
+    # stat tiles: a big number over a caption
+    if "stat" in anc or "items" in anc:
+        if tag == "span":
+            return "Stat number"
+        if tag == "small":
+            return "Stat label"
+
+    # section headers
+    if "section-head" in anc:
+        if tag in ("h1", "h2"):
+            return "Section heading"
+        if tag == "p":
+            return "Section intro"
+    if "lede" in cls:
+        return "Section intro"
+
+    if section == "Footer":
+        return "Footer text"
+
+    return KIND_LABEL.get(tag, "Text")
 
 
 def annotate(src, page_id):
@@ -194,17 +280,17 @@ def annotate(src, page_id):
         return {"ticker": "Scrolling ticker", "countdown": "Countdown",
                 "identity": "Festival name block"}.get(cont["kind"], "Section")
 
+    # a card holding a price is a sponsorship tier
+    tier_cards = {c["card"] for c in kept
+                  if c["card"] and c["tag"] == "div" and c["text"].lstrip().startswith("$")}
+
     for c in kept:
         scope = "global" if c["global"] else page_id
         key = f"{scope}__{c['tag']}__{_h(c['text'])}"
         inserts.append((c["pos"], f' data-edit="{key}"'))
-        kind = KIND_LABEL.get(c["tag"], "Text")
-        if "kicker" in c["classes"]:
-            kind = "Small caps label"
-        if "tag" in c["classes"]:
-            kind = "Banner tag"
-        if c["tag"] == "b" and re.fullmatch(r"\d{4}", c["text"]):
-            kind = "Year"
+        cont = w.containers.get(c["cont"]) if c["cont"] else None
+        kind = _label_for(c, cont["kind"] if cont else None, section_of(c),
+                          c["card"] in tier_cards)
         long = c["tag"] == "p" or len(c["text"]) > 90 or "\n" in c["text"]
         fields.append({"key": key, "type": "long" if long else "text", "label": kind,
                        "section": section_of(c), "default": c["text"], "pos": c["start"],
@@ -219,7 +305,7 @@ def annotate(src, page_id):
         key = f"{scope}__img__{re.sub(r'[^a-z0-9]+', '_', base.lower())}_{n}"
         inserts.append((im["pos"], f' data-img="{key}"'))
         # label from the next heading after the image
-        nxt = next((f for f in fields if f["pos"] > im["pos"] and f["label"] in ("Heading", "Subheading")), None)
+        nxt = next((f for f in fields if f["pos"] > im["pos"] and f["label"] in HEADING_LABELS), None)
         what = "Banner image" if "bg" in im["classes"] else "Image"
         label = f"{what} — {nxt['default'][:48]}" if nxt else what
         fields.append({"key": key, "type": "image", "label": label,
